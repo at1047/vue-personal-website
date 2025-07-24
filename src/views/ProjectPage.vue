@@ -8,7 +8,43 @@
     <p style="margin-top: 30px; text-align: center;" v-if="loading" class="text">Loading...</p>
     -->
 
-    <router-link to="/projects/clarent"><h3 class="text menu-item">Clarent</h3></router-link>
+  <div class="card-grid">
+    <div class="card">
+      <router-link to="/projects/clarent">
+        <div class="menu-item">
+          <h3 class="text text-h3">Clarent</h3>
+          <p>A really good ergonomic keyboard</p>
+          <img class="card-img" src="/public/clarent_1.png" />
+        </div>
+      </router-link>
+    </div>
+    <!--
+    <div class="card menu-item">
+      <router-link to="/projects/clarent">
+        <div>
+          <h3 class="text">Clarent</h3>
+          <p>A really good ergonomic keyboard</p>
+        </div>
+      </router-link>
+    </div>
+    <div class="card menu-item">
+      <router-link to="/projects/clarent">
+        <div>
+          <h3 class="text">Clarent</h3>
+          <p>A really good ergonomic keyboard</p>
+        </div>
+      </router-link>
+    </div>
+    <div class="card menu-item">
+      <router-link to="/projects/clarent">
+        <div>
+          <h3 class="text">Clarent</h3>
+          <p>A really good ergonomic keyboard</p>
+        </div>
+      </router-link>
+    </div>
+-->
+  </div>
 </template>
 
 <script>
@@ -56,7 +92,7 @@
 background-color: var(--color-menu-item);
 border-radius: 5px;
 margin-top: 7px;
-padding: 2px 10px;
+padding: 5px 10px 10px;
 transition: background-color 100ms ease-out;
 }
 
@@ -64,13 +100,34 @@ transition: background-color 100ms ease-out;
 background-color: var(--color-menu-item-hover);
 }
 
+
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: auto;
+  grid-gap: 1rem;
+}
+
+.card {
+  border-radius: 4px;
+  padding: .5rem;
+}
+
+.card-img {
+  padding-top: 20px;
+  max-width: 100%;
+  height: auto;
+}
+
+
 h2 {
   font-size: 60px;
   margin-bottom: 3px;
 }
 
-h3 {
-  font-size: 35px;
+.text-h3 {
+  font-size: 30px;
   color: #D1D1D1;
 }
 
@@ -80,7 +137,9 @@ h4 {
 
 p {
   font-size: 14px;
+  /*
   margin-bottom: 30px;
+  */
   color: #C1C1C1;
 }
 
