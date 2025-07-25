@@ -1,15 +1,55 @@
-p {
-  color: #B1B1B1;
-}
-
 .project-header {
   margin-bottom: 30px;
 }
 
-h2 {
-  font-size: 50px;
+.project-content {
+  display: flex;
+  justify-content: center;
 }
 
-h3 {
+#clarent_1 {
+  height: 250px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.markdown {
+  width: 800px;
+}
+
+.markdown p {
+  color: #B1B1B1;
+}
+
+.markdown li {
+  color: #B1B1B1;
+  font-size: 14px;
+  margin: 0;
+}
+
+ul ul {
+  padding-left: 2em;
+}
+
+
+.markdown h1 {
+  text-align: left;
+  font-size: 30px;
+  margin-bottom: 7px;
+  margin-top: 15px;
+}
+
+/* .project-header h2 {
+  font-size: 50px;
+} */
+
+/* h3 {
   font-size: 20px;
+} */
+
+.markdown > img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }

@@ -1,6 +1,6 @@
 <template>
 
-    <h2>~ / Projects</h2>
+    <p class="breadcrumb">~ / projects</p>
     <!--
     <div v-for="(project, idx) of projects" :idx = idx>
         <router-link :to="`/projects/${project.projectCode}`"><h3 class="text menu-item">{{ project.project }}</h3></router-link>
@@ -14,7 +14,7 @@
         <div class="menu-item">
           <h3 class="text text-h3">Clarent</h3>
           <p>A really good ergonomic keyboard</p>
-          <img class="card-img" src="/public/clarent_1.png" />
+          <img class="card-img" src="/clarent_2.png" />
         </div>
       </router-link>
     </div>
@@ -120,6 +120,9 @@ background-color: var(--color-menu-item-hover);
   height: auto;
 }
 
+.breadcrumb {
+    font-size: 16px;
+}
 
 h2 {
   font-size: 60px;

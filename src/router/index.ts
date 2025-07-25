@@ -2,9 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '@/views/HomePage.vue'
 import ProjectPage from '@/views/ProjectPage.vue'
 // import ProjectIndexPage from '@/views/ProjectIndexPage.vue'
-import ProjectDetailsPage from '@/views/ProjectDetailsPage.vue'
-import EditorPage from '@/views/EditorPage.vue'
-import EditorMarkdownPage from '@/views/EditorMarkdownPage.vue'
+// import ProjectDetailsPage from '@/views/ProjectDetailsPage.vue'
+// import EditorPage from '@/views/EditorPage.vue'
+// import EditorMarkdownPage from '@/views/EditorMarkdownPage.vue'
 import RecipePage from '@/views/RecipePage.vue'
 
 import ProjectClarentPage from '@/views/projects/clarent.vue'
@@ -22,11 +22,11 @@ const router = createRouter({
             name: 'Projects',
             component: ProjectPage,
         },
-        {
-            path: '/editor',
-            name: 'Editor',
-            component: EditorPage,
-        },
+        // {
+        //     path: '/editor',
+        //     name: 'Editor',
+        //     component: EditorPage,
+        // },
         {
             path: '/recipes',
             name: 'Recipes',
@@ -59,24 +59,24 @@ const router = createRouter({
         //         projects: "/projects",
         //     }
         // },
-        {
-            path: '/projects/:projectName/clarent',
-            name: 'Clarent',
-            component: ProjectDetailsPage,
-            meta: {
-                home: "/",
-                projects: "/projects",
-            }
-        },
-        {
-            path: '/editor/markdown',
-            name: 'EditorMarkdownPage',
-            component: EditorMarkdownPage,
-            //meta: {
-            //    home: "/",
-            //    projects: "/projects",
-            //}
-        },
+        // {
+        //     path: '/projects/:projectName/clarent',
+        //     name: 'Clarent',
+        //     component: ProjectDetailsPage,
+        //     meta: {
+        //         home: "/",
+        //         projects: "/projects",
+        //     }
+        // },
+        // {
+        //     path: '/editor/markdown',
+        //     name: 'EditorMarkdownPage',
+        //     component: EditorMarkdownPage,
+        //     //meta: {
+        //     //    home: "/",
+        //     //    projects: "/projects",
+        //     //}
+        // },
         //{
         //    path: '/editor/blogs/:blogName',
         //    name: 'EditorBlogs',
