@@ -8,6 +8,7 @@ import ProjectPage from '@/views/ProjectPage.vue'
 import RecipePage from '@/views/RecipePage.vue'
 
 import ProjectClarentPage from '@/views/projects/clarent.vue'
+import ProjectTripodPage from '@/views/projects/tripod.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -43,8 +44,17 @@ const router = createRouter({
         // },
         {
             path: '/projects/clarent',
-            name: 'ProjectIndex',
+            name: 'ProjectClarent',
             component: ProjectClarentPage,
+            meta: {
+                home: "/",
+                projects: "/projects",
+            }
+        },
+        {
+            path: '/projects/tripod',
+            name: 'ProjectTripod',
+            component: ProjectTripodPage,
             meta: {
                 home: "/",
                 projects: "/projects",

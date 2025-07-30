@@ -18,6 +18,17 @@
         </div>
       </router-link>
     </div>
+
+    <div class="card">
+      <router-link to="/projects/tripod">
+        <div class="menu-item">
+          <h3 class="text text-h3">Tripod</h3>
+          <p>A really good ergonomic keyboard</p>
+          <img class="card-img" src="/clarent_2.png" />
+        </div>
+      </router-link>
+    </div>
+    
     <!--
     <div class="card menu-item">
       <router-link to="/projects/clarent">

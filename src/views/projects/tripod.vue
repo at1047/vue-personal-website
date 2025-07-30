@@ -1,8 +1,8 @@
 <template>
   <Breadcrumbs :breadcrumbArr="this.$route.meta" v-if="!loading" />
   <div class="project-header">
-    <h2 style="display: inline;">Clarent</h2>
-    <p style="display: inline; margin-left: 20px;">A bistable split ergonomic keyboard for gaming</p>
+    <h2 style="display: inline;">My <em>Indestructible</em> Tripod</h2>
+    <p style="display: inline; margin-left: 20px;">My solution for tripods breaking when recording volleyball sessions</p>
   </div>
 
   <div class="project-content">
@@ -19,7 +19,7 @@ import Breadcrumbs from '../../components/Breadcrumbs.vue';
 
 
 export default defineComponent({
-  name: 'ProjectClarentPage',
+  name: 'ProjectTripodPage',
   components: { Breadcrumbs },
   data() {
     return {
@@ -32,21 +32,17 @@ export default defineComponent({
 
       const parsedMarkdown = marked.parse(this.markdown)
       const replacedMarkdown = parsedMarkdown.replace(/<p>!\[\[(.*?)\]\]<\/p>/g, (match, filename) => {
-        console.log(filename)
-        const [fullname, extensionandclass] = filename.split('.');
-        console.log(`fullname: ${fullname}, extension: ${extensionandclass}`)
-        const [extension, classname] = extensionandclass.split('#');
-        console.log(`${fullname}.${extension}, ${classname}`)
-        return `<img id="${fullname}" class="${classname}" src="/${fullname}.${extension}" />`;
+        const id = filename.split('.')[0];
+        return `<img id="${id}" src="/${filename}" />`;
       });
       return replacedMarkdown
     },
   },
   async created() {
     this.breadCrumbArr = this.$route.meta;
-    this.breadCrumbArr['clarent'] = '/projects/Clarent';
+    this.breadCrumbArr['tripod'] = '/projects/Tripod';
     // Fetch the markdown file from public directory
-    const response = await fetch('/clarent.md');
+    const response = await fetch('/tripod.md');
     console.log(response)
     this.markdown = await response.text();
     this.loading = false;
@@ -57,16 +53,4 @@ export default defineComponent({
 
 <style>
 @import '../../assets/projects.css';
-
-.inverted {
-  filter: invert(1) hue-rotate(180deg);
-}
-
-#clarent_3 {
-  height: 270px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 </style>

@@ -1,4 +1,4 @@
-![[clarent_1.jpg]]
+![[clarent_3.png#inverted]]
 
 # Overview
 What is a split, tented, columnar keyboard?

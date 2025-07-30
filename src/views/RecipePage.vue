@@ -26,3 +26,12 @@ export default defineComponent({
 
 });
 </script>
+
+<style>
+
+
+.emph {
+    color: #9a7ad5;
+}
+
+</style>
