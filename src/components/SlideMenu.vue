@@ -34,7 +34,7 @@ export default defineComponent({
   z-index: 99;
   top: 0;
   left: 0;
-  background-color: #111;
+  background-color: var(--color-menu-dark);
   overflow-x: hidden;
   transition: transform 1s;
   padding-top: 60px;
@@ -44,14 +44,14 @@ export default defineComponent({
   padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 20px;
-  color: #E1E1E1;
+  color: var(--color-text);
   display: block;
   transition: color 0.3s;
 }
 
 .nav-text:hover,
 .closebtn:hover {
-  color: #9b9b9b;
+  color: var(--color-text-muted);
   cursor: pointer;
 }
 
@@ -61,7 +61,7 @@ export default defineComponent({
   right: 25px;
   font-size: 36px;
   margin-left: 50px;
-  color: #f1f1f1;
+  color: var(--color-text-bright);
   transition: color 0.3s;
 }
 .slide-enter-active {

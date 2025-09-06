@@ -31,7 +31,7 @@ export default defineComponent({
 
 
 .emph {
-    color: #9a7ad5;
+    color: var(--color-purple);
 }
 
 </style>

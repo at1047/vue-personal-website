@@ -63,8 +63,8 @@ function mounted() {
 }
 
 mark {
-  background-color: #545454;
-  color: var(--color-text);
+  background-color: var(--color-vim-cursor);
+  color: var(--color-vim-text);
 
 }
 

@@ -27,7 +27,7 @@ export default defineComponent({
 
 <style scoped>
 h2 {
-    background: -webkit-linear-gradient(30deg, #b95fe7, #6096ee);
+    background: -webkit-linear-gradient(30deg, var(--color-gradient-purple-start), var(--color-gradient-purple-end));
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;

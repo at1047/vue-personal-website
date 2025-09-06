@@ -1,7 +1,7 @@
 <template>
   <Breadcrumbs :breadcrumbArr="this.$route.meta" v-if="!loading" />
   <div class="project-header">
-    <h2 style="display: inline;">Clarent</h2>
+    <h2 style="display: inline;">Carwennan</h2>
     <p style="display: inline; margin-left: 20px;">A bistable split ergonomic keyboard for gaming</p>
   </div>
 
@@ -19,7 +19,7 @@ import Breadcrumbs from '../../components/Breadcrumbs.vue';
 
 
 export default defineComponent({
-  name: 'ProjectClarentPage',
+  name: 'ProjectCarwennanPage',
   components: { Breadcrumbs },
   data() {
     return {
@@ -44,9 +44,9 @@ export default defineComponent({
   },
   async created() {
     this.breadCrumbArr = this.$route.meta;
-    this.breadCrumbArr['clarent'] = '/projects/Clarent';
+    this.breadCrumbArr['carwennan'] = '/projects/Carwennan';
     // Fetch the markdown file from public directory
-    const response = await fetch('/clarent.md');
+    const response = await fetch('/carwennan.md');
     console.log(response)
     this.markdown = await response.text();
     this.loading = false;

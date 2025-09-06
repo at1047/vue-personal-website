@@ -31,7 +31,7 @@ function mounted() {
     } */
     pre {
         margin: auto;
-        color: #E1E1E1;
+        color: var(--color-text);
         font-size: 14px;
     }
 

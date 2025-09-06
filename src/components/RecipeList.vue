@@ -111,7 +111,7 @@ export default defineComponent({
 }
 
 .recipe-header {
-  background-color: #2F2F2F;
+  background-color: var(--color-card-background);
   border-radius: 8px;
   margin-top: 10px;
   padding: 2px 10px;
@@ -122,7 +122,7 @@ export default defineComponent({
 }
 
 .recipe-header:hover {
-  background-color: #3f3f3F;
+  background-color: var(--color-card-background-hover);
 }
 
 .icons {

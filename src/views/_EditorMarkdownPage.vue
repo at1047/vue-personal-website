@@ -61,7 +61,7 @@ textarea {
   height: 60vh;
   font-size: 13px;
   background: var(--color-background-light);
-  color: #A1A1A1;
+  color: var(--color-text-light);
   border:none;
   padding: 5px 10px
 }

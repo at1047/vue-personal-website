@@ -9,6 +9,7 @@ import RecipePage from '@/views/RecipePage.vue'
 
 import ProjectClarentPage from '@/views/projects/clarent.vue'
 import ProjectTripodPage from '@/views/projects/tripod.vue'
+import ProjectCarwennanPage from '@/views/projects/carwennan.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -55,6 +56,15 @@ const router = createRouter({
             path: '/projects/tripod',
             name: 'ProjectTripod',
             component: ProjectTripodPage,
+            meta: {
+                home: "/",
+                projects: "/projects",
+            }
+        },
+        {
+            path: '/projects/carwennan',
+            name: 'ProjectCarwennan',
+            component: ProjectCarwennanPage,
             meta: {
                 home: "/",
                 projects: "/projects",

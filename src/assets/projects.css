@@ -12,11 +12,11 @@
 }
 
 .markdown p {
-  color: #B1B1B1;
+  color: var(--color-text-secondary);
 }
 
 .markdown li {
-  color: #B1B1B1;
+  color: var(--color-text-secondary);
   font-size: 14px;
   margin: 0;
 }
@@ -40,7 +40,7 @@ ul ul {
   font-weight: 400;
   margin-bottom: 7px;
   margin-top: 15px;
-  color: #D1D1D1; /* #9a7ad5 */
+  color: var(--color-text-tertiary);
 }
 
 /* .project-header h2 {

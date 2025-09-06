@@ -2,6 +2,7 @@
   <header>
   </header>
   <body>
+    
     <transition name="slide">
     <SlideMenu v-show="showSlideMenu" v-on:close-slide="closeSlideMenu()"></SlideMenu>
     </transition>
@@ -19,6 +20,7 @@
         <a class="nav-icons" href="https://github.com/at1047" target="_blank"><font-awesome-icon icon="fa-brands fa-github" /></a>
         <a class="nav-icons" href="https://www.youtube.com/channel/UCSjOvYqYrVd5-d78yg-Cvlw" target="_blank"><font-awesome-icon icon="fa-brands fa-youtube" /></a>
         <a class="nav-icons" target="_blank"><font-awesome-icon icon="fa-envelope" /></a>
+        <ThemeToggle />
       </div>
     </nav>
     <div id="nav-underline"></div>
@@ -34,6 +36,7 @@
 import { defineComponent } from 'vue';
 import { RouterLink, RouterView } from 'vue-router'
 import SlideMenu from './components/SlideMenu.vue'
+import ThemeToggle from './components/ThemeToggle.vue'
 
 export default defineComponent({
     name: 'App',
@@ -41,6 +44,7 @@ export default defineComponent({
     RouterView,
     RouterLink,
     SlideMenu,
+    ThemeToggle,
   },
   data() {
     return {
@@ -79,7 +83,7 @@ a {
 }
 
 button {
-  background: -webkit-linear-gradient(0deg, #ad5ddf, #e05cd5);
+  background: -webkit-linear-gradient(0deg, var(--color-gradient-pink-start), var(--color-gradient-pink-end));
   padding: 0 5px;
   border-radius: 5px;
   border: 0;
@@ -89,7 +93,7 @@ button {
   display: block;
   width: 100%;
   height: 0.5px;
-  background: #363636;
+  background: var(--color-background-light);
 }
 
 .nav-icons {
@@ -107,7 +111,7 @@ button {
 .nav-icons,
 .nav-text {
   transition: color 0.5s ease-in-out;
-  color: #E1E1E1;
+  color: var(--color-text);
 }
 
 
@@ -118,7 +122,7 @@ button {
 
 .nav.router-link-exact-active {
   opacity: 0.5;
-  color: #7d7d7d;
+  color: var(--color-text-gray);
   cursor: default;
 }
 
