@@ -11,15 +11,19 @@ export default defineComponent({
   name: 'ThemeToggle',
   data() {
     return {
-      isLightMode: false
+      isLightMode: true
     };
   },
   mounted() {
-    // Check for saved theme preference or default to dark mode
+    // Check for saved theme preference or default to light mode
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
+    if (savedTheme === 'dark') {
+      this.isLightMode = false;
+      document.body.classList.add('dark-mode');
+    } else {
+      // Default to light mode
       this.isLightMode = true;
-      document.body.classList.add('light-mode');
+      document.body.classList.remove('dark-mode');
     }
   },
   methods: {
@@ -27,10 +31,10 @@ export default defineComponent({
       this.isLightMode = !this.isLightMode;
       
       if (this.isLightMode) {
-        document.body.classList.add('light-mode');
+        document.body.classList.remove('dark-mode');
         localStorage.setItem('theme', 'light');
       } else {
-        document.body.classList.remove('light-mode');
+        document.body.classList.add('dark-mode');
         localStorage.setItem('theme', 'dark');
       }
     }

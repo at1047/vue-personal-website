@@ -59,11 +59,11 @@ export default defineComponent({
 @import '../../assets/projects.css';
 
 .inverted {
-  filter: invert(1) hue-rotate(180deg);
+  filter: none;
 }
 
-.light-mode .inverted {
-  filter: none;
+.dark-mode .inverted {
+  filter: invert(1) hue-rotate(180deg);
 }
 
 #clarent_3 {

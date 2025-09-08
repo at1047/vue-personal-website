@@ -8,7 +8,7 @@
     </transition>
     <nav>
       <div class="nav-bar nav-bar-left">
-        <span class="nav-icons" v-on:click="openSlideMenu()"><font-awesome-icon icon="fa-bars" /></span>
+        <!-- <span class="nav-icons" v-on:click="openSlideMenu()"><font-awesome-icon icon="fa-bars" /></span> -->
       </div>
       <div class="nav-bar nav-bar-center">
         <router-link class="nav-text" to="/">Home</router-link>

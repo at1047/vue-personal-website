@@ -1,39 +1,5 @@
 :root {
-    /* Dark mode (default) */
-    --color-background: #1A1A1A;
-    --color-background-light: #232323;
-    --color-text: #E1E1E1;
-    --color-text-light: #A1A1A1;
-    --color-menu-item: #313131;
-    --color-menu-item-hover: #3f3f3F;
-    --color-code-background: #2A2A2A;
-    --color-text-secondary: #B1B1B1;
-    --color-text-tertiary: #D1D1D1;
-    --color-card-background: #2F2F2F;
-    --color-card-background-hover: #3f3f3F;
-    --color-shadow: #222222;
-    --color-gradient-start: #689edf;
-    --color-gradient-end: #9f5ccc;
-    --color-gradient-purple-start: #b95fe7;
-    --color-gradient-purple-end: #6096ee;
-    --color-gradient-pink-start: #ad5ddf;
-    --color-gradient-pink-end: #e05cd5;
-    --color-gradient-light-start: #f581e4;
-    --color-gradient-light-end: #9d2fe7;
-    --color-menu-dark: #111;
-    --color-text-muted: #9b9b9b;
-    --color-text-bright: #f1f1f1;
-    --color-text-gray: #7d7d7d;
-    --color-text-light-gray: #C1C1C1;
-    --color-vim-background: #252525;
-    --color-vim-page: #121212;
-    --color-vim-cursor: #545454;
-    --color-vim-text: #fff;
-    --color-purple: #9a7ad5;
-}
-
-/* Light mode */
-.light-mode {
+    /* Light mode (default) */
     --color-background: #FFFFFF;
     --color-background-light: #F5F5F5;
     --color-text: #1A1A1A;
@@ -64,6 +30,40 @@
     --color-vim-cursor: #CCCCCC;
     --color-vim-text: #000000;
     --color-purple: #8A2BE2;
+}
+
+/* Dark mode */
+.dark-mode {
+    --color-background: #1A1A1A;
+    --color-background-light: #232323;
+    --color-text: #E1E1E1;
+    --color-text-light: #A1A1A1;
+    --color-menu-item: #313131;
+    --color-menu-item-hover: #3f3f3F;
+    --color-code-background: #2A2A2A;
+    --color-text-secondary: #B1B1B1;
+    --color-text-tertiary: #D1D1D1;
+    --color-card-background: #2F2F2F;
+    --color-card-background-hover: #3f3f3F;
+    --color-shadow: #222222;
+    --color-gradient-start: #689edf;
+    --color-gradient-end: #9f5ccc;
+    --color-gradient-purple-start: #b95fe7;
+    --color-gradient-purple-end: #6096ee;
+    --color-gradient-pink-start: #ad5ddf;
+    --color-gradient-pink-end: #e05cd5;
+    --color-gradient-light-start: #f581e4;
+    --color-gradient-light-end: #9d2fe7;
+    --color-menu-dark: #111;
+    --color-text-muted: #9b9b9b;
+    --color-text-bright: #f1f1f1;
+    --color-text-gray: #7d7d7d;
+    --color-text-light-gray: #C1C1C1;
+    --color-vim-background: #252525;
+    --color-vim-page: #121212;
+    --color-vim-cursor: #545454;
+    --color-vim-text: #fff;
+    --color-purple: #9a7ad5;
 }
 
 * {

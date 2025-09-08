@@ -1,8 +1,8 @@
 <template>
   <Breadcrumbs :breadcrumbArr="this.$route.meta" v-if="!loading" />
   <div class="project-header">
-    <h2 style="display: inline;">Clarent</h2>
-    <p style="display: inline; margin-left: 20px;">A bistable split ergonomic keyboard for gaming</p>
+    <h2 style="display: inline;">Home Automation</h2>
+    <p style="display: inline; margin-left: 20px;">IoT solutions for smart home control and weather monitoring</p>
   </div>
 
   <div class="project-content">
@@ -19,7 +19,7 @@ import Breadcrumbs from '../../components/Breadcrumbs.vue';
 
 
 export default defineComponent({
-  name: 'ProjectClarentPage',
+  name: 'ProjectHomeAutomationPage',
   components: { Breadcrumbs },
   data() {
     return {
@@ -44,9 +44,9 @@ export default defineComponent({
   },
   async created() {
     this.breadCrumbArr = this.$route.meta;
-    this.breadCrumbArr['clarent'] = '/projects/Clarent';
+    this.breadCrumbArr['home_automation'] = '/projects/Home_Automation';
     // Fetch the markdown file from public directory
-    const response = await fetch('/clarent.md');
+    const response = await fetch('/home_automation.md');
     console.log(response)
     this.markdown = await response.text();
     this.loading = false;
@@ -58,21 +58,12 @@ export default defineComponent({
 <style>
 @import '../../assets/projects.css';
 
-
-
 .inverted {
   filter: none;
 }
 
 .dark-mode .inverted {
-  filter: invert(1) hue-rotate(180deg);;
-}
-
-#clarent_3 {
-  height: 270px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  filter: invert(1) hue-rotate(180deg);
 }
 
 </style>
