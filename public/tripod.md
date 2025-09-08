@@ -1,8 +1,9 @@
+![[d73a66f5-5536-4363-82bb-1d1d7d1bb1a6.jpeg]]
+
 # Problem Overview
 - I record volleyball videos with a phone
 - Phone + tripod occasionally gets hit by a fast moving volleyball
 - Tripods are usually made from thin sheet metal usually break and replacement costs are adding up
-- Can't continue to record session
 
 # Final Product
 - Design a tripod with designated compliant spots and failure points
@@ -25,3 +26,34 @@
 
 ## Locking Mechanism
 - Use not completely rigid foot locking mechanism to allow legs to unfold, instead of breaking
+
+# FEA (ANSYS)
+
+## So the tripod broke...
+
+![[tripod_2.jpeg]]
+
+## Ran some FEA in ANSYS
+
+Left is the old one, right is the improved one
+
+![[tripod_1.png]]
+## Takeaways from FEA
+- import STEP model from fusion
+- merge together first to avoid having to model screw forces (pre-tension)
+- initial model with constraint on dowel, with force applied perpendicular to tripod leg at the end
+- force calculated by chatgpt
+	- speed of hit from pro
+	- mass of volleyball
+	- contact time of volleyball
+- new model with shell
+- use von-mises stress, see stress points at where the tripod broke
+- make changes
+	- rib (ugly)
+	- reduce radius
+	- increase wall thickness
+	- incorporate flutes (reduced strength somehow?)
+		- sanity test with flat objects, still had reduced strength and increased deflection
+		- need to check second moment of inertia theory
+- used to find local maximum stresses
+- able to reduce by 180MPa

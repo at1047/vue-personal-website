@@ -19,7 +19,7 @@
             <h3 class="text text-h3">Clarent</h3>
             <div class="right-content">
               <p>A Split, Tented, Columnar, Bistable, Ergonomic Keyboard for Typing & Gaming</p>
-              <p>Tech used: fdsa</p>
+              <p>Tech used: CAD, C++, Kicad</p>
             </div>
           </div>
         </router-link>
@@ -31,25 +31,25 @@
             <h3 class="text text-h3">Tripod</h3>
             <div class="right-content">
               <p>An indestructible tripod for recording volleyball</p>
-              <p>Tech used: CAD, FEA</p>
+              <p>Tech used: CAD, FEA (ANSYS)</p>
             </div>
           </div>
         </router-link>
       </div>
       
-      <div class="card" style="--bias-left: 60%; --bias-right: 0%;">
+      <div class="card" style="--bias-left: 0%; --bias-right: 40%;">
         <router-link to="/projects/carwennan">
           <div class="menu-item">
             <h3 class="text text-h3">Carwennan</h3>
             <div class="right-content">
               <p>Software development project</p>
-              <p>Tech used: fdsa</p>
+              <p>Tech used: CAD, C++, Kicad</p>
             </div>
           </div>
         </router-link>
       </div>
       
-      <div class="card cross-card-spanning" style="--bias-left: 10%; --bias-right: 10%;">
+      <div class="card cross-card-spanning" style="--bias-left: 30%; --bias-right: 10%;">
         <router-link to="/projects/home_automation">
           <div class="menu-item">
             <h3 class="text text-h3">Home Automation</h3>
@@ -62,6 +62,9 @@
       </div>
       
       <!-- Dynamic Popup Project Cards -->
+      <div v-if="loading" class="loading-message">
+        <p>Loading projects...</p>
+      </div>
       <div 
         v-for="project in popupProjects" 
         :key="project.id"
@@ -180,102 +183,8 @@
                     status: '',
                     details: ''
                 },
-                // Popup project data - you can expand this for multiple projects
-                popupProjects: [
-                    {
-                         id: 'macropad',
-                         title: 'Macropad',
-                         description: 'Macropad for Backlight and Home Automation',
-                         technologies: 'Arduino C, Networking, CAD, 3D Printing',
-                         status: 'Completed',
-                         details: `- Based on Arduino, sends Serial communication to another Arduino which has HID support, to imitate keystrokes to send to my computer
-- Utilizes key matrix scanning, where 5 GPIO pins control 6 keys, was a prototype for my keyboard where 12 GPIO pins control 32 keys
-- Connects to local network to control smart lights around the house via API calls to service on RaspberryPi
-- Controls monitor backlight LED strip
-[img:macropad_1.png:300]
-`,
-                         // Card positioning and styling
-                         biasLeft: '20%',
-                         biasRight: '0%',
-                         cardClass: '', // Can be 'cross-card-spanning' for cross-discipline projects
-                         category: 'cross' // 'hardware', 'software', or 'cross'
-                     },
-                     {
-                         id: 'civic-si-shift-boot-collar',
-                         title: 'Civic SI Shift Boot Collar',
-                         description: 'OEM Plus Shift Collar for Civic SI',
-                         technologies: 'CAD, 3D Printing',
-                         status: 'Completed',
-                         details: `The problem:
-- Shift boot collar of 2012 Honda Civic SI is extremely fragile (four thin prongs)
-- OEM replacement doesn't improve design, so would break again
-- Aftermarket shift boot collars don't imitate the design exactly, with the leather fold around the collar
-
-[img:shift_boot_collar_1.png:300]
-
-My solution:
-- Design parts out of TPU, taking advantage of increased flexibility to add support to previously fragile parts
-- Allows the shift boot collar to be indexed on the nut to keep leather stitching aligned
-`,
-                         // Card positioning and styling
-                         biasLeft: '0%',
-                         biasRight: '50%',
-                         cardClass: '', // Can be 'cross-card-spanning' for cross-discipline projects
-                         category: 'hardware' // 'hardware', 'software', or 'cross'
-                     },
-                    {
-                        id: 'webcam-and-monitor-light-mount',
-                        title: 'Webcam and Monitor Light Mount',
-                        description: 'Mount for webcam and monitor light',
-                        technologies: 'CAD, 3D Printing',
-                        status: 'Completed',
-                        details: `Need a way to mount webcam and monitor light above monitor. Designed custom mounting bracket.
-                        [img:webcam_1.png:300]
-                        `,
-                        // Card positioning and styling
-                        biasLeft: '0%',
-                        biasRight: '50%',
-                        cardClass: '', // Can be 'cross-card-spanning' for cross-discipline projects
-                        category: 'hardware' // 'hardware', 'software', or 'cross'
-                    },
-                    {
-                        id: 'csv-to-table-converter',
-                        title: 'CSV to Table Converter',
-                        description: 'Webapp to convert CSVs to HTML tables',
-                        technologies: 'Javascript, Regex',
-                        status: 'Completed',
-                        details: 'Needed a way to process CSVs quickly while iterating on the CSV generator itself. Need the ability to set custom delimiters dynamically.Uses javascript and regex to convert CSVs to HTML tables with custom pattern matching.',
-                        // Card positioning and styling
-                        biasLeft: '50%',
-                        biasRight: '0%',
-                        cardClass: '', // Can be 'cross-card-spanning' for cross-discipline projects
-                        category: 'software' // 'hardware', 'software', or 'cross'
-                    },
-                    {
-                        id: 'sql-analyser',
-                        title: 'SQL Analyser',
-                        description: 'Parses output from SSMS about physical and logical IO activity',
-                        technologies: 'Javascript, SQL, Cursor AI',
-                        status: 'Completed',
-                        details: 'Needed a way to aggregate physical and logical IO activity from SSMS output to identify places for optimization. Used Cursor AI to create parser that aggregates statistics for each table',
-                        biasLeft: '50%',
-                        biasRight: '0%',
-                        cardClass: '',
-                        category: 'software'
-                    },
-                    {
-                        id: '',
-                        title: 'Grass Scoreboard',
-                        description: 'Scoreboard specifically for outdoor volleyball',
-                        technologies: 'Javascript',
-                        status: 'Completed',
-                        details: 'Mobile friendly scoreboard webapp that has a reminder to switch sides for outdoor volleyball, as well as the ability to switch the scores between sides',
-                        biasLeft: '50%',
-                        biasRight: '0%',
-                        cardClass: '',
-                        category: 'software'
-                    }
-                ]
+                popupProjects: [],
+                loading: true
             };
         },
         methods: {
@@ -319,16 +228,17 @@ My solution:
                 return formatted;
             }
         },
-        // async created() {
-        //     try {
-        //         this.projects = await axios.get("//" + import.meta.env.VITE_API
-        //             + "/projects")
-        //             .then((res) => res.data)
-        //     } catch(e) {
-        //         console.error(e);
-        //     };
-        //     this.loading = false
-        // },
+        async created() {
+            try {
+                const response = await fetch('/popupProjects.json');
+                this.popupProjects = await response.json();
+            } catch (error) {
+                console.error('Error loading popup projects:', error);
+                // Fallback to empty array if JSON fails to load
+                this.popupProjects = [];
+            }
+            this.loading = false;
+        },
     });
 </script>
 
@@ -344,12 +254,12 @@ My solution:
 background-color: var(--color-menu-item);
 border-radius: 5px;
 margin-top: 0;
-padding: 15px 10px;
+padding: 7px 15px;
 transition: background-color 100ms ease-out;
 display: flex;
 align-items: flex-start;
 justify-content: space-between;
-min-height: 40px;
+min-height: 30px;
 }
 
 .menu-item:hover {
@@ -570,6 +480,13 @@ h4 {
 
 .below-title-content p:last-child {
   margin-bottom: 0;
+}
+
+.loading-message {
+  text-align: center;
+  padding: 20px;
+  color: var(--color-text-light);
+  font-style: italic;
 }
 
 /* Responsive Design */

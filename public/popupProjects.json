@@ -1,0 +1,74 @@
+[
+  {
+    "id": "macropad",
+    "title": "Macropad",
+    "description": "Macropad for Backlight and Home Automation",
+    "technologies": "Arduino, Networking, CAD, 3D Printing",
+    "status": "Completed",
+    "details": "- Based on Arduino, sends Serial communication to another Arduino which has HID support, to imitate keystrokes to send to my computer\n- Utilizes key matrix scanning, where 5 GPIO pins control 6 keys, was a prototype for my keyboard where 12 GPIO pins control 32 keys\n- Connects to local network to control smart lights around the house via API calls to service on RaspberryPi\n- Controls monitor backlight LED strip\n[img:macropad_1.png:300]\n",
+    "biasLeft": "40%",
+    "biasRight": "0%",
+    "cardClass": "",
+    "category": "cross"
+  },
+  {
+    "id": "civic-si-shift-boot-collar",
+    "title": "Civic SI Shift Boot Collar",
+    "description": "OEM Plus Shift Collar for Civic SI",
+    "technologies": "CAD, 3D Printing",
+    "status": "Completed",
+    "details": "The problem:\n- Shift boot collar of 2012 Honda Civic SI is extremely fragile (four thin prongs)\n- OEM replacement doesn't improve design, so would break again\n- Aftermarket shift boot collars don't imitate the design exactly, with the leather fold around the collar\n\n[img:shift_boot_collar_1.png:300]\n\nMy solution:\n- Design parts out of TPU, taking advantage of increased flexibility to add support to previously fragile parts\n- Allows the shift boot collar to be indexed on the nut to keep leather stitching aligned\n",
+    "biasLeft": "0%",
+    "biasRight": "50%",
+    "cardClass": "",
+    "category": "hardware"
+  },
+  {
+    "id": "webcam-and-monitor-light-mount",
+    "title": "Webcam and Monitor Light Mount",
+    "description": "Mount for webcam and monitor light",
+    "technologies": "CAD, 3D Printing",
+    "status": "Completed",
+    "details": "Need a way to mount webcam and monitor light above monitor. Designed custom mounting bracket.\n[img:webcam_1.png:300]\n",
+    "biasLeft": "0%",
+    "biasRight": "50%",
+    "cardClass": "",
+    "category": "hardware"
+  },
+  {
+    "id": "csv-to-table-converter",
+    "title": "CSV to Table Converter",
+    "description": "Webapp to convert CSVs to HTML tables",
+    "technologies": "Javascript, Regex",
+    "status": "Completed",
+    "details": "Needed a way to process CSVs quickly while iterating on the CSV generator itself. Need the ability to set custom delimiters dynamically.Uses javascript and regex to convert CSVs to HTML tables with custom pattern matching.",
+    "biasLeft": "50%",
+    "biasRight": "0%",
+    "cardClass": "",
+    "category": "software"
+  },
+  {
+    "id": "sql-analyser",
+    "title": "SQL Analyser",
+    "description": "Parses output from SSMS about physical and logical IO activity",
+    "technologies": "Javascript, SQL, Cursor AI",
+    "status": "Completed",
+    "details": "Needed a way to aggregate physical and logical IO activity from SSMS output to identify places for optimization. Used Cursor AI to create parser that aggregates statistics for each table",
+    "biasLeft": "50%",
+    "biasRight": "0%",
+    "cardClass": "",
+    "category": "software"
+  },
+  {
+    "id": "grass-scoreboard",
+    "title": "Grass Scoreboard",
+    "description": "Scoreboard specifically for outdoor volleyball",
+    "technologies": "Javascript",
+    "status": "Completed",
+    "details": "Mobile friendly scoreboard webapp that has a reminder to switch sides for outdoor volleyball, as well as the ability to switch the scores between sides",
+    "biasLeft": "50%",
+    "biasRight": "0%",
+    "cardClass": "",
+    "category": "software"
+  }
+]

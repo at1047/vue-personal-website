@@ -19,7 +19,7 @@
       <div class="nav-bar nav-bar-right">
         <a class="nav-icons" href="https://github.com/at1047" target="_blank"><font-awesome-icon icon="fa-brands fa-github" /></a>
         <a class="nav-icons" href="https://www.youtube.com/channel/UCSjOvYqYrVd5-d78yg-Cvlw" target="_blank"><font-awesome-icon icon="fa-brands fa-youtube" /></a>
-        <a class="nav-icons" target="_blank"><font-awesome-icon icon="fa-envelope" /></a>
+        <a class="nav-icons" :href="mailtoHref"><font-awesome-icon icon="fa-envelope" /></a>
         <ThemeToggle />
       </div>
     </nav>
@@ -49,6 +49,12 @@ export default defineComponent({
   data() {
     return {
       showSlideMenu: false,
+      contactEmail: import.meta.env.VITE_CONTACT_EMAIL || ''
+    }
+  },
+  computed: {
+    mailtoHref() {
+      return this.contactEmail ? `mailto:${this.contactEmail}` : 'mailto:';
     }
   },
   methods: {
@@ -106,7 +112,7 @@ button {
 
 .nav-text {
   font-size: 16px;
-  font-weight: 200;
+  font-weight: 400;
 }
 .nav-icons,
 .nav-text {

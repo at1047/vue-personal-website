@@ -14,7 +14,7 @@
 <script>
 
 import { defineComponent } from "vue";
-import { marked } from "marked";
+import { markdownToHtml, fetchMarkdown } from '../../utils/markdownUtils.js';
 import Breadcrumbs from '../../components/Breadcrumbs.vue';
 
 
@@ -29,26 +29,14 @@ export default defineComponent({
   },
   computed: {
     markdownToHtml() {
-
-      const parsedMarkdown = marked.parse(this.markdown)
-      const replacedMarkdown = parsedMarkdown.replace(/<p>!\[\[(.*?)\]\]<\/p>/g, (match, filename) => {
-        console.log(filename)
-        const [fullname, extensionandclass] = filename.split('.');
-        console.log(`fullname: ${fullname}, extension: ${extensionandclass}`)
-        const [extension, classname] = extensionandclass.split('#');
-        console.log(`${fullname}.${extension}, ${classname}`)
-        return `<img id="${fullname}" class="${classname}" src="/${fullname}.${extension}" />`;
-      });
-      return replacedMarkdown
+      return markdownToHtml(this.markdown);
     },
   },
   async created() {
     this.breadCrumbArr = this.$route.meta;
     this.breadCrumbArr['home_automation'] = '/projects/Home_Automation';
     // Fetch the markdown file from public directory
-    const response = await fetch('/home_automation.md');
-    console.log(response)
-    this.markdown = await response.text();
+    this.markdown = await fetchMarkdown('home_automation');
     this.loading = false;
   },
 });

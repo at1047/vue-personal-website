@@ -14,7 +14,7 @@
 <script>
 
 import { defineComponent } from "vue";
-import { marked } from "marked";
+import { markdownToHtml, fetchMarkdown } from '../../utils/markdownUtils.js';
 import Breadcrumbs from '../../components/Breadcrumbs.vue';
 
 
@@ -29,22 +29,14 @@ export default defineComponent({
   },
   computed: {
     markdownToHtml() {
-
-      const parsedMarkdown = marked.parse(this.markdown)
-      const replacedMarkdown = parsedMarkdown.replace(/<p>!\[\[(.*?)\]\]<\/p>/g, (match, filename) => {
-        const id = filename.split('.')[0];
-        return `<img id="${id}" src="/${filename}" />`;
-      });
-      return replacedMarkdown
+      return markdownToHtml(this.markdown);
     },
   },
   async created() {
     this.breadCrumbArr = this.$route.meta;
     this.breadCrumbArr['tripod'] = '/projects/Tripod';
     // Fetch the markdown file from public directory
-    const response = await fetch('/tripod.md');
-    console.log(response)
-    this.markdown = await response.text();
+    this.markdown = await fetchMarkdown('tripod');
     this.loading = false;
   },
 });
@@ -53,4 +45,28 @@ export default defineComponent({
 
 <style>
 @import '../../assets/projects.css';
+
+#d73a66f5-5536-4363-82bb-1d1d7d1bb1a6 {
+  width: 600px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#tripod_2 {
+  display: block;
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#tripod_1 {
+  width: 1000px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
 </style>
