@@ -1,5 +1,4 @@
 <template>
-  <Breadcrumbs :breadcrumbArr="this.$route.meta" v-if="!loading" />
   <div class="project-header">
     <h2 style="display: inline;">Clarent</h2>
     <p style="display: inline; margin-left: 20px;">A bistable split ergonomic keyboard for gaming</p>
@@ -15,12 +14,11 @@
 
 import { defineComponent } from "vue";
 import { markdownToHtml, fetchMarkdown } from '../../utils/markdownUtils.js';
-import Breadcrumbs from '../../components/Breadcrumbs.vue';
 
 
 export default defineComponent({
   name: 'ProjectClarentPage',
-  components: { Breadcrumbs },
+  components: { },
   data() {
     return {
       markdown: "",
@@ -35,8 +33,8 @@ export default defineComponent({
   async created() {
     this.breadCrumbArr = this.$route.meta;
     this.breadCrumbArr['clarent'] = '/projects/Clarent';
-    // Fetch the markdown file from public directory
-    this.markdown = await fetchMarkdown('clarent');
+    // Fetch the markdown file from public/projects directory
+    this.markdown = await fetchMarkdown('projects/clarent');
     this.loading = false;
   },
 });
@@ -58,6 +56,20 @@ export default defineComponent({
 
 #clarent_3 {
   height: 270px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#clarent_4 {
+  width: 600px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#clarent_5 {
+  width: 600px;
   display: block;
   margin-left: auto;
   margin-right: auto;

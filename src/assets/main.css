@@ -12,58 +12,38 @@
     --color-card-background: #F9F9F9;
     --color-card-background-hover: #F0F0F0;
     --color-shadow: #E0E0E0;
-    --color-gradient-start: #4A90E2;
-    --color-gradient-end: #7B68EE;
-    --color-gradient-purple-start: #8A2BE2;
-    --color-gradient-purple-end: #4169E1;
-    --color-gradient-pink-start: #FF69B4;
-    --color-gradient-pink-end: #FF1493;
-    --color-gradient-light-start: #FFB6C1;
-    --color-gradient-light-end: #DA70D6;
     --color-menu-dark: #F0F0F0;
-    --color-text-muted: #888888;
-    --color-text-bright: #000000;
-    --color-text-gray: #666666;
-    --color-text-light-gray: #4A4A4A;
-    --color-vim-background: #F8F8F8;
-    --color-vim-page: #FFFFFF;
-    --color-vim-cursor: #CCCCCC;
-    --color-vim-text: #000000;
-    --color-purple: #8A2BE2;
+
+
+    
+    /* Header colors */
+    --color-h1: #1A1A1A;
+    --color-h2: #1A1A1A;
+    --color-h3: #1A1A1A;
+    --color-h4: #1A1A1A;
 }
 
-/* Dark mode */
+/* Dark mode - Everforest theme */
 .dark-mode {
-    --color-background: #1A1A1A;
-    --color-background-light: #232323;
-    --color-text: #E1E1E1;
-    --color-text-light: #A1A1A1;
-    --color-menu-item: #313131;
-    --color-menu-item-hover: #3f3f3F;
-    --color-code-background: #2A2A2A;
-    --color-text-secondary: #B1B1B1;
-    --color-text-tertiary: #D1D1D1;
-    --color-card-background: #2F2F2F;
-    --color-card-background-hover: #3f3f3F;
-    --color-shadow: #222222;
-    --color-gradient-start: #689edf;
-    --color-gradient-end: #9f5ccc;
-    --color-gradient-purple-start: #b95fe7;
-    --color-gradient-purple-end: #6096ee;
-    --color-gradient-pink-start: #ad5ddf;
-    --color-gradient-pink-end: #e05cd5;
-    --color-gradient-light-start: #f581e4;
-    --color-gradient-light-end: #9d2fe7;
-    --color-menu-dark: #111;
-    --color-text-muted: #9b9b9b;
-    --color-text-bright: #f1f1f1;
-    --color-text-gray: #7d7d7d;
-    --color-text-light-gray: #C1C1C1;
-    --color-vim-background: #252525;
-    --color-vim-page: #121212;
-    --color-vim-cursor: #545454;
-    --color-vim-text: #fff;
-    --color-purple: #9a7ad5;
+    --color-background: #31383D;
+    --color-background-light: #3C484F;
+    --color-text: #D3C6AA;
+    --color-text-light: #9DA9A0;
+    --color-menu-item: #3C484F;
+    --color-menu-item-hover: #4A5560;
+    --color-code-background: #3C484F;
+    --color-text-secondary: #cacaca;
+    --color-text-tertiary: #999999;
+    --color-card-background: #3C484F;
+    --color-card-background-hover: #4A5560;
+    --color-shadow: #232A2E;
+    --color-menu-dark: #232A2E;
+    
+    /* Header colors - Everforest theme */
+    --color-h1: #CB6A66;
+    --color-h2: #CB8353;
+    --color-h3: #DBBC7F;
+    --color-h4: #D699B6;
 }
 
 * {
@@ -87,11 +67,28 @@ main {
     margin: 50px auto;
 }
 
-h1, h2, h3, h4, a, p, span, li, code, textarea {
+h1, h2, h3, h4, a, p, span, li, code, textarea, table {
     font-family: "Poppins";
     font-weight: 400;
     color: var(--color-text);
     text-decoration: none;
+}
+
+/* Individual header colors */
+h1 {
+    color: var(--color-h1);
+}
+
+h2 {
+    color: var(--color-h2);
+}
+
+h3 {
+    color: var(--color-h3);
+}
+
+h4 {
+    color: var(--color-h4);
 }
 
 h1 {

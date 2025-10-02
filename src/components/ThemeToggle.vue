@@ -15,15 +15,15 @@ export default defineComponent({
     };
   },
   mounted() {
-    // Check for saved theme preference or default to light mode
+    // Check for saved theme preference or default to dark mode
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      this.isLightMode = false;
-      document.body.classList.add('dark-mode');
-    } else {
-      // Default to light mode
+    if (savedTheme === 'light') {
       this.isLightMode = true;
       document.body.classList.remove('dark-mode');
+    } else {
+      // Default to dark mode
+      this.isLightMode = false;
+      document.body.classList.add('dark-mode');
     }
   },
   methods: {

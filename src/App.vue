@@ -9,12 +9,14 @@
     <nav>
       <div class="nav-bar nav-bar-left">
         <!-- <span class="nav-icons" v-on:click="openSlideMenu()"><font-awesome-icon icon="fa-bars" /></span> -->
+        <Breadcrumbs :breadcrumbArr="breadcrumbArr" />
       </div>
       <div class="nav-bar nav-bar-center">
         <router-link class="nav-text" to="/">Home</router-link>
         <router-link class="nav-text" to="/projects">Projects</router-link>
         <!--<router-link class="nav-text" to="/editor">Editor</router-link>-->
         <router-link class="nav-text" to="/recipes">Recipes</router-link>
+        <router-link class="nav-text" to="/blog">Blog</router-link>
       </div>
       <div class="nav-bar nav-bar-right">
         <a class="nav-icons" href="https://github.com/at1047" target="_blank"><font-awesome-icon icon="fa-brands fa-github" /></a>
@@ -37,6 +39,7 @@ import { defineComponent } from 'vue';
 import { RouterLink, RouterView } from 'vue-router'
 import SlideMenu from './components/SlideMenu.vue'
 import ThemeToggle from './components/ThemeToggle.vue'
+import Breadcrumbs from './components/Breadcrumbs.vue'
 
 export default defineComponent({
     name: 'App',
@@ -45,6 +48,7 @@ export default defineComponent({
     RouterLink,
     SlideMenu,
     ThemeToggle,
+    Breadcrumbs,
   },
   data() {
     return {
@@ -55,6 +59,25 @@ export default defineComponent({
   computed: {
     mailtoHref() {
       return this.contactEmail ? `mailto:${this.contactEmail}` : 'mailto:';
+    },
+    breadcrumbArr() {
+      const route = this.$route;
+      const base = { home: '/', ...(route.meta || {}) };
+      let lastKey = '';
+      if (route.name === 'Projects') {
+        lastKey = 'projects';
+      } else if (typeof route.name === 'string' && route.name.startsWith('Project')) {
+        const segments = route.path.split('/').filter(Boolean);
+        lastKey = segments[segments.length - 1] || '';
+      } else if (route.name === 'Recipes') {
+        lastKey = 'recipes';
+      } else if (route.name === 'Home') {
+        lastKey = 'home';
+      }
+      if (lastKey && !Object.prototype.hasOwnProperty.call(base, lastKey)) {
+        base[lastKey] = route.path;
+      }
+      return base;
     }
   },
   methods: {
@@ -98,7 +121,7 @@ button {
 #nav-underline {
   display: block;
   width: 100%;
-  height: 0.5px;
+  height: 1.5px;
   background: var(--color-background-light);
 }
 

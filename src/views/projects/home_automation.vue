@@ -1,5 +1,4 @@
 <template>
-  <Breadcrumbs :breadcrumbArr="this.$route.meta" v-if="!loading" />
   <div class="project-header">
     <h2 style="display: inline;">Home Automation</h2>
     <p style="display: inline; margin-left: 20px;">IoT solutions for smart home control and weather monitoring</p>
@@ -15,12 +14,11 @@
 
 import { defineComponent } from "vue";
 import { markdownToHtml, fetchMarkdown } from '../../utils/markdownUtils.js';
-import Breadcrumbs from '../../components/Breadcrumbs.vue';
 
 
 export default defineComponent({
   name: 'ProjectHomeAutomationPage',
-  components: { Breadcrumbs },
+  components: { },
   data() {
     return {
       markdown: "",
@@ -35,8 +33,8 @@ export default defineComponent({
   async created() {
     this.breadCrumbArr = this.$route.meta;
     this.breadCrumbArr['home_automation'] = '/projects/Home_Automation';
-    // Fetch the markdown file from public directory
-    this.markdown = await fetchMarkdown('home_automation');
+    // Fetch the markdown file from public/projects directory
+    this.markdown = await fetchMarkdown('projects/home_automation');
     this.loading = false;
   },
 });

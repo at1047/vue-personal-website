@@ -6,6 +6,7 @@ import ProjectPage from '@/views/ProjectPage.vue'
 // import EditorPage from '@/views/EditorPage.vue'
 // import EditorMarkdownPage from '@/views/EditorMarkdownPage.vue'
 import RecipePage from '@/views/RecipePage.vue'
+import BlogPage from '@/views/BlogPage.vue'
 
 import ProjectClarentPage from '@/views/projects/clarent.vue'
 import ProjectTripodPage from '@/views/projects/tripod.vue'
@@ -34,6 +35,11 @@ const router = createRouter({
             path: '/recipes',
             name: 'Recipes',
             component: RecipePage,
+        },
+        {
+            path: '/blog',
+            name: 'Blog',
+            component: BlogPage,
         },
         // {
         //     path: '/projects/:projectName',

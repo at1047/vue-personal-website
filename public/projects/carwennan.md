@@ -48,7 +48,6 @@ calc_max_press_force(L_a = 24, L_c = 9.8, A_to_B_offset = -7, L_b = 33, T_b = 12
 ## PCB
 - Kicad -> Freeroute while fixing bad routes
 - Use reversible footprints
-- Look for connectors on Mouser -> 10 pin FPC 0.5mm connectors
 
 ## Connector to controller
 

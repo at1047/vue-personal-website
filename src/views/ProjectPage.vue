@@ -1,5 +1,5 @@
 <template>
-  <p class="breadcrumb">~ / projects</p>
+  
   
   <div class="projects-container">
     <!-- Section Headers -->
@@ -8,8 +8,7 @@
       <h2 class="section-title software-title">Software</h2>
     </div>
     
-    <!-- Background Divider -->
-    <div class="background-divider"></div>
+    
     
     <!-- All Projects Container -->
     <div class="all-projects">
@@ -280,21 +279,7 @@ background-color: var(--color-menu-item-hover);
   gap: 50%;
 }
 
-.background-divider {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 2px;
-  height: 100%;
-  background: linear-gradient(to bottom, 
-    transparent 0%,
-    var(--color-gradient-start) 10%,
-    var(--color-gradient-purple-start) 90%,
-    transparent 100%
-  );
-  z-index: 1;
-}
+
 
 .all-projects {
   display: flex;
@@ -308,21 +293,18 @@ background-color: var(--color-menu-item-hover);
   font-size: 32px;
   margin: 0;
   text-align: center;
-  color: var(--color-text-tertiary);
+  color: var(--color-h1);
   font-weight: 600;
 }
 
+/* 
 .hardware-title {
-  color: var(--color-gradient-start);
+  color: var(--color-text-secondary);
 }
 
 .software-title {
-  color: var(--color-gradient-purple-start);
-}
-
-.cross-title {
-  color: var(--color-gradient-pink-start);
-}
+  color: var(--color-text-secondary);
+} */
 
 /* Flexible Bias System using CSS Custom Properties */
 .card {
@@ -331,83 +313,9 @@ background-color: var(--color-menu-item-hover);
   position: relative;
 }
 
-/* Border indicators based on bias direction with fade effect */
-.card[style*="--bias-left: 0%"] {
-  position: relative;
-}
+/* Removed vertical border indicators */
 
-.card[style*="--bias-left: 0%"]::before {
-  content: '';
-  position: absolute;
-  left: -3px;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: linear-gradient(to bottom,
-    transparent 0%,
-    var(--color-gradient-start) 20%,
-    var(--color-gradient-start) 80%,
-    transparent 100%
-  );
-  z-index: 1;
-}
-
-.card[style*="--bias-right: 0%"] {
-  position: relative;
-}
-
-.card[style*="--bias-right: 0%"]::after {
-  content: '';
-  position: absolute;
-  right: -3px;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: linear-gradient(to bottom,
-    transparent 0%,
-    var(--color-gradient-purple-start) 20%,
-    var(--color-gradient-purple-start) 80%,
-    transparent 100%
-  );
-  z-index: 1;
-}
-
-/* Cross-discipline projects get both borders with fade */
-.cross-card-spanning {
-  position: relative;
-}
-
-.cross-card-spanning::before {
-  content: '';
-  position: absolute;
-  left: -3px;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: linear-gradient(to bottom,
-    transparent 0%,
-    var(--color-gradient-start) 20%,
-    var(--color-gradient-start) 80%,
-    transparent 100%
-  );
-  z-index: 1;
-}
-
-.cross-card-spanning::after {
-  content: '';
-  position: absolute;
-  right: -3px;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: linear-gradient(to bottom,
-    transparent 0%,
-    var(--color-gradient-purple-start) 20%,
-    var(--color-gradient-purple-start) 80%,
-    transparent 100%
-  );
-  z-index: 1;
-}
+/* Removed cross-card vertical borders */
 
 .card {
   border-radius: 0px;
@@ -427,7 +335,7 @@ h2 {
 
 .text-h3 {
   font-size: 20px;
-  color: var(--color-text-tertiary);
+  color: var(--color-h2);
   margin: 0;
   font-weight: 600;
 }
@@ -447,7 +355,6 @@ h4 {
 
 .menu-item .right-content p {
   font-size: 14px;
-  color: var(--color-text-light-gray);
   margin: 0;
   line-height: 1.3;
 }
@@ -473,7 +380,6 @@ h4 {
 
 .below-title-content p {
   font-size: 14px;
-  color: var(--color-text-light-gray);
   margin: 0 0 4px 0;
   line-height: 1.3;
 }
@@ -497,9 +403,7 @@ h4 {
     text-align: center;
   }
   
-  .background-divider {
-    display: none;
-  }
+  
   
   .card {
     margin-left: 0 !important;

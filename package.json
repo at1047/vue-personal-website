@@ -23,8 +23,6 @@
     "marked": "^5.0.4",
     "oh-vue-icons": "^1.0.0-rc3",
     "react-icons": "^4.6.0",
-    "tree-sitter": "^0.21.1",
-    "tree-sitter-vue": "^0.2.1",
     "vue": "^3.2.41",
     "vue-axios": "^3.5.2",
     "vue-burger-menu": "^2.0.5",
