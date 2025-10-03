@@ -27,11 +27,15 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scoped>
 
 
 .emph {
     color: var(--color-purple);
+}
+
+.text p {
+    color: var(--color-text-muted);
 }
 
 </style>

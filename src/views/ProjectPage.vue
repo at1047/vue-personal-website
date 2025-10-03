@@ -299,11 +299,11 @@ background-color: var(--color-menu-item-hover);
 
 /* 
 .hardware-title {
-  color: var(--color-text-secondary);
+  color: var(--color-text-muted);
 }
 
 .software-title {
-  color: var(--color-text-secondary);
+  color: var(--color-text-muted);
 } */
 
 /* Flexible Bias System using CSS Custom Properties */
@@ -391,7 +391,7 @@ h4 {
 .loading-message {
   text-align: center;
   padding: 20px;
-  color: var(--color-text-light);
+  color: var(--color-text-muted);
   font-style: italic;
 }
 
@@ -488,7 +488,7 @@ h4 {
   background: none;
   border: none;
   font-size: 28px;
-  color: var(--color-text-light);
+  color: var(--color-text-muted);
   cursor: pointer;
   padding: 0;
   width: 30px;

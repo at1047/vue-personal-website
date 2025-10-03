@@ -11,15 +11,29 @@ export function markdownToHtml(markdown) {
   // Parse markdown to HTML
   const parsedMarkdown = marked.parse(markdown);
   
-  // Process custom image syntax: ![[filename.ext#classname]]
-  const replacedMarkdown = parsedMarkdown.replace(/<p>!\[\[(.*?)\]\]<\/p>/g, (match, filename) => {
-    console.log(filename);
-    const [fullname, extensionandclass] = filename.split('.');
-    console.log(`fullname: ${fullname}, extension: ${extensionandclass}`);
-    const [extension, classname] = extensionandclass.split('#');
-    console.log(`${fullname}.${extension}, ${classname}`);
-    // Automatically prepend images/ to the path
-    return `<img id="${fullname}" class="${classname}" src="/images/${fullname}.${extension}" />`;
+  // Process custom image syntax: ![[filename.ext#classname]] (supports .jpg, .jpeg, .png, .gif, .svg)
+  const replacedMarkdown = parsedMarkdown.replace(/<p>!\[\[(.*?)\]\]<\/p>/g, (match, raw) => {
+    if (!raw) return match;
+    // Extract optional class after '#'
+    const hashIndex = raw.indexOf('#');
+    const pathPart = hashIndex >= 0 ? raw.slice(0, hashIndex) : raw;
+    const className = hashIndex >= 0 ? raw.slice(hashIndex + 1) : '';
+
+    // Use last '.' to allow filenames with dots
+    const lastDot = pathPart.lastIndexOf('.');
+    if (lastDot === -1) return match;
+    const baseName = pathPart.slice(0, lastDot);
+    const extension = pathPart.slice(lastDot + 1).toLowerCase();
+
+    // Permit common image extensions, including gif
+    const allowed = ['jpg', 'jpeg', 'png', 'gif', 'svg'];
+    if (!allowed.includes(extension)) return match;
+
+    // Build img src path, auto-prepend images/ if no folder provided
+    const imagePath = baseName.includes('/') ? `${baseName}.${extension}` : `images/${baseName}.${extension}`;
+    const idValue = baseName.split('/').pop();
+    const classAttr = className ? ` class="${className}"` : '';
+    return `<img id="${idValue}"${classAttr} src="/${imagePath}" />`;
   });
 
   // Remove any width attribute from standard <img> tags (e.g., width="300")
@@ -29,7 +43,7 @@ export function markdownToHtml(markdown) {
   // Add id attribute to standard <img> tags based on filename if missing
   // Also automatically prepend images/ to paths that don't already have a folder
   // Example: <img src="/clarent_5.jpg" /> => <img id="clarent_5" src="/images/clarent_5.jpg" />
-  const withImgIds = cleanedImages.replace(/<img([^>]*?)src=\"\/([^\/"]+)\.([a-zA-Z0-9]+)\"([^>]*)>/g, (match, before, name, ext, after) => {
+  const withImgIds = cleanedImages.replace(/<img([^>]*?)src=\"\/?([^/\"]+)\.([a-zA-Z0-9]+)\"([^>]*)>/g, (match, before, name, ext, after) => {
     // If an id already exists, leave unchanged
     if (/\sid\s*=/.test(match)) return match;
     // Check if path already has a folder (contains /)

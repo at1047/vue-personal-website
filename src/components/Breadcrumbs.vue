@@ -49,7 +49,7 @@ li {
 }
 
 .destination {
-  color: var(--color-text-light);
+  color: var(--color-text-muted2);
 }
 
 </style>

@@ -1,43 +1,47 @@
 :root {
     /* Light mode (default) */
-    --color-background: #FFFFFF;
-    --color-background-light: #F5F5F5;
-    --color-text: #1A1A1A;
-    --color-text-light: #666666;
-    --color-menu-item: #E5E5E5;
+    --color-background: hsl(0, 0%, 90%);
+    --color-background-light: hsl(0, 0%, 85%);
+    --color-text: hsl(0, 0%, 40%);
+    --color-text-muted: #666666;
+    --color-text-muted2: #4A4A4A;
+    --color-menu-item: hsl(0, 0%, 95%);
     --color-menu-item-hover: #D0D0D0;
     --color-code-background: #F8F8F8;
-    --color-text-secondary: #4A4A4A;
-    --color-text-tertiary: #2A2A2A;
+
     --color-card-background: #F9F9F9;
     --color-card-background-hover: #F0F0F0;
     --color-shadow: #E0E0E0;
     --color-menu-dark: #F0F0F0;
 
+    --color-icon-filter: brightness(0) saturate(100%) opacity(70%);
 
-    
+
     /* Header colors */
-    --color-h1: #1A1A1A;
-    --color-h2: #1A1A1A;
-    --color-h3: #1A1A1A;
-    --color-h4: #1A1A1A;
+    --color-h1: hsl(0, 0%, 10%);
+    --color-h2: hsl(0, 0%, 10%);
+    --color-h3: hsl(0, 0%, 20%);
+    --color-h4: hsl(0, 0%, 20%);
 }
 
 /* Dark mode - Everforest theme */
 .dark-mode {
     --color-background: #31383D;
     --color-background-light: #3C484F;
-    --color-text: #D3C6AA;
-    --color-text-light: #9DA9A0;
+    --color-text: hsl(41, 32%, 75%);
+    --color-text-muted: #d1cdb5;
+    --color-text-muted2: #8b877d;
     --color-menu-item: #3C484F;
     --color-menu-item-hover: #4A5560;
     --color-code-background: #3C484F;
-    --color-text-secondary: rgb(188, 185, 176);
-    --color-text-tertiary: #999999;
+    
     --color-card-background: #3C484F;
     --color-card-background-hover: #4A5560;
     --color-shadow: #232A2E;
     --color-menu-dark: #232A2E;
+
+    --color-icon-filter: brightness(0) saturate(100%) invert(76%) sepia(20%) saturate(257%) hue-rotate(4deg) brightness(104%) contrast(87%);
+
     
     /* Header colors - Everforest theme */
     --color-h1: #CB6A66;

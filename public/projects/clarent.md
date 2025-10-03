@@ -1,11 +1,12 @@
-Clarent is a **split**, **tented**, **columnar** keyboard featuring a **bistable compliant** mechanical sliding mechanism. This novel implementation allows the entire left-hand key matrix to physically shift, instantly and satisfyingly moving between a standard ASDF layout for typing and a WASD-optimized layout for gaming, solving the ergonomic and functional compromises of other solutions.
 
-![[clarent_3.png#inverted]]
+<!-- <div style="display: flex; flex-direction: row; justify-content: space-around">
+<p style="flex-basis: 50%;"> -->
+Clarent is a split, tented, columnar keyboard featuring a bistable compliant mechanical sliding mechanism. This novel implementation allows the entire left-hand key matrix to physically shift, instantly and satisfyingly moving between a standard ASDF layout for typing and a WASD-optimized layout for gaming, solving the ergonomic and functional compromises of other solutions.
+<!-- </p>
+</div> -->
 
-<p style="display: flex; flex-direction: row; justify-content: space-around">
-  <img src="/clarent_4.jpg" width="300" />
-  <img src="/clarent_5.jpg" width="300" /> 
-</p>
+<img src="ezgif-1306001d1e5c97.gif"/>
+
 
 *Notice the left 3 columns shifted up such that they are horizontally aligned*
 ## What is a split, tented, columnar keyboard?
@@ -39,6 +40,7 @@ My pain points when using ergonomic keyboards on the market:
 	- It requires a manual button press to activate, and it's easy to forget which layer is active, even with visual cues like RGB lighting.
 	- The need to manually switch layers is slow and adds unnecessary mental overhead.
 
+![[Gemini_Generated_Image_lrn9ehlrn9ehlrn9_transparent.png#inverted]]
 ## Project Goals
 ### Primary Design Goals
 - A split, tented, columnar foundation with adjustable tenting.
