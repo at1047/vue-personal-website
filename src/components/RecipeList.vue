@@ -134,6 +134,7 @@ export default defineComponent({
   width: 18px;
   height: 18px;
   margin-right: 10px;
+  color: var(--color-text);
 }
 
 p.text {

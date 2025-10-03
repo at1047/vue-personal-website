@@ -45,10 +45,10 @@ Build and run the container:
 docker build -t vue-personal-website .
 
 # Run the container
-docker run -p 3000:3000 vue-personal-website
+docker run -p 8080:80 vue-personal-website
 ```
 
-The application will be available at `http://localhost:3000`
+The application will be available at `http://localhost:8080`
 
 ## Project Structure
 
