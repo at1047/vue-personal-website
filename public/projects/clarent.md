@@ -1,34 +1,34 @@
+Clarent is a **split**, **tented**, **columnar** keyboard featuring a **bistable compliant** mechanical sliding mechanism. This novel implementation allows the entire left-hand key matrix to physically shift, instantly and satisfyingly moving between a standard ASDF layout for typing and a WASD-optimized layout for gaming, solving the ergonomic and functional compromises of other solutions.
+
 ![[clarent_3.png#inverted]]
 
-# What is Clarent
-Clarent is a split, tented, columnar keyboard featuring a bistable mechanical sliding mechanism. This core innovation allows the entire left-hand key matrix to physically shift, instantly and satisfyingly moving between a standard ASDF layout for typing and a WASD-optimized layout for gaming, solving the ergonomic and functional compromises of other solutions.
-### Features:
-- Split, Tented, and Columnar
-- Bistable mechanism for instant physical layout switching
-- Offset thumb cluster optimized for both typing and gaming roles
-
-![[clarent_4.jpg]]
-
-![[clarent_5.jpg]]
+<p style="display: flex; flex-direction: row; justify-content: space-around">
+  <img src="/clarent_4.jpg" width="300" />
+  <img src="/clarent_5.jpg" width="300" /> 
+</p>
 
 *Notice the left 3 columns shifted up such that they are horizontally aligned*
-# What is a split, tented, columnar keyboard?
+## What is a split, tented, columnar keyboard?
 *A breakdown of the core ergonomic concepts:*
-- Columnar Layout
+- **Columnar Layout**
 	- Positions keys in vertical columns rather than the staggered horizontal rows of traditional keyboards.
 	- Staggers each column vertically to better match the natural lengths of different fingers.
-- Split Design
+- **Split Design**
 	- Ability to position the the two halves further apart arms don't have to meet near the centerline of body
 	- Ability to angle keyboards so wrist are in line with arms (reduce ulnar deviation)
-- Tented
+- **Tented** 
 	- Raises the inner edge of each keyboard half, similar to a tent.
 	- This allows the wrists to rest in a more neutral, "handshake" position, reducing forearm pronation (the twisting motion required to lay your hands flat).
 
-# Defining the problem
+## The problem
+I type a lot. I also game. I got my first split keyboard in 2021, the Keebio Iris. (https://keeb.io/collections/iris-split-ergonomic-keyboard) This was a split, columnar, tented design. This was a significant step up for typing. However, as I used it more, I started to notice some problems and made some adjustments.
+
+First of all, the thumb keys were the same switch type as the alpha keys, but when our hand naturally rests on the keyboard, the thumbs should be resting on a lower plane than the rest of the fingers. To solve this, I ordered some low profile switches and keycaps, desoldered the thumb key switches and replaced them with the low profile ones. This greatly improved the ergonomics of the keyboard overall.
+
 My pain points when using ergonomic keyboards on the market:
 - Gaming Hand Position: The ergonomic benefits of column stagger are lost during gaming. The standard ASDF home row shifts to WASD, misaligning the fingers with the columns they were designed for (e.g., the index finger moves from F to D).
 - Dual-Use Thumb Keys: The primary left thumb key is ideal for Shift during typing but needs to function as Space for gaming, requiring an inconvenient mode switch.
-# Conventional solutions and why they are suboptimal
+## Conventional solutions and why they are suboptimal
 - In-Game Key Remapping (e.g., WASD to ESDF)
 	- Not enough keys to the right of ESDF for additional key-binds
 	- While it opens up keys on the left, it relies on the less dexterous ring and pinky fingers for access.
@@ -39,7 +39,7 @@ My pain points when using ergonomic keyboards on the market:
 	- It requires a manual button press to activate, and it's easy to forget which layer is active, even with visual cues like RGB lighting.
 	- The need to manually switch layers is slow and adds unnecessary mental overhead.
 
-# Project Goals
+## Project Goals
 ### Primary Design Goals
 - A split, tented, columnar foundation with adjustable tenting.
 - Seamlessly accommodates both typing and gaming use cases.
@@ -56,8 +56,8 @@ My pain points when using ergonomic keyboards on the market:
 - Compatible with use on a large desk mat or mousepad.
 - Cable routing that exits from the top/front edge of the keyboard to avoid interference.
 
-# Engineering Considerations
-## **Mechanism for Column Translation: Trade-off Analysis**
+## Engineering Considerations
+### **Mechanism for Column Translation: Trade-off Analysis**
 
 | Mechanism                    | Pros                                                                                                                                                                                                                | Cons                                                                                                                                                                                                                                                                                                                                                                          |
 | :--------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -85,6 +85,6 @@ The compliant mechanism option was chosen because it aligns with the core goals 
 
 ## Thumb Keys
 
-# Key Takeaways
-# Moving forwards
-# Reflection
+## Key Takeaways
+## Moving forwards
+## Reflection

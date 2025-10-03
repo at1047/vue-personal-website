@@ -13,6 +13,9 @@ import ProjectTripodPage from '@/views/projects/tripod.vue'
 import ProjectCarwennanPage from '@/views/projects/carwennan.vue'
 import ProjectHomeAutomationPage from '@/views/projects/home_automation.vue'
 
+import BlogSettersMindsetPage from '@/views/blog/setters-mindset.vue'
+import BlogDefiningVolleyballSetsPage from '@/views/blog/defining-volleyball-sets.vue'
+
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
@@ -84,6 +87,24 @@ const router = createRouter({
             meta: {
                 home: "/",
                 projects: "/projects",
+            }
+        },
+        {
+            path: '/blog/setters-mindset',
+            name: 'BlogSettersMindset',
+            component: BlogSettersMindsetPage,
+            meta: {
+                home: "/",
+                blog: "/blog",
+            }
+        },
+        {
+            path: '/blog/defining-volleyball-sets',
+            name: 'BlogDefiningVolleyballSets',
+            component: BlogDefiningVolleyballSetsPage,
+            meta: {
+                home: "/",
+                blog: "/blog",
             }
         },
         // {

@@ -1,5 +1,13 @@
+.project-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .project-header {
   margin-bottom: 30px;
+  width: 800px;
 }
 
 .project-content {
@@ -8,12 +16,13 @@
 }
 
 .markdown {
-  width: 1000px;
+  width: 800px;
 }
 
 .markdown p {
   color: var(--color-text-secondary);
   font-size: 14px;
+  margin-bottom: 15px;
 }
 
 .markdown li {
@@ -35,19 +44,20 @@ ul ul {
 
 .markdown h1 {
   text-align: left;
-  font-size: 25px;
-  font-weight: 400;
+  font-size: 24px;
+  font-weight: 600;
   margin-bottom: 7px;
   margin-top: 15px;
+  color: var(--color-h1);
 }
 
 .markdown h2 {
   text-align: left;
-  font-size: 18px;
-  font-weight: 400;
+  font-size: 22px;
+  font-weight: 600;
   margin-bottom: 7px;
   margin-top: 15px;
-  color: var(--color-text-secondary);
+  color: var(--color-h2);
 }
 
 /* .project-header h2 {

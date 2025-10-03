@@ -242,7 +242,7 @@
 </script>
 
 
-<style scope>
+<style scoped>
 /*
 .menu-item:hover {
   opacity: 0.3 ;

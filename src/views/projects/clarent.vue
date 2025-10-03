@@ -1,6 +1,7 @@
 <template>
+  <div class="project-container">
   <div class="project-header">
-    <h2 style="display: inline;">Clarent</h2>
+    <h1 style="display: inline;">Clarent</h1>
     <p style="display: inline; margin-left: 20px;">A bistable split ergonomic keyboard for gaming</p>
   </div>
 
@@ -8,6 +9,7 @@
 
     <div v-html="markdownToHtml" class="markdown"></div>
   </div>
+</div>
 </template>
 
 <script>
@@ -62,14 +64,14 @@ export default defineComponent({
 }
 
 #clarent_4 {
-  width: 600px;
+  width: 400px;
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
 
 #clarent_5 {
-  width: 600px;
+  width: 400px;
   display: block;
   margin-left: auto;
   margin-right: auto;

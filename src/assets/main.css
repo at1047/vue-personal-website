@@ -94,17 +94,8 @@ h4 {
 h1 {
     font-weight: bold;
     text-align: center;
-    font-size: 60px;
+    font-size: 40px;
     margin-bottom: 50px;
-    /* background: -webkit-linear-gradient(30deg, #b95fe7, #6096ee);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent; */
-
-    /* background: -webkit-linear-gradient(0deg, var(--color-light-blue), var(--color-light-purple));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent; */
 }
 
 h2 {

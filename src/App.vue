@@ -15,8 +15,9 @@
         <router-link class="nav-text" to="/">Home</router-link>
         <router-link class="nav-text" to="/projects">Projects</router-link>
         <!--<router-link class="nav-text" to="/editor">Editor</router-link>-->
-        <router-link class="nav-text" to="/recipes">Recipes</router-link>
         <router-link class="nav-text" to="/blog">Blog</router-link>
+        <router-link class="nav-text" to="/recipes">Recipes</router-link>
+
       </div>
       <div class="nav-bar nav-bar-right">
         <a class="nav-icons" href="https://github.com/at1047" target="_blank"><font-awesome-icon icon="fa-brands fa-github" /></a>

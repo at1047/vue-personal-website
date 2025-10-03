@@ -5,6 +5,26 @@
     </div>
 
     <div class="all-projects">
+      <!-- Vue Component Links -->
+      <div class="card">
+        <router-link to="/blog/setters-mindset" class="menu-item">
+          <h3 class="text text-h3">A Setter's Mindset</h3>
+          <!-- <div class="right-content">
+            <p>and volleyball mindset in general</p>
+          </div> -->
+        </router-link>
+      </div>
+      
+      <div class="card">
+        <router-link to="/blog/defining-volleyball-sets" class="menu-item">
+          <h3 class="text text-h3">Defining Volleyball Sets</h3>
+          <!-- <div class="right-content">
+            <p>Understanding volleyball set terminology</p>
+          </div> -->
+        </router-link>
+      </div>
+
+      <!-- Popup-based posts (if any) -->
       <div 
         v-for="post in posts" 
         :key="post.id"
@@ -88,8 +108,7 @@
     });
 
 </script>
-<!-- 
-<style scope>
+<style scoped>
 .menu-item {
   background-color: var(--color-menu-item);
   border-radius: 5px;
@@ -97,8 +116,9 @@
   padding: 7px 15px;
   transition: background-color 100ms ease-out;
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+  flex-direction: row;
+  align-items: end;
+  justify-content: start;
   min-height: 30px;
 }
 
@@ -136,8 +156,6 @@
 }
 
 .card {
-  margin-left: var(--bias-left, 0%);
-  margin-right: var(--bias-right, 0%);
   position: relative;
   border-radius: 0px;
   padding: .5rem;
@@ -145,98 +163,14 @@
 
 .text-h3 {
   font-size: 20px;
-  color: var(--color-text-tertiary);
+  color: var(--color-h2);
   margin: 0;
   font-weight: 600;
 }
 
-.menu-item .right-content p {
-  font-size: 14px;
-  color: var(--color-text-light-gray);
-  margin: 0;
-  line-height: 1.3;
-}
-
-/* Popup Modal Styles (reuse from projects) */
-.popup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  backdrop-filter: blur(2px);
-}
-
-.popup-content {
-  background-color: var(--color-card-background);
-  border-radius: 10px;
-  padding: 0;
-  width: 80%;
-  height: 80%;
-  max-width: none;
-  max-height: none;
-  overflow-y: auto;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  border: 1px solid var(--color-background-light);
-}
-
-.dark-mode .popup-content {
-  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
-}
-
-.popup-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 25px;
-  border-bottom: 1px solid var(--color-background-light);
-  background-color: var(--color-menu-item);
-  border-radius: 10px 10px 0 0;
-}
-
-.popup-header h2 {
-  margin: 0;
-  color: var(--color-text-tertiary);
-  font-size: 24px;
-  font-weight: 600;
-}
-
-.popup-close {
-  background: none;
-  border: none;
-  font-size: 28px;
-  color: var(--color-text-light);
-  cursor: pointer;
-  padding: 0;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  transition: background-color 0.2s ease;
-}
-
-.popup-close:hover {
-  background-color: var(--color-menu-item-hover);
-}
-
-.popup-body {
-  padding: 25px;
-}
-
-.popup-details-content {
-  line-height: 1.6;
-}
-
-.popup-details-content p {
-  margin: 0 0 15px 0;
-  color: var(--color-text);
+.right-content {
+  padding-bottom: 2px;
+  padding-left: 10px;
 }
 
 @media (max-width: 768px) {
@@ -249,13 +183,6 @@
     margin-left: 0 !important;
     margin-right: 0 !important;
   }
-  .popup-content {
-    width: 95%;
-    height: 90%;
-    margin: 20px;
-  }
 }
 
 </style>
-
- -->

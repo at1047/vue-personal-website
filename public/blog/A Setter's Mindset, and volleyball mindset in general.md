@@ -1,0 +1,7 @@
+## A Setter's Mindset, and volleyball mindset in general
+
+*"The secret of happiness is realizing that we have control over nothing except our reactions, and that all else is outside of our control, a matter of indifference, and not our concern" - Epictetus Art of Living.
+
+At some point of my career, I started associating the outcome of the point to my setting, and would get upset at myself if the hitter doesn't score. It was a turning point of zen for me upon realizing that although there is a positive correlation between a good set and a good attack, it's not always guarenteed. There are a billion and one factors that happen after the set that affects the outcome, and that it would be naive to be negatively affected by the outcome. Instead of applying **result based analysis**, I would analyze my performance based on the set, and whatever after is simply a probability distribution.
+
+This probability distribution applies to the rest of volleyball as well. For example, sometimes people come to me asking how they could have defended that ball. I tell them, often it's important to realize that the volleyball court is simply a 9m by 9m square, and is too big for 6 people to entirely cover. There are certain spots and attacks that are simply good spots, or good attacks. Instead of beating ourselves up over some failed defense, we should play the probability distribution game. Go for the high probability play that is sound in theory, and understand that singular, low probability events shouldn't change our game plan if we believe in it.

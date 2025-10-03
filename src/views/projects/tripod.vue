@@ -1,12 +1,15 @@
 <template>
-  <div class="project-header">
-    <h2 style="display: inline;">My <em>Indestructible</em> Tripod</h2>
-    <p style="display: inline; margin-left: 20px;">My solution for tripods breaking when recording volleyball sessions</p>
+  <div class="project-container">
+  <div class="project-header" style="display: flex; flex-direction: column; align-items: flex-start;">
+    <h1>My <em>Indestructible</em> Tripod</h1>
+
+    <p>My solution for tripods breaking when recording volleyball sessions</p>
   </div>
 
   <div class="project-content">
 
     <div v-html="markdownToHtml" class="markdown"></div>
+  </div>
   </div>
 </template>
 
@@ -43,6 +46,23 @@ export default defineComponent({
 
 <style>
 @import '../../assets/projects.css';
+
+.tinted {
+  filter: none;
+}
+
+.dark-mode .tinted {
+  /* filter: invert(0.8) hue-rotate(180deg) brightness(1.5) contrast(0.9); */
+  filter: invert(15%) brightness(0.9) contrast(90%);
+}
+
+.project-header h1 {
+  margin-bottom: 0;
+}
+
+.project-header p {
+  margin-top: 0;
+}
 
 #d73a66f5-5536-4363-82bb-1d1d7d1bb1a6 {
   width: 600px;

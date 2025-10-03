@@ -20,8 +20,20 @@ export function markdownToHtml(markdown) {
     console.log(`${fullname}.${extension}, ${classname}`);
     return `<img id="${fullname}" class="${classname}" src="/${fullname}.${extension}" />`;
   });
+
+  // Remove any width attribute from standard <img> tags (e.g., width="300")
+  // Example input: <img src="/clarent_5.jpg" width="300" />
+  const cleanedImages = replacedMarkdown.replace(/\swidth="[^"]*"/g, '');
+
+  // Add id attribute to standard <img> tags based on filename if missing
+  // Example: <img src="/clarent_5.jpg" /> => <img id="clarent_5" src="/clarent_5.jpg" />
+  const withImgIds = cleanedImages.replace(/<img([^>]*?)src=\"\/([^\/"]+)\.([a-zA-Z0-9]+)\"([^>]*)>/g, (match, before, name, ext, after) => {
+    // If an id already exists, leave unchanged
+    if (/\sid\s*=/.test(match)) return match;
+    return `<img id="${name}"${before}src="/${name}.${ext}"${after}>`;
+  });
   
-  return replacedMarkdown;
+  return withImgIds;
 }
 
 /**
