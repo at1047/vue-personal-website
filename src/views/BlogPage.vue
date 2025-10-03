@@ -9,18 +9,18 @@
       <div class="card">
         <router-link to="/blog/setters-mindset" class="menu-item">
           <h3 class="text text-h3">A Setter's Mindset</h3>
-          <!-- <div class="right-content">
-            <p>and volleyball mindset in general</p>
-          </div> -->
+          <div class="right-content">
+            <p>10-02-2025</p>
+          </div>
         </router-link>
       </div>
       
       <div class="card">
         <router-link to="/blog/defining-volleyball-sets" class="menu-item">
           <h3 class="text text-h3">Defining Volleyball Sets</h3>
-          <!-- <div class="right-content">
-            <p>Understanding volleyball set terminology</p>
-          </div> -->
+          <div class="right-content">
+            <p>06-17-2025</p>
+          </div>
         </router-link>
       </div>
 
@@ -118,7 +118,7 @@
   display: flex;
   flex-direction: row;
   align-items: end;
-  justify-content: start;
+  justify-content: space-between;
   min-height: 30px;
 }
 
@@ -151,7 +151,7 @@
   font-size: 32px;
   margin: 0;
   text-align: center;
-  /* color: var(--color-text-tertiary); */
+  color: var(--color-h1);
   font-weight: 600;
 }
 
@@ -163,7 +163,7 @@
 
 .text-h3 {
   font-size: 20px;
-  color: var(--color-h2);
+  color: var(--color-text);
   margin: 0;
   font-weight: 600;
 }

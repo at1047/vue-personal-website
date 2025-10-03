@@ -29,8 +29,6 @@ export default defineComponent({
     },
   },
   async created() {
-    this.breadCrumbArr = this.$route.meta;
-    this.breadCrumbArr['defining-volleyball-sets'] = '/blog/Defining Volleyball Sets';
     // Fetch the markdown file from public/blog directory
     this.markdown = await fetchMarkdown('blog/Defining Volleyball Sets');
     this.loading = false;

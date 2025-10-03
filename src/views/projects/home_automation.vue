@@ -1,13 +1,15 @@
 <template>
-  <div class="project-header">
-    <h2 style="display: inline;">Home Automation</h2>
-    <p style="display: inline; margin-left: 20px;">IoT solutions for smart home control and weather monitoring</p>
+  <div class="project-container">
+  <div class="project-header" style="display: flex; flex-direction: column; align-items: flex-start;">
+    <h1 style="display: inline;">Home Automation</h1>
+    <p style="display: inline;">IoT solutions for smart home control and weather monitoring</p>
   </div>
 
   <div class="project-content">
 
     <div v-html="markdownToHtml" class="markdown"></div>
   </div>
+</div>
 </template>
 
 <script>

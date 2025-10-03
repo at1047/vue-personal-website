@@ -221,7 +221,9 @@
                 // Handle image tags - convert [img:filename] or [img:filename:height] to proper img tags
                 formatted = formatted.replace(/\[img:([^:\]]+)(?::(\d+))?\]/g, (match, filename, height) => {
                     const heightStyle = height ? `style="height: ${height}px;"` : '';
-                    return `<div class="popup-image-container"><img src="/${filename}" alt="Project image" class="popup-image" ${heightStyle} /></div>`;
+                    // Automatically prepend images/ to the path
+                    const imagePath = filename.startsWith('images/') ? filename : `images/${filename}`;
+                    return `<div class="popup-image-container"><img src="/${imagePath}" alt="Project image" class="popup-image" ${heightStyle} /></div>`;
                 });
                 
                 return formatted;
@@ -278,8 +280,6 @@ background-color: var(--color-menu-item-hover);
   z-index: 3;
   gap: 50%;
 }
-
-
 
 .all-projects {
   display: flex;

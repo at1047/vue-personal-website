@@ -18,7 +18,8 @@ export function markdownToHtml(markdown) {
     console.log(`fullname: ${fullname}, extension: ${extensionandclass}`);
     const [extension, classname] = extensionandclass.split('#');
     console.log(`${fullname}.${extension}, ${classname}`);
-    return `<img id="${fullname}" class="${classname}" src="/${fullname}.${extension}" />`;
+    // Automatically prepend images/ to the path
+    return `<img id="${fullname}" class="${classname}" src="/images/${fullname}.${extension}" />`;
   });
 
   // Remove any width attribute from standard <img> tags (e.g., width="300")
@@ -26,11 +27,14 @@ export function markdownToHtml(markdown) {
   const cleanedImages = replacedMarkdown.replace(/\swidth="[^"]*"/g, '');
 
   // Add id attribute to standard <img> tags based on filename if missing
-  // Example: <img src="/clarent_5.jpg" /> => <img id="clarent_5" src="/clarent_5.jpg" />
+  // Also automatically prepend images/ to paths that don't already have a folder
+  // Example: <img src="/clarent_5.jpg" /> => <img id="clarent_5" src="/images/clarent_5.jpg" />
   const withImgIds = cleanedImages.replace(/<img([^>]*?)src=\"\/([^\/"]+)\.([a-zA-Z0-9]+)\"([^>]*)>/g, (match, before, name, ext, after) => {
     // If an id already exists, leave unchanged
     if (/\sid\s*=/.test(match)) return match;
-    return `<img id="${name}"${before}src="/${name}.${ext}"${after}>`;
+    // Check if path already has a folder (contains /)
+    const imagePath = name.includes('/') ? `${name}.${ext}` : `images/${name}.${ext}`;
+    return `<img id="${name.split('/').pop()}"${before}src="/${imagePath}"${after}>`;
   });
   
   return withImgIds;

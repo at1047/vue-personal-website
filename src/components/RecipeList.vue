@@ -2,7 +2,7 @@
   <p style="margin-top: 30px; text-align: center;" v-if="loading" class="text">Loading...</p>
   <div v-for="(recipe, idx) of recipes" :idx = idx>
     <div class="recipe-header" @click="() => toggleOpen(idx)" >
-      <img v-if="recipe.icon" class="icons" :src="recipe.icon + '.svg'" />
+      <img v-if="recipe.icon" class="icons" :src="'/images/' + recipe.icon + '.svg'" />
       <div v-if="!recipe.icon" style="height: 10px; width: 23px"></div>
       <h3 style="display: inline-block"  class="text" > {{ recipe['name'] }} </h3>
     </div>
@@ -121,6 +121,10 @@ export default defineComponent({
   transition: background-color 100ms ease-out;
 }
 
+.recipe-header h3 {
+  color: var(--color-text);
+}
+
 .recipe-header:hover {
   background-color: var(--color-card-background-hover);
 }
@@ -129,7 +133,7 @@ export default defineComponent({
   vertical-align: middle;
   width: 18px;
   height: 18px;
-  margin-right: 5px;
+  margin-right: 10px;
 }
 
 p.text {

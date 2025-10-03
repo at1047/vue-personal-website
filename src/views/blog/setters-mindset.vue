@@ -30,8 +30,6 @@ export default defineComponent({
     },
   },
   async created() {
-    this.breadCrumbArr = this.$route.meta;
-    this.breadCrumbArr['setters-mindset'] = '/blog/A Setter\'s Mindset, and volleyball mindset in general';
     // Fetch the markdown file from public/blog directory
     this.markdown = await fetchMarkdown('blog/A Setter\'s Mindset, and volleyball mindset in general');
     this.loading = false;

@@ -70,6 +70,11 @@ export default defineComponent({
       } else if (typeof route.name === 'string' && route.name.startsWith('Project')) {
         const segments = route.path.split('/').filter(Boolean);
         lastKey = segments[segments.length - 1] || '';
+      } else if (route.name === 'Blog') {
+        lastKey = 'blog';
+      } else if (typeof route.name === 'string' && route.name.startsWith('Blog')) {
+        const segments = route.path.split('/').filter(Boolean);
+        lastKey = segments[segments.length - 1] || '';
       } else if (route.name === 'Recipes') {
         lastKey = 'recipes';
       } else if (route.name === 'Home') {
@@ -157,25 +162,25 @@ button {
 }
 
 .nav-bar-left {
-  flex-basis: 20%;
+  flex-basis: 30%;
   display: flex;
   align-items: center;
   padding-left: 40px;
   border-left: none;
 }
 .nav-bar-center {
-  flex-basis: 55%;
+  flex-basis: 40%;
   display: flex;
   justify-content: space-around;
   align-items: center;
   padding: 10px 70px;
 }
 .nav-bar-right {
-  flex-basis: 25%;
+  flex-basis: 30%;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 10px 40px;
+  padding: 10px 60px;
 
 }
 /*
