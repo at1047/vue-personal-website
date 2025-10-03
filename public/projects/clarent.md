@@ -8,9 +8,9 @@ Clarent is a split, tented, columnar keyboard featuring a bistable compliant mec
 <img src="ezgif-1306001d1e5c97.gif"/>
 
 
-*Notice the left 3 columns shifted up such that they are horizontally aligned*
+<div style="text-align: center; margin-bottom: 10px;"><em>Notice the left 3 columns shifted up such that they are horizontally aligned</em></div>
+
 ## What is a split, tented, columnar keyboard?
-*A breakdown of the core ergonomic concepts:*
 - **Columnar Layout**
 	- Positions keys in vertical columns rather than the staggered horizontal rows of traditional keyboards.
 	- Staggers each column vertically to better match the natural lengths of different fingers.

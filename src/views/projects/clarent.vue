@@ -56,6 +56,16 @@ export default defineComponent({
   filter: invert(1) hue-rotate(180deg);;
 }
 
+#ezgif-1306001d1e5c97 {
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+#Gemini_Generated_Image_lrn9ehlrn9ehlrn9_transparent {
+  width: 100%;
+  filter: var(--color-icon-filter);
+}
+
 #clarent_3 {
   height: 270px;
   display: block;

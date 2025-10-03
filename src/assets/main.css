@@ -71,7 +71,7 @@ main {
     margin: 50px auto;
 }
 
-h1, h2, h3, h4, a, p, span, li, code, textarea, table {
+h1, h2, h3, h4, a, p, em, span, li, code, textarea, table {
     font-family: "Poppins";
     font-weight: 400;
     color: var(--color-text);
@@ -137,6 +137,7 @@ pre {
     padding: 5px 10px;
     background: var(--color-background);
 }
+
 
 
 /* #app {

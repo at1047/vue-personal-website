@@ -163,7 +163,7 @@
 
 .text-h3 {
   font-size: 20px;
-  color: var(--color-text);
+  color: var(--color-h2);
   margin: 0;
   font-weight: 600;
 }
