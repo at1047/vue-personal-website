@@ -8,8 +8,11 @@ import { marked } from 'marked';
 export function markdownToHtml(markdown) {
   if (!markdown) return '';
   
+  // Remove text wrapped in %%text%% before processing
+  const withoutIgnored = markdown.replace(/%%[\s\S]*?%%/g, '');
+  
   // Parse markdown to HTML
-  const parsedMarkdown = marked.parse(markdown);
+  const parsedMarkdown = marked.parse(withoutIgnored);
   
   // Process custom image syntax: ![[filename.ext#classname]] (supports .jpg, .jpeg, .png, .gif, .svg)
   const replacedMarkdown = parsedMarkdown.replace(/<p>!\[\[(.*?)\]\]<\/p>/g, (match, raw) => {

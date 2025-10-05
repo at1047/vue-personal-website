@@ -86,8 +86,8 @@
                 const post = this.posts.find(p => p.id === postId);
                 if (!post) return;
                 this.currentPost = post;
-                // Fetch markdown by id from public/blog/{id}.md
-                this.markdown = await fetchMarkdown(`blog/${post.id}`);
+                // Fetch markdown by id from public/blog_md/{id}.md
+                this.markdown = await fetchMarkdown(`blog_md/${post.id}`);
                 this.showPopup = true;
             },
             closePopup() {

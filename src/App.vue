@@ -183,6 +183,21 @@ button {
   padding: 10px 60px;
 
 }
+
+@media (max-width: 500px) {
+    
+    .nav-bar-left {
+        display: none;
+    }
+    .nav-bar-center {
+        flex-basis: 100%;
+        padding: 10px 40px;
+    }
+    .nav-bar-right {
+        display: none;
+    }
+}
+
 /*
 .nav-bar-contacts,
 .nav-bar-socials {

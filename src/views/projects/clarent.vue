@@ -2,7 +2,7 @@
   <div class="project-container">
   <div class="project-header">
     <h1 style="display: inline;">Clarent</h1>
-    <p style="display: inline; margin-left: 20px;">A bistable split ergonomic keyboard for gaming</p>
+    <p style="display: inline; margin-left: 20px;" class="hide-on-mobile">A bistable split ergonomic keyboard for gaming</p>
   </div>
 
   <div class="project-content">
@@ -35,8 +35,8 @@ export default defineComponent({
   async created() {
     this.breadCrumbArr = this.$route.meta;
     this.breadCrumbArr['clarent'] = '/projects/Clarent';
-    // Fetch the markdown file from public/projects directory
-    this.markdown = await fetchMarkdown('projects/clarent');
+    // Fetch the markdown file from public/projects_md directory
+    this.markdown = await fetchMarkdown('projects_md/clarent');
     this.loading = false;
   },
 });

@@ -426,12 +426,18 @@ h4 {
   }
   
   .section-title {
-    font-size: 24px;
+    display: none;
   }
+
+  .card {
+    margin: 0;
+    padding: 0;
+  }
+
+  .all-projects {
+  gap: 10px;
+}
   
-  .project-cards {
-    gap: 15px;
-  }
 }
 
 /* Popup Modal Styles */

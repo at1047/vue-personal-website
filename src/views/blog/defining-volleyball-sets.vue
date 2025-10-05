@@ -29,8 +29,8 @@ export default defineComponent({
     },
   },
   async created() {
-    // Fetch the markdown file from public/blog directory
-    this.markdown = await fetchMarkdown('blog/Defining Volleyball Sets');
+    // Fetch the markdown file from public/blog_md directory
+    this.markdown = await fetchMarkdown('blog_md/Defining Volleyball Sets');
     this.loading = false;
   },
 });

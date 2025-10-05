@@ -36,8 +36,8 @@ export default defineComponent({
   async created() {
     this.breadCrumbArr = this.$route.meta;
     this.breadCrumbArr['tripod'] = '/projects/Tripod';
-    // Fetch the markdown file from public/projects directory
-    this.markdown = await fetchMarkdown('projects/tripod');
+    // Fetch the markdown file from public/projects_md directory
+    this.markdown = await fetchMarkdown('projects_md/tripod');
     this.loading = false;
   },
 });

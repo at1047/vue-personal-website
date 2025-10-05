@@ -30,8 +30,8 @@ export default defineComponent({
     },
   },
   async created() {
-    // Fetch the markdown file from public/blog directory
-    this.markdown = await fetchMarkdown('blog/A Setter\'s Mindset, and volleyball mindset in general');
+    // Fetch the markdown file from public/blog_md directory
+    this.markdown = await fetchMarkdown('blog_md/A Setter\'s Mindset, and volleyball mindset in general');
     this.loading = false;
   },
 });

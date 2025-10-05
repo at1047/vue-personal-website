@@ -19,36 +19,22 @@ A personal website built with Vue.js featuring projects, blog posts, and recipes
 - Marked.js for markdown parsing
 - Docker for containerization
 
-## Development
-
-```bash
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
-```
-
 
 ## Docker Deployment
 
-Build and run the container:
-
-```bash
-# Build the image
-docker build -t vue-personal-website .
-
-# Run the container
-docker run -p 8080:80 vue-personal-website
+### 1. Build locally
+```
+docker buildx create --platform linux/arm64,linux/arm/v7,linux/amd6
+docker buildx build --platform linux/amd64,linux/arm64 --push -t at1047/vue-personal-website 
 ```
 
-The application will be available at `http://localhost:8080`
+### 2. Deploy on the server
+```
+sudo docker stop vue-website
+sudo docker rm vue-website
+sudo docker pull at1047/vue-personal-website:latest
+sudo docker run -d -p 8080:80 --name vue-website at1047/vue-personal-website:latest
+```
 
 ## Project Structure
 

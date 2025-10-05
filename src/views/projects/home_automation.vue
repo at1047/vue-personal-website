@@ -35,8 +35,8 @@ export default defineComponent({
   async created() {
     this.breadCrumbArr = this.$route.meta;
     this.breadCrumbArr['home_automation'] = '/projects/Home_Automation';
-    // Fetch the markdown file from public/projects directory
-    this.markdown = await fetchMarkdown('projects/home_automation');
+    // Fetch the markdown file from public/projects_md directory
+    this.markdown = await fetchMarkdown('projects_md/home_automation');
     this.loading = false;
   },
 });

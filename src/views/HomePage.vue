@@ -1,6 +1,6 @@
 <template>
     <body>
-        <Cube></Cube>
+        <Cube id="canvas"></Cube>
         <!-- <p style="text-align: center" class="text">Nothing much to see, still populating the content. Head over to the Recipes page or the Renju page!</p> -->
     </body>
 
@@ -18,3 +18,14 @@ export default defineComponent({
     },
 });
 </script>
+
+<style scoped>
+
+@media (max-width: 500px) {
+    
+    #canvas {
+        display: none;
+    }
+}
+
+</style>

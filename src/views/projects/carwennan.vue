@@ -33,8 +33,8 @@ export default defineComponent({
   async created() {
     this.breadCrumbArr = this.$route.meta;
     this.breadCrumbArr['carwennan'] = '/projects/Carwennan';
-    // Fetch the markdown file from public/projects directory
-    this.markdown = await fetchMarkdown('projects/carwennan');
+    // Fetch the markdown file from public/projects_md directory
+    this.markdown = await fetchMarkdown('projects_md/carwennan');
     this.loading = false;
   },
 });
