@@ -16,7 +16,6 @@
 
     --color-icon-filter: brightness(0) saturate(100%) opacity(70%);
 
-
     /* Header colors */
     --color-h1: hsl(0, 0%, 10%);
     --color-h2: hsl(0, 0%, 10%);
@@ -24,30 +23,32 @@
     --color-h4: hsl(0, 0%, 20%);
 }
 
-/* Dark mode - Everforest theme */
+/* Dark mode - Atom One Dark theme */
 .dark-mode {
-    --color-background: #31383D;
-    --color-background-light: #3C484F;
-    --color-text: hsl(41, 32%, 75%);
-    --color-text-muted: #d1cdb5;
-    --color-text-muted2: #8b877d;
-    --color-menu-item: #3C484F;
-    --color-menu-item-hover: #4A5560;
-    --color-code-background: #3C484F;
-    
-    --color-card-background: #3C484F;
-    --color-card-background-hover: #4A5560;
-    --color-shadow: #232A2E;
-    --color-menu-dark: #232A2E;
+    /* Base background and surfaces */
+    --color-background: #282c34;
+    --color-background-light: #3a3f4b;
+    --color-card-background: #2c323c;
+    --color-card-background-hover: #3e4451;
+    --color-menu-item: #2c323c;
+    --color-menu-item-hover: #3e4451;
+    --color-code-background: #2c323c;
+    --color-shadow: #1c2026;
+    --color-menu-dark: #1c2026;
 
-    --color-icon-filter: brightness(0) saturate(100%) invert(76%) sepia(20%) saturate(257%) hue-rotate(4deg) brightness(104%) contrast(87%);
+    /* Text */
+    --color-text: #abb2bf;
+    --color-text-muted: #828997;
+    --color-text-muted2: #5c6370;
 
-    
-    /* Header colors - Everforest theme */
-    --color-h1: #CB6A66;
-    --color-h2: #CB8353;
-    --color-h3: #DBBC7F;
-    --color-h4: #D699B6;
+    /* Icon tint so icons stay visible on dark bg */
+    --color-icon-filter: brightness(0) saturate(100%) invert(84%) sepia(8%) saturate(368%) hue-rotate(179deg) brightness(96%) contrast(88%);
+
+    /* Header colors inspired by Atom One Dark syntax */
+    --color-h1: #e06c75; /* red */
+    --color-h2: #61afef; /* blue */
+    --color-h3: #98c379; /* green */
+    --color-h4: #c678dd; /* purple */
 }
 
 * {

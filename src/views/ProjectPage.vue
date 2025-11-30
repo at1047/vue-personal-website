@@ -1,141 +1,28 @@
 <template>
-  
-  
   <div class="projects-container">
-    <!-- Section Headers -->
-    <div class="section-headers">
-      <h2 class="section-title hardware-title">Hardware</h2>
-      <h2 class="section-title software-title">Software</h2>
+    <div v-if="loading" class="loading-message">
+      <p>Loading projects...</p>
     </div>
-    
-    
-    
-    <!-- All Projects Container -->
-    <div class="all-projects">
-      <div class="card" style="--bias-left: 0%; --bias-right: 20%;">
-        <router-link to="/projects/clarent">
-          <div class="menu-item">
-            <h3 class="text text-h3">Clarent</h3>
-            <div class="right-content">
-              <p>A Split, Tented, Columnar, Bistable, Ergonomic Keyboard for Typing & Gaming</p>
-              <p>Tech used: CAD, C++, Kicad</p>
-            </div>
+    <ul class="projects-list">
+      <li v-for="project in allProjects" :key="project.id" class="project-item">
+        <router-link v-if="project.route" :to="project.route" class="project-link">
+          <img v-if="project.icon" :src="project.icon" :alt="project.title + ' icon'" class="project-icon" :class="{ 'tripod-icon': project.id === 'tripod' }" />
+          <div class="project-content">
+            <h3 class="project-title">{{ project.title }}</h3>
+            <p class="project-description">{{ project.description }}</p>
+            <p class="project-tech">Tech used: {{ project.technologies }}</p>
           </div>
         </router-link>
-      </div>
-      
-      <div class="card" style="--bias-left: 0%; --bias-right: 50%;">
-        <router-link to="/projects/tripod">
-          <div class="menu-item">
-            <h3 class="text text-h3">Tripod</h3>
-            <div class="right-content">
-              <p>An indestructible tripod for recording volleyball</p>
-              <p>Tech used: CAD, FEA (ANSYS)</p>
-            </div>
-          </div>
-        </router-link>
-      </div>
-      
-      <div class="card" style="--bias-left: 0%; --bias-right: 40%;">
-        <router-link to="/projects/carwennan">
-          <div class="menu-item">
-            <h3 class="text text-h3">Carwennan</h3>
-            <div class="right-content">
-              <p>Software development project</p>
-              <p>Tech used: CAD, C++, Kicad</p>
-            </div>
-          </div>
-        </router-link>
-      </div>
-      
-      <div class="card cross-card-spanning" style="--bias-left: 30%; --bias-right: 10%;">
-        <router-link to="/projects/home_automation">
-          <div class="menu-item">
-            <h3 class="text text-h3">Home Automation</h3>
-            <div class="right-content">
-              <p>IoT solutions for smart home control and weather monitoring</p>
-              <p>Tech used: Go, Arduino, ESP8266, Docker</p>
-            </div>
-          </div>
-        </router-link>
-      </div>
-      
-      <!-- Dynamic Popup Project Cards -->
-      <div v-if="loading" class="loading-message">
-        <p>Loading projects...</p>
-      </div>
-      <div 
-        v-for="project in popupProjects" 
-        :key="project.id"
-        class="card" 
-        :class="project.cardClass"
-        :style="`--bias-left: ${project.biasLeft}; --bias-right: ${project.biasRight};`"
-      >
-        <div class="menu-item" @click="openPopup(project.id)" :class="{ 'long-title-layout': isTitleLong(project.title) }">
-          <h3 class="text text-h3">{{ project.title }}</h3>
-          <div class="right-content" v-if="!isTitleLong(project.title)">
-            <p>{{ project.description }}</p>
-            <p>Tech used: {{ project.technologies }}</p>
-          </div>
-          <div class="below-title-content" v-if="isTitleLong(project.title)">
-            <p>{{ project.description }}</p>
-            <p>Tech used: {{ project.technologies }}</p>
+        <div v-else @click="openPopup(project.id)" class="project-link project-clickable">
+          <img v-if="project.icon" :src="project.icon" :alt="project.title + ' icon'" class="project-icon" :class="{ 'tripod-icon': project.id === 'tripod' }" />
+          <div class="project-content">
+            <h3 class="project-title">{{ project.title }}</h3>
+            <p class="project-description">{{ project.description }}</p>
+            <p class="project-tech">Tech used: {{ project.technologies }}</p>
           </div>
         </div>
-      </div>
-      
-      <!-- <div class="card" style="--bias-left: 50%; --bias-right: 0%;">
-        <router-link to="/projects/recipes-api">
-          <div class="menu-item">
-            <h3 class="text text-h3">Recipes API</h3>
-            <p>Backend API in Go</p>
-          </div>
-        </router-link>
-      </div>
-      
-      <div class="card" style="--bias-left: 70%; --bias-right: 0%;">
-        <router-link to="/projects/renju">
-          <div class="menu-item">
-            <h3 class="text text-h3">Renju Game</h3>
-            <p>Multiplayer game</p>
-          </div>
-        </router-link>
-      </div>
-      
-      <div class="card cross-card-spanning" style="--bias-left: 0%; --bias-right: 20%;">
-        <router-link to="/projects/iot-project">
-          <div class="menu-item">
-            <h3 class="text text-h3">IoT Project</h3>
-            <div class="right-content">
-              <p>Hardware + Software integration</p>
-            </div>
-          </div>
-        </router-link>
-      </div>
-      
-      <div class="card cross-card-spanning" style="--bias-left: 15%; --bias-right: 15%;">
-        <router-link to="/projects/embedded-system">
-          <div class="menu-item">
-            <h3 class="text text-h3">Embedded System</h3>
-            <div class="right-content">
-              <p>Firmware + Hardware design</p>
-            </div>
-          </div>
-        </router-link>
-      </div>
-      
-      <div class="card cross-card-spanning" style="--bias-left: 10%; --bias-right: 10%;">
-        <router-link to="/projects/robotics">
-          <div class="menu-item">
-            <h3 class="text text-h3">Robotics Platform</h3>
-            <div class="right-content">
-              <p>Mechanical + Software + Electronics</p>
-            </div>
-          </div>
-        </router-link>
-      </div> -->
-
-    </div>
+      </li>
+    </ul>
   </div>
 
   <!-- Project Popup Modal -->
@@ -183,8 +70,47 @@
                     details: ''
                 },
                 popupProjects: [],
-                loading: true
+                loading: true,
+                // Static projects with routes
+                staticProjects: [
+                    {
+                        id: 'clarent',
+                        title: 'Clarent',
+                        description: 'A Split, Tented, Columnar, Bistable, Ergonomic Keyboard for Typing & Gaming',
+                        technologies: 'CAD, C++, Kicad',
+                        route: '/projects/clarent',
+                        icon: '/images/clarent_icon.JPG'
+                    },
+                    {
+                        id: 'tripod',
+                        title: 'Tripod',
+                        description: 'An indestructible tripod for recording volleyball',
+                        technologies: 'CAD, FEA (ANSYS)',
+                        route: '/projects/tripod',
+                        icon: '/images/tripod_icon.jpeg'
+                    },
+                    {
+                        id: 'carwennan',
+                        title: 'Carwennan',
+                        description: 'Software development project',
+                        technologies: 'CAD, C++, Kicad',
+                        route: '/projects/carwennan'
+                    },
+                    {
+                        id: 'home_automation',
+                        title: 'Home Automation',
+                        description: 'IoT solutions for smart home control and weather monitoring',
+                        technologies: 'Go, Arduino, ESP8266, Docker',
+                        route: '/projects/home_automation',
+                        icon: '/images/home_automation_icon.JPG'
+                    }
+                ]
             };
+        },
+        computed: {
+            allProjects() {
+                return [...this.staticProjects, ...this.popupProjects];
+            }
         },
         methods: {
             openPopup(projectId) {
@@ -202,10 +128,6 @@
             },
             closePopup() {
                 this.showPopup = false;
-            },
-            isTitleLong(title) {
-                // Consider title long if it's more than 20 characters
-                return title && title.length > 20;
             },
             formatDetails(details) {
                 if (!details) return '';
@@ -245,147 +167,82 @@
 
 
 <style scoped>
-/*
-.menu-item:hover {
-  opacity: 0.3 ;
-}
-*/
-
-.menu-item {
-background-color: var(--color-menu-item);
-border-radius: 5px;
-margin-top: 0;
-padding: 7px 15px;
-transition: background-color 100ms ease-out;
-display: flex;
-align-items: flex-start;
-justify-content: space-between;
-min-height: 30px;
-}
-
-.menu-item:hover {
-background-color: var(--color-menu-item-hover);
-}
-
 .projects-container {
-  position: relative;
   margin-bottom: 60px;
 }
 
-.section-headers {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 30px;
-  position: relative;
-  z-index: 3;
-  gap: 50%;
-}
-
-.all-projects {
+.projects-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  position: relative;
-  z-index: 2;
 }
 
-.section-title {
-  font-size: 32px;
+.project-item {
   margin: 0;
-  text-align: center;
-  color: var(--color-h1);
-  font-weight: 600;
+  padding: 0;
 }
 
-/* 
-.hardware-title {
-  color: var(--color-text-muted);
+.project-link {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background-color: var(--color-menu-item);
+  border-radius: 5px;
+  padding: 15px 20px;
+  transition: background-color 100ms ease-out;
+  text-decoration: none;
+  color: inherit;
 }
 
-.software-title {
-  color: var(--color-text-muted);
-} */
-
-/* Flexible Bias System using CSS Custom Properties */
-.card {
-  margin-left: var(--bias-left, 0%);
-  margin-right: var(--bias-right, 0%);
-  position: relative;
+.project-link:hover {
+  background-color: var(--color-menu-item-hover);
 }
 
-/* Removed vertical border indicators */
-
-/* Removed cross-card vertical borders */
-
-.card {
-  border-radius: 0px;
-  padding: .5rem;
+.project-clickable {
+  cursor: pointer;
 }
 
-/* Removed card-img styling since images are no longer used */
-
-.breadcrumb {
-    font-size: 16px;
+.project-icon {
+  width: 160px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 5px;
+  flex-shrink: 0;
 }
 
-h2 {
-  font-size: 60px;
-  margin-bottom: 3px;
+.project-icon.tripod-icon {
+  filter: brightness(0.9);
 }
 
-.text-h3 {
+.project-content {
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  text-align: left;
+}
+
+.project-title {
   font-size: 20px;
   color: var(--color-h2);
-  margin: 0;
+  margin: 0 0 8px 0;
   font-weight: 600;
 }
 
-h4 {
-  font-size: 16px;
-}
-
-.menu-item .right-content {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  text-align: right;
-  flex: 1;
-  margin-left: 20px;
-}
-
-.menu-item .right-content p {
+.project-description {
   font-size: 14px;
+  color: var(--color-text);
+  margin: 0 0 4px 0;
+  line-height: 1.4;
+}
+
+.project-tech {
+  font-size: 14px;
+  color: var(--color-text-muted);
   margin: 0;
   line-height: 1.3;
-}
-
-.menu-item .right-content p:first-child {
-  margin-bottom: 4px;
-}
-
-/* Long title layout - description below title */
-.menu-item.long-title-layout {
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.menu-item.long-title-layout h3 {
-  margin-bottom: 8px;
-  width: 100%;
-}
-
-.below-title-content {
-  width: 100%;
-}
-
-.below-title-content p {
-  font-size: 14px;
-  margin: 0 0 4px 0;
-  line-height: 1.3;
-}
-
-.below-title-content p:last-child {
-  margin-bottom: 0;
 }
 
 .loading-message {
@@ -395,49 +252,29 @@ h4 {
   font-style: italic;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .section-headers {
-    flex-direction: column;
-    gap: 20px;
-    text-align: center;
-  }
-  
-  
-  
-  .card {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-  }
-  
-  /* Show borders based on original bias direction with fade on mobile */
-  .card[style*="--bias-left: 0%"] {
-    border-right: none;
-  }
-  
-  .card[style*="--bias-right: 0%"] {
-    border-left: none;
-  }
-}
-
 @media (max-width: 500px) {
-  .projects-container {
-    gap: 20px;
+  .projects-list {
+    gap: 10px;
   }
   
-  .section-title {
-    display: none;
+  .project-link {
+    padding: 12px 15px;
+    gap: 12px;
   }
-
-  .card {
-    margin: 0;
-    padding: 0;
-  }
-
-  .all-projects {
-  gap: 10px;
-}
   
+  .project-icon {
+    width: 100px;
+    height: 80px;
+  }
+  
+  .project-title {
+    font-size: 18px;
+  }
+  
+  .project-description,
+  .project-tech {
+    font-size: 13px;
+  }
 }
 
 /* Popup Modal Styles */
