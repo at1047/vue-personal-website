@@ -13,7 +13,6 @@
       </div>
       <div class="nav-bar nav-bar-center">
         <router-link class="nav-text" to="/">Home</router-link>
-        <router-link class="nav-text" to="/projects">Projects</router-link>
         <!--<router-link class="nav-text" to="/editor">Editor</router-link>-->
         <router-link class="nav-text" to="/blog">Blog</router-link>
         <router-link class="nav-text" to="/recipes">Recipes</router-link>
