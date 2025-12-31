@@ -1,0 +1,3 @@
+*"The secret of happiness is realizing that we have control over nothing except our reactions" - Epictetus, Art of Living*
+
+At some point, I tied the outcome of every point directly to my setting. If the hitter didn't get the kill, I blamed myself. It was a turning point towards tranquility for me when I realized that although there is a positive correlation between a good set and a good attack, it’s not always guaranteed. Countless variables come into play after the ball leaves my hands, and it is naïve to judge myself based on events that occur after my action is complete. Instead of applying result based analysis, I should analyze my performance based on the set, and whatever after is simply a probability distribution.

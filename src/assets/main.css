@@ -3,8 +3,8 @@
     --color-background: hsl(0, 0%, 90%);
     --color-background-light: hsl(0, 0%, 85%);
     --color-text: hsl(0, 0%, 40%);
-    --color-text-muted: #666666;
-    --color-text-muted2: #4A4A4A;
+    --color-text-muted: hsl(0, 0%, 45%);
+    --color-text-muted2: hsl(0, 0%, 50%);
     --color-menu-item: hsl(0, 0%, 95%);
     --color-menu-item-hover: #D0D0D0;
     --color-code-background: #F8F8F8;
@@ -17,15 +17,15 @@
     --color-icon-filter: brightness(0) saturate(100%) opacity(70%);
 
     /* Header colors */
-    --color-h1: hsl(0, 0%, 10%);
-    --color-h2: hsl(0, 0%, 10%);
-    --color-h3: hsl(0, 0%, 20%);
-    --color-h4: hsl(0, 0%, 20%);
+    --color-h1: hsl(0, 0%, 30%);
+    --color-h2: hsl(0, 0%, 30%);
+    --color-h3: hsl(0, 0%, 40%);
+    --color-h4: hsl(0, 0%, 40%);
 }
 
-/* Dark mode - Atom One Dark theme */
+/* catppuccin */
+/*
 .dark-mode {
-    /* Base background and surfaces */
     --color-background: #282c34;
     --color-background-light: #3a3f4b;
     --color-card-background: #2c323c;
@@ -36,19 +36,43 @@
     --color-shadow: #1c2026;
     --color-menu-dark: #1c2026;
 
-    /* Text */
     --color-text: #abb2bf;
     --color-text-muted: #828997;
     --color-text-muted2: #5c6370;
 
-    /* Icon tint so icons stay visible on dark bg */
     --color-icon-filter: brightness(0) saturate(100%) invert(84%) sepia(8%) saturate(368%) hue-rotate(179deg) brightness(96%) contrast(88%);
 
-    /* Header colors inspired by Atom One Dark syntax */
-    --color-h1: #e06c75; /* red */
-    --color-h2: #61afef; /* blue */
-    --color-h3: #98c379; /* green */
-    --color-h4: #c678dd; /* purple */
+    --color-h1: #e06c75;
+    --color-h2: #61afef;
+    --color-h3: #98c379;
+    --color-h4: #c678dd;
+}
+*/
+
+.dark-mode {
+    --color-background: #1A1A1A;
+    --color-background-light: #2F2F2F;
+    --color-menu-dark: #2F2F2F;
+
+    --color-card-background: #21252b;
+    --color-card-background-hover: #3e4451;
+    --color-menu-item: #2F2F2F;
+    --color-menu-item-hover: #3e4451;
+    --color-code-background: #21252b;
+    --color-shadow: #181a1f;
+
+    --color-text: #C8C8C8;
+    --color-text-muted: #989898;
+    --color-text-muted2: #919191;
+
+    --color-icon-filter: invert(77%) sepia(8%) saturate(285%) hue-rotate(185deg) brightness(91%) contrast(88%);
+
+    --color-h1: #e06c75;
+    --color-h2: #61afef;
+    --color-h3: #98c379;
+    --color-h4: #c678dd;
+    --color-h5: #e5c07b;
+    --color-h6: #56b6c2;
 }
 
 * {
@@ -63,16 +87,20 @@ body {
 }
 
 main {
-    margin: 10px 200px;
+    margin: 10px auto;
+    width: 800px;
     background-color: var(--color-background);
 }
 
+/*
 .main {
     width: 1000px;
     margin: 50px auto;
 }
+*/
 
 h1, h2, h3, h4, a, p, em, span, li, code, textarea, table {
+    /*font-family: "Roboto Mono", monospace;*/
     font-family: "Poppins";
     font-weight: 400;
     color: var(--color-text);
@@ -174,6 +202,31 @@ a,
     padding: 0 2rem;
     }
 } */
+
+@media (max-width: 1000px) {
+
+    h1 {
+    margin: 60px 0 30px;
+    }
+
+    h3 {
+    font-size: 16px;
+    }
+
+    p.text {
+    font-size: 14px;
+    }
+
+    main {
+    width: calc(100% - 30px);
+    margin: 0 auto;
+    }
+
+    .web-nav-bar{
+    display: none;
+
+    }
+}
 
 @media (max-width: 500px) {
 

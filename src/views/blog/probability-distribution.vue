@@ -1,7 +1,7 @@
 <template>
   <div class="project-container">
     <div class="project-header">
-      <h1 style="display: inline;">The Secret to Happiness</h1>
+      <h1 style="display: inline;">Volleyball: Probability Distribution</h1>
       <!--<p style="display: inline; margin-left: 20px;">and volleyball mindset in general</p>-->
     </div>
 
@@ -31,7 +31,7 @@ export default defineComponent({
   },
   async created() {
     // Fetch the markdown file from public/blog_md directory
-    this.markdown = await fetchMarkdown('blog_md/setters_mindset');
+    this.markdown = await fetchMarkdown('blog_md/probability_distribution');
     this.loading = false;
   },
 });

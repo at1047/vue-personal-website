@@ -13,22 +13,25 @@
       </div>
       <div class="nav-bar nav-bar-center">
         <router-link class="nav-text" to="/">Home</router-link>
+        <router-link class="nav-text" to="/projects">Projects</router-link>
         <!--<router-link class="nav-text" to="/editor">Editor</router-link>-->
         <router-link class="nav-text" to="/blog">Blog</router-link>
-        <router-link class="nav-text" to="/recipes">Recipes</router-link>
+        <!--<router-link class="nav-text" to="/recipes">Recipes</router-link>-->
 
       </div>
       <div class="nav-bar nav-bar-right">
         <a class="nav-icons" href="https://github.com/at1047" target="_blank"><font-awesome-icon icon="fa-brands fa-github" /></a>
-        <a class="nav-icons" href="https://www.youtube.com/channel/UCSjOvYqYrVd5-d78yg-Cvlw" target="_blank"><font-awesome-icon icon="fa-brands fa-youtube" /></a>
-        <a class="nav-icons" :href="mailtoHref"><font-awesome-icon icon="fa-envelope" /></a>
+        <!--<a class="nav-icons" href="https://www.youtube.com/channel/UCSjOvYqYrVd5-d78yg-Cvlw" target="_blank"><font-awesome-icon icon="fa-brands fa-youtube" /></a>-->
+        <!--<a class="nav-icons" :href="mailtoHref"><font-awesome-icon icon="fa-envelope" /></a>-->
         <ThemeToggle />
       </div>
     </nav>
     <div id="nav-underline"></div>
 
-    <main>
-      <RouterView />
+    <main class="main-content">
+      <div class="main-content-inner">
+        <RouterView />
+      </div>
     </main>
   </body>
 </template>
@@ -99,6 +102,18 @@ export default defineComponent({
 </script>
 
 <style scoped>
+
+/*
+.main-content {
+  display: flex;
+  justify-content: center;
+}
+
+.main-content-inner {
+  width: 800px;
+}
+*/
+
 nav {
   display: inline-grid;
   grid-template-columns: 1fr 1.5fr 1fr;
@@ -106,6 +121,7 @@ nav {
   height: 50px;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   position:relative;
 }
 
@@ -161,29 +177,30 @@ button {
 }
 
 .nav-bar-left {
-  flex-basis: 30%;
+  width: 400px;
   display: flex;
   align-items: center;
   padding-left: 40px;
   border-left: none;
 }
 .nav-bar-center {
-  flex-basis: 40%;
+  width: 600px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   padding: 10px 70px;
 }
 .nav-bar-right {
-  flex-basis: 30%;
+  width: 400px;
   display: flex;
-  justify-content: space-around;
+  justify-content: right;
+  gap: 50px;
   align-items: center;
   padding: 10px 60px;
 
 }
 
-@media (max-width: 500px) {
+@media (max-width: 800px) {
     
     .nav-bar-left {
         display: none;

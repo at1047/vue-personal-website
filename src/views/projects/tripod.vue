@@ -1,7 +1,7 @@
 <template>
   <div class="project-container">
   <div class="project-header" style="display: flex; flex-direction: column; align-items: flex-start;">
-    <h1>My <em>Indestructible</em> Tripod</h1>
+    <h1>My Indestructible Tripod</h1>
 
     <p>My solution for tripods breaking when recording volleyball sessions</p>
   </div>

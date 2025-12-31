@@ -25,7 +25,7 @@ A personal website built with Vue.js featuring projects, blog posts, and recipes
 ### 1. Build locally
 ```
 docker buildx create --platform linux/arm64,linux/arm/v7,linux/amd6
-docker buildx build --platform linux/amd64,linux/arm64 --push -t at1047/vue-personal-website 
+docker buildx build --platform linux/amd64,linux/arm64 --push -t at1047/vue-personal-website .
 ```
 
 ### 2. Deploy on the server

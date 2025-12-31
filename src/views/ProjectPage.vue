@@ -1,4 +1,8 @@
 <template>
+
+  <div class="section-headers">
+    <h2 class="section-title">Projects</h2>
+  </div>
   <div class="projects-container">
     <div v-if="loading" class="loading-message">
       <p>Loading projects...</p>
@@ -9,10 +13,11 @@
           <img v-if="project.icon" :src="project.icon" :alt="project.title + ' icon'" class="project-icon" :class="{ 'tripod-icon': project.id === 'tripod' }" />
           <div class="project-content">
             <h3 class="project-title">{{ project.title }}</h3>
-            <p class="project-description">{{ project.description }}</p>
+            <p class="project-description hide-on-mobile">{{ project.description }}</p>
             <p class="project-tech">Tech used: {{ project.technologies }}</p>
           </div>
         </router-link>
+        <!--
         <div v-else @click="openPopup(project.id)" class="project-link project-clickable">
           <img v-if="project.icon" :src="project.icon" :alt="project.title + ' icon'" class="project-icon" :class="{ 'tripod-icon': project.id === 'tripod' }" />
           <div class="project-content">
@@ -21,11 +26,14 @@
             <p class="project-tech">Tech used: {{ project.technologies }}</p>
           </div>
         </div>
+        -->
       </li>
     </ul>
   </div>
 
   <!-- Project Popup Modal -->
+
+  <!--
   <div v-if="showPopup" class="popup-overlay" @click="closePopup">
     <div class="popup-content" @click.stop>
       <div class="popup-header">
@@ -35,7 +43,6 @@
       <div class="popup-body">
         <p><strong>Description:</strong> {{ popupProject.description }}</p>
         <p><strong>Technologies:</strong> {{ popupProject.technologies }}</p>
-        <!-- <p><strong>Status:</strong> {{ popupProject.status }}</p> -->
         <div v-if="popupProject.details" class="popup-details">
           <h3>Additional Details</h3>
           <div class="popup-details-content" v-html="formatDetails(popupProject.details)"></div>
@@ -43,130 +50,150 @@
       </div>
     </div>
   </div>
+  -->
 </template>
 
 <script>
 
-    import { defineComponent } from 'vue';
-    // import axios from 'axios';
-    import { RouterLink, RouterView } from 'vue-router'
+import { defineComponent } from 'vue';
+// import axios from 'axios';
+import { RouterLink, RouterView } from 'vue-router'
 
-    // console.log(import.meta.env)
+// console.log(import.meta.env)
 
-    export default defineComponent({
-        name: 'Projects',
-        components: {
-        //    RouterView,
-            RouterLink,
-        },
-        data() {
-            return {
-                showPopup: false,
-                popupProject: {
-                    title: '',
-                    description: '',
-                    technologies: '',
-                    status: '',
-                    details: ''
-                },
-                popupProjects: [],
-                loading: true,
-                // Static projects with routes
-                staticProjects: [
-                    {
-                        id: 'clarent',
-                        title: 'Clarent',
-                        description: 'A Split, Tented, Columnar, Bistable, Ergonomic Keyboard for Typing & Gaming',
-                        technologies: 'CAD, C++, Kicad',
-                        route: '/projects/clarent',
-                        icon: '/images/clarent_icon.JPG'
-                    },
-                    {
-                        id: 'tripod',
-                        title: 'Tripod',
-                        description: 'An indestructible tripod for recording volleyball',
-                        technologies: 'CAD, FEA (ANSYS)',
-                        route: '/projects/tripod',
-                        icon: '/images/tripod_icon.jpeg'
-                    },
-                    {
-                        id: 'carwennan',
-                        title: 'Carwennan',
-                        description: 'Software development project',
-                        technologies: 'CAD, C++, Kicad',
-                        route: '/projects/carwennan'
-                    },
-                    {
-                        id: 'home_automation',
-                        title: 'Home Automation',
-                        description: 'IoT solutions for smart home control and weather monitoring',
-                        technologies: 'Go, Arduino, ESP8266, Docker',
-                        route: '/projects/home_automation',
-                        icon: '/images/home_automation_icon.JPG'
-                    }
-                ]
-            };
-        },
-        computed: {
-            allProjects() {
-                return [...this.staticProjects, ...this.popupProjects];
-            }
-        },
-        methods: {
-            openPopup(projectId) {
-                const project = this.popupProjects.find(p => p.id === projectId);
-                if (project) {
-                    this.popupProject = {
-                        title: project.title,
-                        description: project.description,
-                        technologies: project.technologies,
-                        status: project.status,
-                        details: project.details
-                    };
-                    this.showPopup = true;
-                }
-            },
-            closePopup() {
-                this.showPopup = false;
-            },
-            formatDetails(details) {
-                if (!details) return '';
-                
-                // Convert line breaks to <br> tags and handle bullet points
-                let formatted = details
-                    .replace(/\n\n/g, '</p><p>') // Double line breaks = new paragraphs
-                    .replace(/\n/g, '<br>')      // Single line breaks = line breaks
-                    .replace(/• /g, '&bull; ')   // Convert bullet points to HTML entities
-                    .replace(/^/, '<p>')         // Start with opening paragraph tag
-                    .replace(/$/, '</p>');       // End with closing paragraph tag
-                
-                // Handle image tags - convert [img:filename] or [img:filename:height] to proper img tags
-                formatted = formatted.replace(/\[img:([^:\]]+)(?::(\d+))?\]/g, (match, filename, height) => {
-                    const heightStyle = height ? `style="height: ${height}px;"` : '';
-                    // Automatically prepend images/ to the path
-                    const imagePath = filename.startsWith('images/') ? filename : `images/${filename}`;
-                    return `<div class="popup-image-container"><img src="/${imagePath}" alt="Project image" class="popup-image" ${heightStyle} /></div>`;
-                });
-                
-                return formatted;
-            }
-        },
-        async created() {
-            try {
-                const response = await fetch('/popupProjects.json');
-                this.popupProjects = await response.json();
-            } catch (error) {
-                console.error('Error loading popup projects:', error);
-                // Fallback to empty array if JSON fails to load
-                this.popupProjects = [];
-            }
-            this.loading = false;
-        },
-    });
+export default defineComponent({
+name: 'Projects',
+components: {
+//    RouterView,
+RouterLink,
+},
+data() {
+return {
+showPopup: false,
+popupProject: {
+title: '',
+description: '',
+technologies: '',
+status: '',
+details: ''
+},
+popupProjects: [],
+loading: true,
+// Static projects with routes
+staticProjects: [
+{
+id: 'clarent',
+title: 'Clarent',
+description: 'A Split, Tented, Columnar, Bistable, Ergonomic Keyboard for Typing & Gaming',
+technologies: 'CAD, C++, Kicad',
+route: '/projects/clarent',
+icon: '/images/clarent_icon.JPG'
+},
+{
+id: 'tripod',
+title: 'Tripod',
+description: 'An indestructible tripod for recording volleyball',
+technologies: 'CAD, FEA (ANSYS)',
+route: '/projects/tripod',
+icon: '/images/tripod_icon.jpeg'
+},
+{
+id: 'carwennan',
+title: 'Carwennan',
+description: 'Portable Ergonomic Keyboard (WIP)',
+technologies: 'CAD, C++, Kicad',
+route: '/projects/carwennan',
+icon: '/images/carwennan_icon_1.png'
+},
+{
+id: 'home_automation',
+title: 'Home Automation',
+description: 'IoT solutions for smart home control and weather monitoring',
+technologies: 'Go, Arduino, ESP8266, Docker',
+route: '/projects/home_automation',
+icon: '/images/home_automation_icon.JPG'
+}
+]
+};
+},
+computed: {
+allProjects() {
+return [...this.staticProjects, ...this.popupProjects];
+}
+},
+methods: {
+openPopup(projectId) {
+const project = this.popupProjects.find(p => p.id === projectId);
+if (project) {
+this.popupProject = {
+title: project.title,
+description: project.description,
+technologies: project.technologies,
+status: project.status,
+details: project.details
+};
+this.showPopup = true;
+}
+},
+closePopup() {
+this.showPopup = false;
+},
+formatDetails(details) {
+if (!details) return '';
+
+// Convert line breaks to <br> tags and handle bullet points
+let formatted = details
+.replace(/\n\n/g, '</p><p>') // Double line breaks = new paragraphs
+.replace(/\n/g, '<br>')      // Single line breaks = line breaks
+.replace(/• /g, '&bull; ')   // Convert bullet points to HTML entities
+.replace(/^/, '<p>')         // Start with opening paragraph tag
+.replace(/$/, '</p>');       // End with closing paragraph tag
+
+// Handle image tags - convert [img:filename] or [img:filename:height] to proper img tags
+formatted = formatted.replace(/\[img:([^:\]]+)(?::(\d+))?\]/g, (match, filename, height) => {
+const heightStyle = height ? `style="height: ${height}px;"` : '';
+// Automatically prepend images/ to the path
+const imagePath = filename.startsWith('images/') ? filename : `images/${filename}`;
+return `<div class="popup-image-container"><img src="/${imagePath}" alt="Project image" class="popup-image" ${heightStyle} /></div>`;
+});
+
+return formatted;
+}
+},
+async created() {
+try {
+const response = await fetch('/popupProjects.json');
+this.popupProjects = await response.json();
+} catch (error) {
+console.error('Error loading popup projects:', error);
+// Fallback to empty array if JSON fails to load
+this.popupProjects = [];
+}
+this.loading = false;
+},
+});
 </script>
 
 
 <style scoped>
+
+
+.section-headers {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 3;
+}
+
+.section-title {
+  font-size: 32px;
+  margin: 0;
+  text-align: center;
+  color: var(--color-h1);
+  font-weight: 600;
+}
+
 .projects-container {
   margin-bottom: 60px;
 }
@@ -190,8 +217,8 @@
   align-items: center;
   gap: 15px;
   background-color: var(--color-menu-item);
-  border-radius: 5px;
-  padding: 15px 20px;
+  border-radius: 8px;
+  padding: 8px 8px;
   transition: background-color 100ms ease-out;
   text-decoration: none;
   color: inherit;
@@ -253,24 +280,28 @@
 }
 
 @media (max-width: 500px) {
+  .hide-on-mobile {
+    display: none !important;
+  }
+
   .projects-list {
     gap: 10px;
   }
-  
+
   .project-link {
-    padding: 12px 15px;
-    gap: 12px;
+    align-items: start; 
+    padding: 8px 8px;
   }
-  
+
   .project-icon {
     width: 100px;
     height: 80px;
   }
-  
+
   .project-title {
     font-size: 18px;
   }
-  
+
   .project-description,
   .project-tech {
     font-size: 13px;
@@ -420,15 +451,15 @@
     height: 90%;
     margin: 20px;
   }
-  
+
   .popup-header {
     padding: 15px 20px;
   }
-  
+
   .popup-header h2 {
     font-size: 20px;
   }
-  
+
   .popup-body {
     padding: 20px;
   }

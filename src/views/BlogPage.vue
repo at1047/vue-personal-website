@@ -7,8 +7,17 @@
     <div class="all-projects">
       <!-- Vue Component Links -->
       <div class="card">
+        <router-link to="/blog/probability-distribution" class="menu-item">
+          <h3 class="text text-h3">Volleyball: Probability Distribution</h3>
+          <div class="right-content">
+            <p>12-30-2025</p>
+          </div>
+        </router-link>
+      </div>
+
+       <div class="card">
         <router-link to="/blog/setters-mindset" class="menu-item">
-          <h3 class="text text-h3">A Setter's Mindset</h3>
+          <h3 class="text text-h3">Volleyball: Secret to Happiness</h3>
           <div class="right-content">
             <p>10-02-2025</p>
           </div>
@@ -17,41 +26,13 @@
       
       <div class="card">
         <router-link to="/blog/defining-volleyball-sets" class="menu-item">
-          <h3 class="text text-h3">Defining Volleyball Sets</h3>
+          <h3 class="text text-h3">Volleyball: Defining Sets</h3>
           <div class="right-content">
             <p>06-17-2025</p>
           </div>
         </router-link>
       </div>
-
-      <!-- Popup-based posts (if any) -->
-      <div 
-        v-for="post in posts" 
-        :key="post.id"
-        class="card"
-        :style="`--bias-left: ${post.biasLeft}; --bias-right: ${post.biasRight};`"
-      >
-        <div class="menu-item" @click="openPopup(post.id)">
-          <h3 class="text text-h3">{{ post.title }}</h3>
-          <div class="right-content">
-            <p>{{ post.description }}</p>
-            <p v-if="post.date">{{ post.date }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div v-if="showPopup" class="popup-overlay" @click="closePopup">
-      <div class="popup-content" @click.stop>
-        <div class="popup-header">
-          <h2>{{ currentPost.title }}</h2>
-          <button class="popup-close" @click="closePopup">&times;</button>
-        </div>
-        <div class="popup-body">
-          <div class="popup-details-content markdown" v-html="markdownHtml"></div>
-        </div>
-      </div>
-    </div>
+  </div>
   </div>
 </template>
 
@@ -126,11 +107,6 @@
   background-color: var(--color-menu-item-hover);
 }
 
-.projects-container {
-  position: relative;
-  margin-bottom: 60px;
-}
-
 .section-headers {
   display: flex;
   justify-content: center;
@@ -142,7 +118,6 @@
 .all-projects {
   display: flex;
   flex-direction: column;
-  gap: 12px;
   position: relative;
   z-index: 2;
 }
@@ -158,12 +133,12 @@
 .card {
   position: relative;
   border-radius: 0px;
-  padding: .5rem;
+  margin-bottom: 8px;
 }
 
 .text-h3 {
   font-size: 20px;
-  color: var(--color-h2);
+  color: var(--color-text);
   margin: 0;
   font-weight: 600;
 }
