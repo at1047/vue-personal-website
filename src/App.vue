@@ -2,9 +2,9 @@
   <header>
   </header>
   <body>
-    
+
     <transition name="slide">
-    <SlideMenu v-show="showSlideMenu" v-on:close-slide="closeSlideMenu()"></SlideMenu>
+      <SlideMenu v-show="showSlideMenu" v-on:close-slide="closeSlideMenu()"></SlideMenu>
     </transition>
     <nav>
       <div class="nav-bar nav-bar-left">
@@ -45,8 +45,8 @@ import ThemeToggle from './components/ThemeToggle.vue'
 import Breadcrumbs from './components/Breadcrumbs.vue'
 
 export default defineComponent({
-    name: 'App',
-    components: {
+  name: 'App',
+  components: {
     RouterView,
     RouterLink,
     SlideMenu,
@@ -64,92 +64,92 @@ export default defineComponent({
       return this.contactEmail ? `mailto:${this.contactEmail}` : 'mailto:';
     },
     breadcrumbArr() {
-    const route = this.$route;
-    // 1. Initialize with Home and any meta breadcrumbs
-    const base = { home: '/', ...(route.meta || {}) };
-    let lastKey = '';
+      const route = this.$route;
+      // 1. Initialize with Home and any meta breadcrumbs
+      // const base = { home: '/', ...(route.meta || {}) };
+      const base = { home: '/'};
+      let lastKey = '';
 
-    // 2. NEW: Handle Projects and all nested subpages (Dynamic Loop)
-    // This covers "Projects", "ProjectDetails", "ProjectSettings", etc.
-    if (
+      // 2. NEW: Handle Projects and all nested subpages (Dynamic Loop)
+      // This covers "Projects", "ProjectDetails", "ProjectSettings", etc.
+      if (
         route.name === 'Projects' || 
-        (typeof route.name === 'string' && route.name.startsWith('Project'))
-    ) {
+          (typeof route.name === 'string' && route.name.startsWith('Project'))
+      ) {
         // Split path into parts: ['', 'projects', 'my-app', 'details']
         const segments = route.path.split('/').filter(Boolean);
-        let currentPath = '';
-        console.log(segments)
-        segments.forEach(segment => {
+
+        if (segments.length >= 3) 
+        {
+          // A. Create the parent path (Up one level)
+          //    Take all segments except the last one and join them.
+          const parentPath = '/' + segments.slice(0, -1).join('/');
+
+          // B. Add the "..." breadcrumb
+          //    This key displays as "..." and links to the parent folder.
+          base['...'] = parentPath;
+
+          // C. Add the last file name (Current Page)
+          const lastSegment = segments[segments.length - 1];
+          base[lastSegment] = route.path;
+
+
+        } else {
+          Object.assign(base, route.meta || {});
+          let currentPath = '';
+          console.log(segments)
+          segments.forEach(segment => {
             currentPath += `/${segment}`;
             console.log(`seg: ${segment}, currpath: ${currentPath}`)
-            
+
             // Only add if not already in base (prevents overwriting 'home' or meta)
             if (!Object.prototype.hasOwnProperty.call(base, segment)) {
-                // key = display text (e.g. 'my-app'), value = link (e.g. '/projects/my-app')
-                base[segment] = currentPath; 
+              // key = display text (e.g. 'my-app'), value = link (e.g. '/projects/my-app')
+              base[segment] = currentPath; 
             }
-        });
-        
+          });
+
+        }
         // Note: We don't set 'lastKey' here because the loop added everything to 'base' directly.
-    } 
-    
-    // 3. Existing logic for other routes (Blog, Recipes)
-    else if (route.name === 'Blog') {
+      } 
+
+      // 3. Existing logic for other routes (Blog, Recipes)
+      else if (route.name === 'Blog') {
+          Object.assign(base, route.meta || {});
         lastKey = 'blog';
-    } else if (typeof route.name === 'string' && route.name.startsWith('Blog')) {
+      } else if (typeof route.name === 'string' && route.name.startsWith('Blog')) {
+          Object.assign(base, route.meta || {});
         const segments = route.path.split('/').filter(Boolean);
         lastKey = segments[segments.length - 1] || '';
-    } else if (route.name === 'Recipes') {
+      } else if (route.name === 'Recipes') {
+          Object.assign(base, route.meta || {});
         lastKey = 'recipes';
-    } 
-    // No need to check Home explicitly if base already has it, 
-    // but keeping your logic safe:
-    else if (route.name === 'Home') {
+      } 
+      // No need to check Home explicitly if base already has it, 
+      // but keeping your logic safe:
+      else if (route.name === 'Home') {
+          Object.assign(base, route.meta || {});
         // 'home' is already in base, so this effectively does nothing, which is fine
         lastKey = 'home';
-    }
+      }
 
-    // 4. Add the single lastKey (for Blog/Recipes logic)
-    if (lastKey && !Object.prototype.hasOwnProperty.call(base, lastKey)) {
+      // 4. Add the single lastKey (for Blog/Recipes logic)
+      if (lastKey && !Object.prototype.hasOwnProperty.call(base, lastKey)) {
         base[lastKey] = route.path;
-    }
+      }
 
-    return base;
-}
-    // breadcrumbArr() {
-    //   const route = this.$route;
-    //   const base = { home: '/', ...(route.meta || {}) };
-    //   let lastKey = '';
-    //   if (route.name === 'Projects') {
-    //     lastKey = 'projects';
-    //   } else if (typeof route.name === 'string' && route.name.startsWith('Project')) {
-    //     const segments = route.path.split('/').filter(Boolean);
-    //     lastKey = segments[segments.length - 1] || '';
-    //   } else if (route.name === 'Blog') {
-    //     lastKey = 'blog';
-    //   } else if (typeof route.name === 'string' && route.name.startsWith('Blog')) {
-    //     const segments = route.path.split('/').filter(Boolean);
-    //     lastKey = segments[segments.length - 1] || '';
-    //   } else if (route.name === 'Recipes') {
-    //     lastKey = 'recipes';
-    //   } else if (route.name === 'Home') {
-    //     lastKey = 'home';
-    //   }
-    //   if (lastKey && !Object.prototype.hasOwnProperty.call(base, lastKey)) {
-    //     base[lastKey] = route.path;
-    //   }
-    //   return base;
-    // }
+      return base;
+    }
   },
   methods: {
-      openSlideMenu(){
-        this.$emit('open-slide');
-        this.showSlideMenu = true;
-      },
-      closeSlideMenu(){
-      this.showSlideMenu = false;
-      }
+    openSlideMenu(){
+      this.$emit('open-slide');
+      this.showSlideMenu = true;
     },
+    closeSlideMenu(){
+      this.showSlideMenu = false;
+    }
+  },
 })
 
 </script>
@@ -158,12 +158,12 @@ export default defineComponent({
 
 /*
 .main-content {
-  display: flex;
-  justify-content: center;
+display: flex;
+justify-content: center;
 }
 
 .main-content-inner {
-  width: 800px;
+width: 800px;
 }
 */
 
@@ -257,36 +257,36 @@ nav {
 }
 
 @media (max-width: 800px) {
-    
-    .nav-bar-left {
-        display: none;
-    }
-    .nav-bar-center {
-        flex-basis: 100%;
-        padding: 10px 40px;
-    }
-    .nav-bar-right {
-        display: none;
-    }
+
+  .nav-bar-left {
+    display: none;
+  }
+  .nav-bar-center {
+    flex-basis: 100%;
+    padding: 10px 40px;
+  }
+  .nav-bar-right {
+    display: none;
+  }
 }
 
 /*
 .nav-bar-contacts,
 .nav-bar-socials {
-  flex-grow: 1;
+flex-grow: 1;
 }
 .nav-bar-socials {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  padding-left: 50px;
-  padding-right: 50px;
+display: flex;
+align-items: center;
+justify-content: space-around;
+padding-left: 50px;
+padding-right: 50px;
 }
 
 .nav-bar-contacts {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+display: flex;
+align-items: center;
+justify-content: space-around;
 }
 */
 
