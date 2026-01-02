@@ -39,6 +39,11 @@ export default defineComponent({
 <style>
 @import '../../assets/projects.css';
 
+#combined_traj {
+  width: 100%;
+  display: block;
+}
+
 .inverted {
   filter: none;
 }

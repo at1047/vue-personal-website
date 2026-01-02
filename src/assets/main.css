@@ -13,6 +13,7 @@
     --color-card-background-hover: #F0F0F0;
     --color-shadow: #E0E0E0;
     --color-menu-dark: #F0F0F0;
+    --color-nav: hsl(0, 0%, 95%);
 
     --color-icon-filter: brightness(0) saturate(100%) opacity(70%);
 
@@ -50,16 +51,17 @@
 */
 
 .dark-mode {
-    --color-background: #1A1A1A;
-    --color-background-light: #2F2F2F;
+    --color-background: hsl(0, 0%, 10%);
+    --color-background-light: hsl(0, 0%, 18%);
     --color-menu-dark: #2F2F2F;
 
     --color-card-background: #21252b;
     --color-card-background-hover: #3e4451;
-    --color-menu-item: #2F2F2F;
+    --color-menu-item: hsl(0, 0%, 17%);
     --color-menu-item-hover: #3e4451;
     --color-code-background: #21252b;
     --color-shadow: #181a1f;
+    --color-nav: hsl(0, 0%, 10%);
 
     --color-text: #C8C8C8;
     --color-text-muted: #989898;
@@ -146,6 +148,11 @@ ul {
     list-style-type: circle;
     list-style-position: inside;
     padding-left: 10px;
+}
+
+ol {
+    list-style-type: decimal;
+    list-style-position: inside;
 }
 
 li {

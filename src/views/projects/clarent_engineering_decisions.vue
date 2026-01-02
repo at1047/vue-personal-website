@@ -16,10 +16,9 @@
 
 import { defineComponent } from "vue";
 import { markdownToHtml, fetchMarkdown } from '../../utils/markdownUtils.js';
-import { triggerScroll } from '@/utils/scrollResolver';
 
 export default defineComponent({
-  name: 'ProjectClarentPage',
+  name: 'ProjectClarentEngineeringDecisionsPage',
   components: { },
   data() {
     return {
@@ -29,18 +28,16 @@ export default defineComponent({
   },
   computed: {
     markdownToHtml() {
-      return markdownToHtml(this.markdown, "projects");
+      return markdownToHtml(this.markdown);
     },
   },
   async created() {
-    console.log("debug")
-    console.log(this.$route.meta)
-    // this.breadCrumbArr = this.$route.meta;
-    // this.breadCrumbArr['clarent'] = '/projects/Clarent';
+    this.breadCrumbArr = this.$route.meta;
+    this.breadCrumbArr['clarent'] = '/projects/Clarent';
+    this.breadCrumbArr['clarent_engineering_decisions'] = '/projects/Clarent/clarent_engineering_decisions';
     // Fetch the markdown file from public/projects_md directory
-    this.markdown = await fetchMarkdown('projects_md/clarent');
+    this.markdown = await fetchMarkdown('projects_md/clarent_engineering_decisions');
     this.loading = false;
-    triggerScroll();
   },
 });
 

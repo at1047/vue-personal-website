@@ -1,11 +1,12 @@
 import { marked } from 'marked';
+import { RouterLink, RouterView } from 'vue-router'
 
 /**
  * Converts markdown text to HTML with custom image processing
  * @param {string} markdown - The markdown text to convert
  * @returns {string} - The converted HTML
  */
-export function markdownToHtml(markdown) {
+export function markdownToHtml(markdown, type = null) {
   if (!markdown) return '';
   
   // Remove text wrapped in %%text%% before processing
@@ -15,7 +16,7 @@ export function markdownToHtml(markdown) {
   const parsedMarkdown = marked.parse(withoutIgnored);
   
   // Process custom image syntax: ![[filename.ext#classname]] (supports .jpg, .jpeg, .png, .gif, .svg)
-  const replacedMarkdown = parsedMarkdown.replace(/<p>!\[\[(.*?)\]\]<\/p>/g, (match, raw) => {
+  const replacedMarkdownImg = parsedMarkdown.replace(/<p>!\[\[(.*?)\]\]<\/p>/g, (match, raw) => {
     if (!raw) return match;
     // Extract optional class after '#'
     const hashIndex = raw.indexOf('#');
@@ -38,6 +39,32 @@ export function markdownToHtml(markdown) {
     const classAttr = className ? ` class="${className}"` : '';
     return `<img id="${idValue}"${classAttr} src="/${imagePath}" />`;
   });
+
+ 
+  // Process custom image syntax: ![[filename.ext#classname]] (supports .jpg, .jpeg, .png, .gif, .svg)
+  const replacedMarkdown = replacedMarkdownImg.replace(/<p>\[\[(.*?)\]\]<\/p>/g, (match, raw) => {
+    if (!raw) return match;
+    console.log(raw)
+    
+
+    const segments = raw.split(' ');
+
+    // var file = raw.replaceAll(' ', '_')
+    // file = file + '.md'
+    
+    if (type == null) {
+      return "<p>Link Broken</p>"
+    }
+
+    const prefix = segments.shift(0).toLowerCase()
+
+    const linkName = segments.join(' ')
+
+    const link = `/${type}/${prefix}/${segments.join('_').toLowerCase()}`;
+    
+    return `<a href="${link}" style="text-decoration: underline;">${linkName}</a>`;
+  });
+
 
   // Remove any width attribute from standard <img> tags (e.g., width="300")
   // Example input: <img src="/clarent_5.jpg" width="300" />

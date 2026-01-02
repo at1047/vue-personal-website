@@ -64,29 +64,82 @@ export default defineComponent({
       return this.contactEmail ? `mailto:${this.contactEmail}` : 'mailto:';
     },
     breadcrumbArr() {
-      const route = this.$route;
-      const base = { home: '/', ...(route.meta || {}) };
-      let lastKey = '';
-      if (route.name === 'Projects') {
-        lastKey = 'projects';
-      } else if (typeof route.name === 'string' && route.name.startsWith('Project')) {
+    const route = this.$route;
+    // 1. Initialize with Home and any meta breadcrumbs
+    const base = { home: '/', ...(route.meta || {}) };
+    let lastKey = '';
+
+    // 2. NEW: Handle Projects and all nested subpages (Dynamic Loop)
+    // This covers "Projects", "ProjectDetails", "ProjectSettings", etc.
+    if (
+        route.name === 'Projects' || 
+        (typeof route.name === 'string' && route.name.startsWith('Project'))
+    ) {
+        // Split path into parts: ['', 'projects', 'my-app', 'details']
         const segments = route.path.split('/').filter(Boolean);
-        lastKey = segments[segments.length - 1] || '';
-      } else if (route.name === 'Blog') {
+        let currentPath = '';
+        console.log(segments)
+        segments.forEach(segment => {
+            currentPath += `/${segment}`;
+            console.log(`seg: ${segment}, currpath: ${currentPath}`)
+            
+            // Only add if not already in base (prevents overwriting 'home' or meta)
+            if (!Object.prototype.hasOwnProperty.call(base, segment)) {
+                // key = display text (e.g. 'my-app'), value = link (e.g. '/projects/my-app')
+                base[segment] = currentPath; 
+            }
+        });
+        
+        // Note: We don't set 'lastKey' here because the loop added everything to 'base' directly.
+    } 
+    
+    // 3. Existing logic for other routes (Blog, Recipes)
+    else if (route.name === 'Blog') {
         lastKey = 'blog';
-      } else if (typeof route.name === 'string' && route.name.startsWith('Blog')) {
+    } else if (typeof route.name === 'string' && route.name.startsWith('Blog')) {
         const segments = route.path.split('/').filter(Boolean);
         lastKey = segments[segments.length - 1] || '';
-      } else if (route.name === 'Recipes') {
+    } else if (route.name === 'Recipes') {
         lastKey = 'recipes';
-      } else if (route.name === 'Home') {
+    } 
+    // No need to check Home explicitly if base already has it, 
+    // but keeping your logic safe:
+    else if (route.name === 'Home') {
+        // 'home' is already in base, so this effectively does nothing, which is fine
         lastKey = 'home';
-      }
-      if (lastKey && !Object.prototype.hasOwnProperty.call(base, lastKey)) {
-        base[lastKey] = route.path;
-      }
-      return base;
     }
+
+    // 4. Add the single lastKey (for Blog/Recipes logic)
+    if (lastKey && !Object.prototype.hasOwnProperty.call(base, lastKey)) {
+        base[lastKey] = route.path;
+    }
+
+    return base;
+}
+    // breadcrumbArr() {
+    //   const route = this.$route;
+    //   const base = { home: '/', ...(route.meta || {}) };
+    //   let lastKey = '';
+    //   if (route.name === 'Projects') {
+    //     lastKey = 'projects';
+    //   } else if (typeof route.name === 'string' && route.name.startsWith('Project')) {
+    //     const segments = route.path.split('/').filter(Boolean);
+    //     lastKey = segments[segments.length - 1] || '';
+    //   } else if (route.name === 'Blog') {
+    //     lastKey = 'blog';
+    //   } else if (typeof route.name === 'string' && route.name.startsWith('Blog')) {
+    //     const segments = route.path.split('/').filter(Boolean);
+    //     lastKey = segments[segments.length - 1] || '';
+    //   } else if (route.name === 'Recipes') {
+    //     lastKey = 'recipes';
+    //   } else if (route.name === 'Home') {
+    //     lastKey = 'home';
+    //   }
+    //   if (lastKey && !Object.prototype.hasOwnProperty.call(base, lastKey)) {
+    //     base[lastKey] = route.path;
+    //   }
+    //   return base;
+    // }
   },
   methods: {
       openSlideMenu(){
@@ -164,6 +217,9 @@ button {
   color: var(--color-text);
 }
 
+nav {
+  background-color: var(--color-nav);
+}
 
 .nav-bar {
   box-sizing: border-box;

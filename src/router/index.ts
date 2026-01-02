@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { waitForScroll } from '@/utils/scrollResolver';
 
 import HomePage from '@/views/HomePage.vue'
 import ProjectPage from '@/views/ProjectPage.vue'
@@ -10,6 +11,7 @@ import RecipePage from '@/views/RecipePage.vue'
 import BlogPage from '@/views/BlogPage.vue'
 
 import ProjectClarentPage from '@/views/projects/clarent.vue'
+import ProjectClarentEngineeringDecisionsPage from '@/views/projects/clarent_engineering_decisions.vue'
 import ProjectTripodPage from '@/views/projects/tripod.vue'
 import ProjectCarwennanPage from '@/views/projects/carwennan.vue'
 import ProjectHomeAutomationPage from '@/views/projects/home_automation.vue'
@@ -64,6 +66,16 @@ const router = createRouter({
                 projects: "/projects",
             }
         },
+        {
+            path: '/projects/clarent/engineering_decisions',
+            name: 'ProjectClarentEngineeringDecisions',
+            component: ProjectClarentEngineeringDecisionsPage,
+            meta: {
+                home: "/",
+                projects: "/projects",
+            }
+        },
+
         {
             path: '/projects/tripod',
             name: 'ProjectTripod',
@@ -162,7 +174,27 @@ const router = createRouter({
     //   // which is lazy-loaded when the route is visited.
     //   component: () => import('../views/AboutView.vue')
     // }
-  ]
+  ],
+
+  async scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      // 1. Wait for the component to say "I'm ready!"
+      await waitForScroll();
+      
+      // 2. Optional: Add a tiny delay for the browser to paint the DOM
+      // (sometimes the data is there, but the height hasn't updated yet)
+      await new Promise(r => setTimeout(r, 50)); 
+
+      return savedPosition;
+    }
+    
+    if (to.hash) {
+      return { el: to.hash, behavior: 'smooth' };
+    }
+
+    return { top: 0 };
+  }
+    
 })
 
 export default router

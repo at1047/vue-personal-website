@@ -2,9 +2,9 @@
     <ul>
         <li v-for="(value, key, idx) of this.breadcrumbArr" v-if="this.breadcrumbArr" :idx = idx>
             <span v-if="idx != Object.keys(this.breadcrumbArr).length - 1">
+            <span>{{ (key == 'home') ? '' : ' / '}}</span>
               <router-link :to="`${value}`">
-                <span>{{ (key == 'home') ? '' : ' / '}}</span>
-                <span class="address">{{ (key == 'home') ? '~' : key }}</span>
+                <span class="address" style="text-decoration: underline;">{{ (key == 'home') ? '~' : key }}</span>
               </router-link>
             </span>
             <span class="destination" v-if="idx == Object.keys(this.breadcrumbArr).length - 1">
@@ -27,7 +27,7 @@ export default defineComponent({
         RouterView,
         RouterLink,
     },
-    created() {
+    mounted() {
       // console.log('test')
       console.log(Object.keys(this.breadcrumbArr).length - 1)
       console.log(this.breadcrumbArr)
