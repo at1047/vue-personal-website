@@ -1,7 +1,7 @@
 <template>
   <div class="project-container">
     <div class="project-header">
-      <h1 style="display: inline;">The Secret to Happiness</h1>
+      <h1>The Secret to Happiness</h1>
       <!--<p style="display: inline; margin-left: 20px;">and volleyball mindset in general</p>-->
     </div>
 

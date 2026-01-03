@@ -1,18 +1,17 @@
-I want a portable [[Clarent]]!
 
-# Project Goals
+## Project Goals
 - As thin as possible
 - Thumb cluster is offset downwards
 - Tented, Split, Columnar (naturally)
 - Can enclose itself into a slim form factor, no keys facing outwards, to put into bag
 
-# How to get to those goals
-## As thin as possible
+## How to get to those goals
+### As thin as possible
 - Use Kailh Choc switches
 - Use PCB with hotswap sockets to route, would be thinner than wires
 - Get the minimum height needed for keycaps, switches and HS sockets, will design everything around that height
 
-## Offset thumb cluster
+### Offset thumb cluster
 - Compliant from the pinky side with rotating lever
 	- side towards pink would be too high?
 	- left side would need to slide?
@@ -22,12 +21,12 @@ I want a portable [[Clarent]]!
 	- Not sure if magnets facing downwards/outwards is good idea
 - Use controller holder as a lever for rigidity and for size
 
-# Engineering Challenges
+## Engineering Challenges
 
-## Smooth rotations
+### Smooth rotations
 - Some rotating joints are only supported from one side
 - Use copper sleeve bushings and shoulder bolts
-## Spring close pressure
+### Spring close pressure
 - How to keep the mechanism open, since key presses want to close the keyboard
 - Shock cord? -> Too low spring weight
 - Truss calculations/free body diagram
@@ -45,9 +44,9 @@ calc_max_press_force(L_a = 24, L_c = 9.8, A_to_B_offset = -7, L_b = 33, T_b = 12
 - Source spring from McMasterCarr to get known spring rate/other specifications vs amazon
 - McMasterCarr parser to get force at 33mm (conversions and hooke's law), then put back into max press force calculator
 
-## PCB
+### PCB
 - Kicad -> Freeroute while fixing bad routes
 - Use reversible footprints
 
-## Connector to controller
+### Connector to controller
 

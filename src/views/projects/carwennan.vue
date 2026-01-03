@@ -1,7 +1,6 @@
 <template>
   <div class="project-header">
-    <h2 style="display: inline;">Carwennan</h2>
-    <p style="display: inline; margin-left: 20px;">A bistable split ergonomic keyboard for gaming</p>
+    <h1 style="display: inline;">Carwennan</h1>
   </div>
 
   <div class="project-content">
@@ -50,13 +49,6 @@ export default defineComponent({
 
 .dark-mode .inverted {
   filter: invert(1) hue-rotate(180deg);
-}
-
-#clarent_3 {
-  height: 270px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 </style>

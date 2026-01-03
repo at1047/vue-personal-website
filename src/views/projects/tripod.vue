@@ -1,9 +1,7 @@
 <template>
   <div class="project-container">
   <div class="project-header" style="display: flex; flex-direction: column; align-items: flex-start;">
-    <h1>My Indestructible Tripod</h1>
-
-    <p>My solution for tripods breaking when recording volleyball sessions</p>
+    <h1>Indestructible Tripod</h1>
   </div>
 
   <div class="project-content">
@@ -56,6 +54,7 @@ export default defineComponent({
   filter: invert(15%) brightness(0.9) contrast(90%);
 }
 
+/*
 .project-header h1 {
   margin-bottom: 0;
 }
@@ -63,9 +62,14 @@ export default defineComponent({
 .project-header p {
   margin-top: 0;
 }
+*/
 
-#d73a66f5-5536-4363-82bb-1d1d7d1bb1a6 {
-  width: 600px;
+img {
+  border-radius: 5px;
+}
+
+#tripod_icon {
+  width: 75%;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -73,16 +77,14 @@ export default defineComponent({
 
 #tripod_2 {
   display: block;
-  width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 50%;
+  margin: 20px auto;
 }
 
 #tripod_1 {
-  width: 1000px;
+  width: 100%;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 20px auto;
 }
 
 

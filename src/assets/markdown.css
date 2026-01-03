@@ -1,0 +1,160 @@
+.project-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.project-header {
+  margin-bottom: 10px;
+  width: 100%;
+  /*width: 800px;*/
+}
+
+.project-content {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.markdown {
+  width: 100%;
+  line-height: 150%;
+  --font-size: 14px;
+}
+
+.markdown span {
+  /*font-size: 14px;*/
+  font-size: var(--font-size);
+}
+
+.markdown p {
+  color: var(--color-text);
+  font-size: var(--font-size);
+  margin-bottom: 15px;
+}
+
+.markdown li {
+  color: var(--color-text);
+  font-size: var(--font-size);
+  margin: 0;
+  /* list-style-type: disc; */
+}
+
+.markdown ul li {
+  list-style-type: disc;
+}
+
+.markdown ol li::marker {
+  font-weight: bold;
+}
+
+.markdown a {
+  text-decoration: underline;
+}
+
+table {
+  color: var(--color-text-muted);
+  font-size: var(--font-size);
+  border-collapse: collapse; /* Merges the double borders into one */
+  margin: 20px 0;
+}
+
+th, td {
+    border: 0.5px solid var(--color-text-muted2);   /* The actual line */
+    padding: 8px;              /* Adds space inside the cell so text isn't cramped */
+    text-align: left;
+}
+
+th {
+  border-bottom: 2px solid var(--color-text-muted2);
+}
+
+ul ul {
+  padding-left: 2em;
+}
+
+h1 {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  line-height: 0.9;
+}
+
+.markdown p:has(+ ul),
+.markdown p:has(+ ol) {
+  margin-bottom: 0;
+}
+
+
+
+.markdown h1 {
+  text-align: left;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  margin-top: 15px;
+  color: var(--color-h1);
+}
+
+.markdown h2 {
+  text-align: left;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--color-h2);
+}
+
+strong {
+  color: var(--color-text);
+}
+
+.markdown em {
+    /*color: var(--color-text-muted2);*/
+    font-size: 14px;
+}
+
+.markdown > img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 1000px) {
+  img {
+    width: 450px;
+  }
+}
+
+@media (max-width: 500px) {
+  .project-header {
+    margin-bottom: 0;
+    width: 100%;
+  }
+
+  h1 {
+    font-size: 30px; 
+    margin: 6px 0;
+  }
+
+  .markdown h2 {
+    text-align: left;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    margin-top: 8px;
+    color: var(--color-h2);
+  }
+
+
+  .hide-on-mobile {
+    display: none !important;
+  }
+  
+  img {
+    width: 350px;
+  }
+  
+  .markdown {
+    width: 100%;
+  }
+}

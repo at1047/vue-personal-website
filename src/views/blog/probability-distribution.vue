@@ -1,7 +1,7 @@
 <template>
   <div class="project-container">
     <div class="project-header">
-      <h1 style="display: inline;">Volleyball: Probability Distribution</h1>
+      <h1>Volleyball: Probability Distribution</h1>
       <!--<p style="display: inline; margin-left: 20px;">and volleyball mindset in general</p>-->
     </div>
 

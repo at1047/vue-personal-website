@@ -2,7 +2,6 @@
   <div class="project-container">
   <div class="project-header" style="display: flex; flex-direction: column; align-items: flex-start;">
     <h1 style="display: inline;">Home Automation</h1>
-    <p style="display: inline;">IoT solutions for smart home control and weather monitoring</p>
   </div>
 
   <div class="project-content">

@@ -1,7 +1,7 @@
 <template>
   <div class="project-container">
     <div class="project-header">
-      <h1 style="display: inline;">Defining Volleyball Sets</h1>
+      <h1>Defining Volleyball Sets</h1>
     </div>
 
     <div class="project-content">

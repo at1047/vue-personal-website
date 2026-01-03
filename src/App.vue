@@ -205,17 +205,21 @@ button {
 
 .nav-icons:hover {
   cursor: pointer;
+  color: var(--color-background);
 }
 
 .nav-text {
   font-size: 16px;
   font-weight: 400;
 }
+
+/*
 .nav-icons,
 .nav-text {
   transition: color 0.5s ease-in-out;
   color: var(--color-text);
 }
+*/
 
 nav {
   background-color: var(--color-nav);

@@ -1,4 +1,6 @@
-## We should define sets with position and temporally, not height and speed
+*We should define sets with position and temporally, not height and speed*
+
+I've been setting since 2015. I'm also an engineer. Therefore, I'd like to propose an unambiguous way to describe sets.
 
 A big part of setting is giving the hitter the ball they want, one that they can perform the best with. As a result, communication of preferences between the hitter and the setter is of utmost importance.
 
@@ -16,12 +18,15 @@ For example, a high set can be fast, a flat arc that the hitter would cut off hi
 
 ## Volleyball Trajectory Solver Findings
 
+<a href="http://setting.andrew-tai.com">Link to Trajectory Solver</a>
+
+<a href="https://github.com/at1047/py-volleyball-trajectory">Github</a>
+
 - A shoot trajectory is better when you don't jump set
 - Better is defined as in the hitting window for longer
 
 ![[combined_traj.png]]
 ## This solver:
-
 - Models volleyball flight dynamics with gravity and aerodynamic drag
 - Solves an inverse problem: Given start position, target position, and desired airtime, what is the launch angle and velocity required
 - Validated physics with pre-existing trajectory from video

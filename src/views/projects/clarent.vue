@@ -1,7 +1,7 @@
 <template>
   <div class="project-container">
   <div class="project-header">
-    <h1 style="display: inline;">Clarent</h1>
+    <h1>Clarent</h1>
       <!--<p style="display: inline; margin-left: 20px;" class="hide-on-mobile">A bistable split ergonomic keyboard for gaming</p>-->
   </div>
 
@@ -88,6 +88,17 @@ export default defineComponent({
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+#clarent_full {
+  width: 100%;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+#clarent_under_left, #clarent_under_right {
+  width: 70%;
+  margin: 20px auto;
 }
 
 </style>
