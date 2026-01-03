@@ -1,17 +1,17 @@
-.project-container {
+.project-container, .blog-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.project-header {
+.project-header, .blog-container {
   margin-bottom: 10px;
   width: 100%;
   /*width: 800px;*/
 }
 
-.project-content {
+.project-content, .blog-content {
   display: flex;
   justify-content: center;
   width: 100%;
@@ -85,8 +85,6 @@ h1 {
   margin-bottom: 0;
 }
 
-
-
 .markdown h1 {
   text-align: left;
   font-size: 24px;
@@ -126,25 +124,27 @@ strong {
 }
 
 @media (max-width: 500px) {
-  .project-header {
+  .project-header, .blog-header {
     margin-bottom: 0;
     width: 100%;
   }
 
-  h1 {
-    font-size: 30px; 
-    margin: 6px 0;
+  .project-header h1 {
+    font-size: 30px;
+    margin: 12px 0 6px 0;
+  }
+
+  .blog-header h1 {
+    font-size: 24px;
+    margin: 12px 0 6px 0;
+    line-height: 1.2;
   }
 
   .markdown h2 {
-    text-align: left;
     font-size: 20px;
-    font-weight: 600;
     margin-bottom: 6px;
     margin-top: 8px;
-    color: var(--color-h2);
   }
-
 
   .hide-on-mobile {
     display: none !important;

@@ -1,11 +1,11 @@
 <template>
-  <div class="project-container">
-    <div class="project-header">
+  <div class="blog-container">
+    <div class="blog-header">
       <h1>The Secret to Happiness</h1>
       <!--<p style="display: inline; margin-left: 20px;">and volleyball mindset in general</p>-->
     </div>
 
-    <div class="project-content">
+    <div class="blog-content">
       <div v-html="markdownToHtml" class="markdown"></div>
     </div>
   </div>
@@ -38,7 +38,10 @@ export default defineComponent({
 </script>
 
 <style>
-@import '../../assets/projects.css';
+  @import '../../assets/markdown.css';
+</style>
+
+<style scoped>
 
 .inverted {
   filter: none;

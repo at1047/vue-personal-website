@@ -41,8 +41,10 @@ export default defineComponent({
 </script>
 
 <style>
-@import '../../assets/projects.css';
+  @import '../../assets/markdown.css';
+</style>
 
+<style scoped>
 .inverted {
   filter: none;
 }

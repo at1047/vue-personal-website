@@ -219,18 +219,6 @@ a,
 
 @media (max-width: 1000px) {
 
-    h1 {
-    font-size: 30px;
-    }
-
-    h3 {
-    font-size: 16px;
-    }
-
-    p.text {
-    font-size: 14px;
-    }
-
     main {
     width: calc(100% - 30px);
     margin: 0 auto;
@@ -238,25 +226,11 @@ a,
 
     .web-nav-bar{
     display: none;
-
     }
 }
 
 @media (max-width: 500px) {
 
-
-    h1 {
-    font-size: 30px;
-    }
-
-    h3 {
-    font-size: 16px;
-    }
-
-    p.text {
-    font-size: 14px;
-    }
-
     main {
     width: calc(100% - 30px);
     margin: 0 auto;
@@ -264,6 +238,5 @@ a,
 
     .web-nav-bar{
     display: none;
-
     }
 }

@@ -1,10 +1,10 @@
 <template>
-  <div class="project-container">
-    <div class="project-header">
+  <div class="blog-container">
+    <div class="blog-header">
       <h1>Defining Volleyball Sets</h1>
     </div>
 
-    <div class="project-content">
+    <div class="blog-content">
       <div v-html="markdownToHtml" class="markdown"></div>
     </div>
   </div>
@@ -37,8 +37,10 @@ export default defineComponent({
 </script>
 
 <style>
-@import '../../assets/projects.css';
+  @import '../../assets/markdown.css';
+</style>
 
+<style scoped>
 #combined_traj {
   width: 100%;
   display: block;
