@@ -87,7 +87,7 @@ title: 'Clarent',
 description: 'A Split, Tented, Columnar, Bistable, Ergonomic Keyboard for Typing & Gaming',
 technologies: 'CAD, C++, Kicad',
 route: '/projects/clarent',
-icon: '/images/clarent_icon.JPG'
+icon: '/images/clarent_icon.jpg'
 },
 {
 id: 'tripod',
@@ -111,7 +111,7 @@ title: 'Home Automation',
 description: 'IoT solutions for smart home control and weather monitoring',
 technologies: 'Go, Arduino, ESP8266, Docker',
 route: '/projects/home_automation',
-icon: '/images/home_automation_icon.JPG'
+icon: '/images/home_automation_icon.jpg'
 }
 ]
 };

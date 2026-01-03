@@ -44,9 +44,8 @@ export default defineComponent({
 
 <style>
   @import '../../assets/markdown.css';
-</style>
 
-<style scoped>
+
 .tinted {
   filter: none;
 }

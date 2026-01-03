@@ -38,9 +38,8 @@ export default defineComponent({
 
 <style>
   @import '../../assets/markdown.css';
-</style>
 
-<style scoped>
+  
 #combined_traj {
   width: 100%;
   display: block;

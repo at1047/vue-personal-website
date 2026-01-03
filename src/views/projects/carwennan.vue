@@ -42,9 +42,7 @@ export default defineComponent({
 
 <style>
   @import '../../assets/markdown.css';
-</style>
 
-<style scoped>
 .inverted {
   filter: none;
 }
