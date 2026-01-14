@@ -1,7 +1,7 @@
 <template>
     <body>
         <Cube id="canvas"></Cube>
-        <!-- <p style="text-align: center" class="text">Nothing much to see, still populating the content. Head over to the Recipes page or the Renju page!</p> -->
+    <!--<p style="text-align: center" class="text">test</p>-->
     </body>
 
 </template>

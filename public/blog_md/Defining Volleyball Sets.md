@@ -15,7 +15,6 @@ For example, a high set can be fast, a flat arc that the hitter would cut off hi
 1. A set from farther away and a set from closer should have the same apex height to reach the target at the same time. The vertical trajectory component is independent of the horizontal component
 2. Jump setting worsens the trajectory of farther sets. I built a physics simulator that solves for the dynamics of a volleyball in motion. Setting shoots from a lower point actually causes the ball to travel
 
-
 ## Volleyball Trajectory Solver Findings
 
 <a href="http://setting.andrew-tai.com">Link to Trajectory Solver</a>

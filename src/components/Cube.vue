@@ -1,5 +1,5 @@
 <template>
-        <pre id="canvas" ref="canvas" style='height:700px;width:700px;margin-top: 50px;'></pre>
+        <pre id="canvas" ref="canvas" style='height:450px;width:390px;'></pre>
 </template>
 
 <script lang="ts">
@@ -30,7 +30,7 @@ function mounted() {
         justify-content: center;
     } */
     pre {
-        margin: auto;
+        margin: 50px auto 0;
         color: var(--color-text);
         font-size: 14px;
     }

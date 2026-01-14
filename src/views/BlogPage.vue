@@ -6,14 +6,14 @@
 
     <div class="all-projects">
       <!-- Vue Component Links -->
-      <div class="card">
+      <!--<div class="card">
         <router-link to="/blog/probability-distribution" class="menu-item">
           <h3 class="text text-h3">Volleyball: Probability Distribution</h3>
           <div class="right-content">
             <p>12-30-2025</p>
           </div>
         </router-link>
-      </div>
+</div>-->
 
        <div class="card">
         <router-link to="/blog/setters-mindset" class="menu-item">

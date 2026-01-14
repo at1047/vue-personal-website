@@ -15,6 +15,7 @@ import ProjectClarentEngineeringDecisionsPage from '@/views/projects/clarent_eng
 import ProjectTripodPage from '@/views/projects/tripod.vue'
 import ProjectCarwennanPage from '@/views/projects/carwennan.vue'
 import ProjectHomeAutomationPage from '@/views/projects/home_automation.vue'
+import ProjectJumpingLegPage from '@/views/projects/jumping_leg.vue'
 
 import BlogProbabilityDistributionPage from '@/views/blog/probability-distribution.vue'
 import BlogSettersMindsetPage from '@/views/blog/setters-mindset.vue'
@@ -98,6 +99,15 @@ const router = createRouter({
             path: '/projects/home_automation',
             name: 'ProjectHomeAutomation',
             component: ProjectHomeAutomationPage,
+            meta: {
+                home: "/",
+                projects: "/projects",
+            }
+        },
+        {
+            path: '/projects/jumping_leg',
+            name: 'ProjectJumpingLeg',
+            component: ProjectJumpingLegPage,
             meta: {
                 home: "/",
                 projects: "/projects",

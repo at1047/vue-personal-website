@@ -10,11 +10,15 @@ var cubeZ = 0;
 
 const delay = 65;
 
-const canvasWidth = 83;
-const canvasHeight = 36;
+// const canvasWidth = 83;
+// const canvasHeight = 36;
 
-const cubeWidth = 18;
-const distanceFromCam = 100;
+
+const canvasWidth = 49;
+const canvasHeight = 26;
+
+const cubeWidth = 13;
+const distanceFromCam = 80;
 const K1 = 40;
 const horizontalOffset = 0;
 const incrementSpeed = 0.5;

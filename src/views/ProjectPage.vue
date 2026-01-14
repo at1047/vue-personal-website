@@ -90,6 +90,14 @@ route: '/projects/clarent',
 icon: '/images/clarent_icon.jpg'
 },
 {
+id: 'jumping_leg',
+title: 'Jumping Leg',
+description: 'A jumping robotic leg using a Input-Output Linearization Controller',
+technologies: '',
+route: '/projects/jumping_leg',
+icon: '/images/jumping_leg_icon.png'
+},
+{
 id: 'tripod',
 title: 'Tripod',
 description: 'An indestructible tripod for recording volleyball',
