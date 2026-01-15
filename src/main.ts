@@ -5,8 +5,7 @@ import './assets/main.css'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faBars, faHouse, faUser, faBlog, faEnvelope, faMoon } from "@fortawesome/free-solid-svg-icons";
-import { faSun } from "@fortawesome/free-regular-svg-icons";
+import { faBars, faHouse, faUser, faBlog, faEnvelope, faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import { faGithub, faYoutube } from '@fortawesome/free-brands-svg-icons'
 
 library.add(faHouse, faBars, faUser, faBlog, faGithub, faYoutube, faEnvelope, faSun, faMoon);

@@ -1,181 +1,390 @@
-.project-container, .blog-container {
+/* ============================================
+   MARKDOWN CONTENT STYLING
+   ============================================
+   For project and blog detail pages
+   Optimized for technical documentation
+   ============================================ */
+
+/* --- CONTAINER LAYOUT --- */
+.project-container,
+.blog-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.project-header, .blog-container {
-  margin-bottom: 10px;
-  width: 100%;
-  /*width: 800px;*/
-}
-
-.project-content, .blog-content {
-  display: flex;
-  justify-content: center;
+  padding-bottom: 4rem;
   width: 100%;
 }
 
+.project-header,
+.blog-header {
+  padding: var(--space-4) 0 var(--space-3);
+  border-bottom: 1px solid var(--color-border-subtle);
+  margin-bottom: var(--space-4);
+}
+
+.project-header h1,
+.blog-header h1 {
+  font-size: var(--text-4xl, 2.25rem);
+  font-weight: 700;
+  color: var(--color-h1, #1c1917);
+  margin: 0;
+  text-align: left;
+  line-height: var(--leading-tight, 1.2);
+}
+
+.project-content,
+.blog-content {
+  width: 100%;
+}
+
+/* --- MARKDOWN CONTENT --- */
 .markdown {
   width: 100%;
-  line-height: 150%;
-  --font-size: 14px;
+  line-height: var(--leading-relaxed);
+  --font-size: var(--text-base);  /* 16px - increased from 14px for readability */
 }
 
-.markdown span {
-  /*font-size: 14px;*/
-  font-size: var(--font-size);
-}
-
+/* Paragraphs */
 .markdown p {
-  color: var(--color-text);
-  font-size: var(--font-size);
-  margin-top: 8px;
+  color: var(--color-text-primary, #1c1917);
+  font-size: var(--font-size, 0.875rem);
+  margin-top: var(--space-4, 1rem);
+  line-height: var(--leading-relaxed, 1.65);
 }
 
-.markdown p:has(- p) {
-  margin-top: 12px;
+.markdown p:first-child {
+  margin-top: 0;
 }
 
-/*
-.markdown p:has(+ ul),
-.markdown p:has(+ ol) {
-  margin-bottom: 0;
-}*/
-
-.markdown li {
-  color: var(--color-text);
-  font-size: var(--font-size);
-  margin: 0;
-  /* list-style-type: disc; */
+/* Ensure spans inherit font-size from parent (fixes inline span inconsistency) */
+.markdown span {
+  font-size: inherit;
+  line-height: inherit;
 }
 
-.markdown ul li {
-  list-style-type: disc;
-}
-
-.markdown ol li::marker {
-  font-weight: bold;
-}
-
-.markdown a {
-  text-decoration: underline;
-}
-
-table {
-  color: var(--color-text-muted);
-  font-size: var(--font-size);
-  border-collapse: collapse;
-  margin: 20px 0;
-}
-
-th, td {
-    border: 0.5px solid var(--color-text-muted2);
-    padding: 8px;
-    text-align: left;
-}
-
-th {
-  border-bottom: 2px solid var(--color-text-muted2);
-}
-
-ul ul {
-  padding-left: 2em;
-}
-
-h1 {
-  margin-top: 16px;
-  margin-bottom: 16px;
-  line-height: 0.9;
-  text-align: center;
-}
-
-.markdown-description {
-  text-align: center;
-  color: var(--color-text-muted);
-}
-
+/* Headings */
 .markdown h1 {
-  text-align: center;
-  font-size: 28px;
-  font-weight: 600;
-  margin-top: 20px;
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  margin-top: var(--space-10);
+  margin-bottom: var(--space-4);
   color: var(--color-h1);
+  text-align: left;
+  letter-spacing: -0.02em;
+}
+
+.markdown h1:first-child {
+  margin-top: 0;
 }
 
 .markdown h2 {
-  text-align: left;
-  font-size: 22px;
+  font-size: var(--text-2xl, 1.5rem);
   font-weight: 600;
-  margin-top: 16px;
-  color: var(--color-h2);
+  margin-top: var(--space-8, 2rem);
+  margin-bottom: var(--space-3, 0.75rem);
+  color: var(--color-h2, #292524);
+  text-align: left;
+  letter-spacing: -0.01em;
+  padding-bottom: var(--space-2, 0.5rem);
+  border-bottom: 1px solid var(--color-border-subtle, #e7e5e4);
 }
 
 .markdown h2:first-child {
   margin-top: 0;
 }
 
-
 .markdown h3 {
-  font-size: 16px;
-  margin-top: 12px;
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-2);
+  color: var(--color-h3);
 }
 
-strong {
-  color: var(--color-text);
+.markdown h4 {
+  font-size: var(--text-base);
+  font-weight: 600;
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-2);
+  color: var(--color-h4);
+}
+
+/* Lists */
+.markdown ul,
+.markdown ol {
+  margin-top: var(--space-3);
+  margin-bottom: var(--space-3);
+  padding-left: var(--space-6);
+}
+
+.markdown li {
+  color: var(--color-text-primary);
+  font-size: var(--font-size);
+  margin: var(--space-2) 0;
+  line-height: var(--leading-relaxed);
+}
+
+.markdown ul li {
+  list-style-type: disc;
+}
+
+.markdown ul li::before {
+  display: none; /* Override the global list style */
+}
+
+.markdown ol li {
+  list-style-type: decimal;
+}
+
+.markdown ol li::marker {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+/* Nested lists */
+.markdown ul ul,
+.markdown ol ol,
+.markdown ul ol,
+.markdown ol ul {
+  margin-top: var(--space-1);
+  margin-bottom: var(--space-1);
+  padding-left: var(--space-5);
+}
+
+/* Links */
+.markdown a {
+  color: var(--color-accent-primary);
+  text-decoration: underline;
+  text-decoration-color: var(--color-border);
+  text-underline-offset: 2px;
+  transition: all var(--transition-fast);
+}
+
+.markdown a:hover {
+  color: var(--color-accent-primary);
+  text-decoration-color: var(--color-accent-primary);
+  background-color: transparent;
+}
+
+/* Anchor links - internal page navigation */
+.markdown a.anchor-link {
+  color: var(--color-accent-primary);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--color-accent-primary);
+}
+
+.markdown a.anchor-link:hover {
+  border-bottom-style: solid;
+}
+
+/* Scroll offset for anchor targets (accounts for sticky nav) */
+.markdown h1[id],
+.markdown h2[id],
+.markdown h3[id],
+.markdown h4[id],
+.markdown h5[id],
+.markdown h6[id] {
+  scroll-margin-top: 80px;
+}
+
+/* Highlight target heading briefly when navigating */
+.markdown :target {
+  animation: anchor-highlight 2s ease-out;
+}
+
+@keyframes anchor-highlight {
+  0% {
+    background-color: var(--color-accent-primary);
+    color: var(--color-bg-primary);
+    margin-left: -0.5rem;
+    padding-left: 0.5rem;
+  }
+  100% {
+    background-color: transparent;
+    margin-left: 0;
+    padding-left: 0;
+  }
+}
+
+/* Strong & Emphasis */
+.markdown strong {
+  color: var(--color-text-primary);
+  font-weight: 600;
 }
 
 .markdown em {
-    /*color: var(--color-text-muted2);*/
-    font-size: 14px;
+  color: var(--color-text-secondary);
+  font-style: italic;
 }
 
-.markdown > img {
+/* Inline code */
+.markdown code {
+  font-family: var(--font-mono);
+  font-size: calc(var(--font-size) - 1px);
+  background: var(--color-code-bg);
+  border: 1px solid var(--color-code-border);
+  border-radius: var(--radius-sm);
+  padding: 0.125em 0.375em;
+  color: var(--color-accent-primary);
+}
+
+/* Code blocks */
+.markdown pre {
+  margin: var(--space-5) 0;
+  padding: var(--space-4);
+  background: var(--color-code-bg);
+  border: 1px solid var(--color-code-border);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+}
+
+.markdown pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: var(--color-text-primary);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+}
+
+/* Blockquotes */
+.markdown blockquote {
+  margin: var(--space-5) 0;
+  padding: var(--space-4) var(--space-5);
+  background: var(--color-bg-secondary);
+  border-left: 3px solid var(--color-accent-primary);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+.markdown blockquote p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+/* Tables */
+.markdown table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-6) 0;
+  font-size: var(--font-size);
+}
+
+.markdown th,
+.markdown td {
+  border: 1px solid var(--color-border);
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+}
+
+.markdown th {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  background: var(--color-bg-secondary);
+  border-bottom: 2px solid var(--color-border);
+}
+
+.markdown td {
+  color: var(--color-text-secondary);
+}
+
+.markdown tr:hover td {
+  background: var(--color-hover-bg);
+}
+
+/* Images */
+.markdown img {
   display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 16px;
+  max-width: 100%;
+  height: auto;
+  margin: var(--space-6) auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-subtle);
 }
 
-@media (max-width: 1000px) {
-  img {
-    width: 450px;
+/* Horizontal rules */
+.markdown hr {
+  margin: var(--space-8) 0;
+  border: none;
+  height: 1px;
+  background: var(--color-border);
+}
+
+/* Description text (for subtitles) */
+.markdown-description {
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  margin-top: calc(1 * var(--space-4));
+  margin-bottom: var(--space-6);
+}
+
+/* --- IMAGE UTILITIES --- */
+.inverted {
+  filter: none;
+}
+
+.dark-mode .inverted {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 700px) {
+  .markdown img {
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .markdown table {
+    font-size: var(--text-xs);
+  }
+  
+  .markdown th,
+  .markdown td {
+    padding: var(--space-2) var(--space-3);
   }
 }
 
 @media (max-width: 500px) {
-  .project-header, .blog-header {
-    margin-bottom: 0;
-    width: 100%;
-  }
-
-  .project-header h1 {
-    font-size: 30px;
-    margin: 12px 0 6px 0;
-  }
-
-  .blog-header h1 {
-    font-size: 24px;
-    margin: 12px 0 6px 0;
-    line-height: 1.2;
-  }
-
-  .markdown h2 {
-    font-size: 20px;
-    margin-bottom: 6px;
-    margin-top: 8px;
-  }
-
-  .hide-on-mobile {
-    display: none !important;
+  .project-header,
+  .blog-header {
+    padding: var(--space-3) 0 var(--space-2);
+    margin-bottom: var(--space-3);
   }
   
-  img {
-    width: 350px;
+  .project-header h1,
+  .blog-header h1 {
+    font-size: var(--text-3xl);
+    line-height: 1.2;
   }
   
   .markdown {
-    width: 100%;
+    --font-size: var(--text-sm);
+  }
+  
+  .markdown h1 {
+    font-size: var(--text-2xl);
+  }
+  
+  .markdown h2 {
+    font-size: var(--text-xl);
+    margin-top: var(--space-6);
+  }
+  
+  .markdown h3 {
+    font-size: var(--text-base);
+  }
+  
+  .markdown pre {
+    padding: var(--space-3);
+    font-size: var(--text-xs);
+  }
+  
+  .hide-on-mobile {
+    display: none !important;
   }
 }

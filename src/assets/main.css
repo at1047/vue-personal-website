@@ -1,261 +1,484 @@
+/* ============================================
+   DESIGN SYSTEM: Engineering Portfolio
+   ============================================
+   Philosophy: Tool aesthetic over marketing aesthetic
+   - Precision over polish
+   - Information density over whitespace
+   - Terminal-native dark mode
+   - Restrained color with semantic meaning
+   ============================================ */
+
+/* --- TYPOGRAPHY SCALE (Major Third - 1.25) --- */
 :root {
-    /* Light mode (default) */
-    --color-background: hsl(0, 0%, 90%);
-    --color-background-light: hsl(0, 0%, 85%);
-    --color-text: hsl(0, 0%, 40%);
-    --color-text-muted: hsl(0, 0%, 45%);
-    --color-text-muted2: hsl(0, 0%, 50%);
-    --color-menu-item: hsl(0, 0%, 95%);
-    --color-menu-item-hover: #D0D0D0;
-    --color-code-background: #F8F8F8;
+    --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', 'Consolas', monospace;
+    --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    
+    /* Type scale */
+    --text-xs: 0.75rem;    /* 12px - timestamps, metadata */
+    --text-sm: 0.875rem;   /* 14px - body small, captions */
+    --text-base: 1rem;     /* 16px - body */
+    --text-lg: 1.125rem;   /* 18px - lead text */
+    --text-xl: 1.25rem;    /* 20px - h4 */
+    --text-2xl: 1.5rem;    /* 24px - h3 */
+    --text-3xl: 1.875rem;  /* 30px - h2 */
+    --text-4xl: 2.25rem;   /* 36px - h1 */
+    
+    /* Line heights */
+    --leading-tight: 1.2;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.65;
+    
+    /* Spacing scale (4px base) */
+    --space-1: 0.25rem;    /* 4px */
+    --space-2: 0.5rem;     /* 8px */
+    --space-3: 0.75rem;    /* 12px */
+    --space-4: 1rem;       /* 16px */
+    --space-5: 1.25rem;    /* 20px */
+    --space-6: 1.5rem;     /* 24px */
+    --space-8: 2rem;       /* 32px */
+    --space-10: 2.5rem;    /* 40px */
+    --space-12: 3rem;      /* 48px */
+    --space-16: 4rem;      /* 64px */
+    
+    /* Border radius */
+    --radius-sm: 3px;
+    --radius-md: 5px;
+    --radius-lg: 8px;
+    
+    /* Transitions */
+    --transition-fast: 100ms ease-out;
+    --transition-base: 150ms ease-out;
+    --transition-slow: 250ms ease-out;
+}
 
-    --color-card-background: #F9F9F9;
-    --color-card-background-hover: #F0F0F0;
-    --color-shadow: #E0E0E0;
-    --color-menu-dark: #F0F0F0;
-    --color-nav: hsl(0, 0%, 95%);
-
+/* --- LIGHT MODE --- */
+:root {
+    --color-bg-primary: #f5f5f4;        /* Stone-50 warm gray */
+    --color-bg-secondary: #e7e5e4;      /* Stone-200 */
+    --color-bg-tertiary: #d6d3d1;       /* Stone-300 */
+    --color-bg-elevated: #fafaf9;       /* Cards, elevated surfaces */
+    
+    --color-text-primary: #1c1917;      /* Stone-900 - primary text */
+    --color-text-secondary: #44403c;    /* Stone-700 - secondary text */
+    --color-text-muted: #78716c;        /* Stone-500 - muted, timestamps */
+    --color-text-faint: #a8a29e;        /* Stone-400 - placeholders */
+    
+    /* Semantic accent colors - restrained, purposeful */
+    --color-accent-primary: #0d9488;    /* Teal-600 - links, CTAs */
+    --color-accent-secondary: #0891b2;  /* Cyan-600 - secondary actions */
+    --color-accent-warning: #d97706;    /* Amber-600 - warnings */
+    --color-accent-error: #dc2626;      /* Red-600 - errors */
+    --color-accent-success: #16a34a;    /* Green-600 - success */
+    
+    /* Terminal-inspired syntax highlighting (light) */
+    --color-syntax-keyword: #7c3aed;    /* Violet-600 */
+    --color-syntax-string: #059669;     /* Emerald-600 */
+    --color-syntax-function: #2563eb;   /* Blue-600 */
+    --color-syntax-comment: #9ca3af;    /* Gray-400 */
+    
+    /* UI elements */
+    --color-border: #d6d3d1;
+    --color-border-subtle: #e7e5e4;
+    --color-shadow: rgba(28, 25, 23, 0.08);
+    --color-shadow-lg: rgba(28, 25, 23, 0.12);
+    
+    /* Header colors - semantic, not decorative */
+    --color-h1: #1c1917;
+    --color-h2: #292524;
+    --color-h3: #44403c;
+    --color-h4: #57534e;
+    
+    /* Interactive states */
+    --color-hover-bg: rgba(0, 0, 0, 0.04);
+    --color-active-bg: rgba(0, 0, 0, 0.08);
+    
+    /* Code blocks */
+    --color-code-bg: #fafaf9;
+    --color-code-border: #e7e5e4;
+    
+    /* Icon filter */
     --color-icon-filter: brightness(0) saturate(100%) opacity(70%);
-
-    /* Header colors */
-    --color-h1: hsl(0, 0%, 30%);
-    --color-h2: hsl(0, 0%, 30%);
-    --color-h3: hsl(0, 0%, 40%);
-    --color-h4: hsl(0, 0%, 40%);
+    
+    /* Nav */
+    --color-nav: #fafaf9;
+    
+    /* Card/menu items */
+    --color-menu-item: #fafaf9;
+    --color-menu-item-hover: #f0efed;
+    --color-card-background: #fafaf9;
+    --color-card-background-hover: #f0efed;
+    
+    /* Legacy compatibility - use direct values to avoid circular refs */
+    --color-background: #f5f5f4;
+    --color-background-light: #e7e5e4;
+    --color-text: #1c1917;
+    --color-text-muted2: #a8a29e;
+    --color-code-background: #fafaf9;
 }
 
-/* catppuccin */
-/*
+/* --- DARK MODE (Everforest) --- */
 .dark-mode {
-    --color-background: #282c34;
-    --color-background-light: #3a3f4b;
-    --color-card-background: #2c323c;
-    --color-card-background-hover: #3e4451;
-    --color-menu-item: #2c323c;
-    --color-menu-item-hover: #3e4451;
-    --color-code-background: #2c323c;
-    --color-shadow: #1c2026;
-    --color-menu-dark: #1c2026;
-
-    --color-text: #abb2bf;
-    --color-text-muted: #828997;
-    --color-text-muted2: #5c6370;
-
-    --color-icon-filter: brightness(0) saturate(100%) invert(84%) sepia(8%) saturate(368%) hue-rotate(179deg) brightness(96%) contrast(88%);
-
-    --color-h1: #e06c75;
-    --color-h2: #61afef;
-    --color-h3: #98c379;
-    --color-h4: #c678dd;
+    /* Everforest background palette */
+    --color-bg-primary: #2d353b;        /* bg0 - main background */
+    --color-bg-secondary: #343f44;      /* bg1 - slightly lighter */
+    --color-bg-tertiary: #3d484d;       /* bg2 - borders, highlights */
+    --color-bg-elevated: #343f44;       /* bg1 - cards, elevated surfaces */
+    
+    /* Everforest foreground palette */
+    --color-text-primary: #d1cab9;      /* fg - main text */
+    --color-text-secondary: #9da9a0;    /* grey2 - secondary text */
+    --color-text-muted: #859289;        /* grey1 - muted text */
+    --color-text-faint: #7a8478;        /* grey0 - faint text */
+    
+    /* Everforest accent colors */
+    --color-accent-primary: #a7c080;    /* green - primary accent */
+    --color-accent-secondary: #83c092;  /* aqua - secondary accent */
+    --color-accent-warning: #dbbc7f;    /* yellow - warnings */
+    --color-accent-error: #e67e80;      /* red - errors */
+    --color-accent-success: #a7c080;    /* green - success */
+    
+    /* Everforest syntax highlighting */
+    --color-syntax-keyword: #e69875;    /* orange */
+    --color-syntax-string: #a7c080;     /* green */
+    --color-syntax-function: #7fbbb3;   /* blue */
+    --color-syntax-comment: #859289;    /* grey1 */
+    
+    /* UI elements */
+    --color-border: #475258;            /* bg3 */
+    --color-border-subtle: #3d484d;     /* bg2 */
+    --color-shadow: rgba(0, 0, 0, 0.3);
+    --color-shadow-lg: rgba(0, 0, 0, 0.5);
+    
+    /* Header colors - Everforest palette */
+    --color-h1: #d3c6aa;                /* fg */
+    --color-h2: #d3c6aa;                /* fg */
+    --color-h3: #9da9a0;                /* grey2 */
+    --color-h4: #859289;                /* grey1 */
+    
+    /* Interactive states */
+    --color-hover-bg: rgba(167, 192, 128, 0.1);  /* green with low opacity */
+    --color-active-bg: rgba(167, 192, 128, 0.15);
+    
+    /* Code blocks */
+    --color-code-bg: #343f44;           /* bg1 */
+    --color-code-border: #475258;       /* bg3 */
+    
+    /* Icon filter - warm tint to match Everforest */
+    --color-icon-filter: invert(83%) sepia(10%) saturate(300%) hue-rotate(20deg) brightness(95%);
+    
+    /* Nav */
+    --color-nav: #2d353b;               /* bg0 */
+    
+    /* Card/menu items */
+    --color-menu-item: #343f44;         /* bg1 */
+    --color-menu-item-hover: #3d484d;   /* bg2 */
+    --color-card-background: #343f44;   /* bg1 */
+    --color-card-background-hover: #3d484d; /* bg2 */
+    
+    /* Legacy compatibility - Everforest values */
+    --color-background: #2d353b;
+    --color-background-light: #343f44;
+    --color-text: #d3c6aa;
+    --color-text-muted2: #7a8478;
+    --color-code-background: #343f44;
+    --color-menu-dark: #3d484d;
 }
-*/
 
-.dark-mode {
-    --color-background: hsl(0, 0%, 10%);
-    --color-background-light: hsl(0, 0%, 18%);
-    --color-menu-dark: #2F2F2F;
-
-    --color-card-background: #21252b;
-    --color-card-background-hover: #3e4451;
-    --color-menu-item: hsl(0, 0%, 17%);
-    --color-menu-item-hover: #3e4451;
-    --color-code-background: #21252b;
-    --color-shadow: #181a1f;
-    --color-nav: hsl(0, 0%, 10%);
-
-    --color-text: #C8C8C8;
-    --color-text-muted: #989898;
-    --color-text-muted2: #919191;
-
-    --color-icon-filter: invert(77%) sepia(8%) saturate(285%) hue-rotate(185deg) brightness(91%) contrast(88%);
-
-    --color-h1: #e06c75;
-    --color-h2: #61afef;
-    --color-h3: #98c379;
-    --color-h4: #c678dd;
-    --color-h5: #e5c07b;
-    --color-h6: #56b6c2;
-}
-
-* {
+/* --- RESET & BASE --- */
+*, *::before, *::after {
     margin: 0;
     padding: 0;
-    /*transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;*/
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
 body {
-    background-color: var(--color-background);
-    /*transition: background-color 0.3s ease, color 0.3s ease;*/
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+    min-height: 100vh;
 }
 
+/* --- MAIN LAYOUT --- */
 main {
-    margin: 10px auto;
-    width: 800px;
-    background-color: var(--color-background);
+    margin: var(--space-4) auto;
+    width: min(800px, calc(100% - var(--space-8)));
+    background-color: var(--color-bg-primary);
 }
 
-/*
-.main {
-    width: 1000px;
-    margin: 50px auto;
-}
-*/
-
-
-
-h1, h2, h3, h4, a, p, em, span, li, code, textarea, table {
-    /*font-family: "Roboto Mono", monospace;*/
-    font-weight: 400;
-    color: var(--color-text);
-    text-decoration: none;
+/* --- TYPOGRAPHY --- */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    line-height: var(--leading-tight);
+    letter-spacing: -0.02em;
 }
 
-
-h4, a, p, em, span, li, code, textarea, table {
-    font-family: "Poppins";
-}
-
-h1, h2, h3 {
-    font-family: "Poppins";
-    /*font-family: 'JetBrains Mono', 'Fira Code', monospace;*/
-}
-
-/* Individual header colors */
 h1 {
+    font-size: var(--text-4xl);
     color: var(--color-h1);
-}
-
-h2 {
-    color: var(--color-h2);
-}
-
-/*h3 {
-    color: var(--color-h3);
-}*/
-
-h4 {
-    color: var(--color-h4);
-}
-
-h1 {
-    font-weight: bold;
-    font-size: 40px;
-}
-
-h2 {
-    font-size: 30px;
-}
-
-h3 {
-    font-size: 18px;
     font-weight: 700;
 }
 
+h2 {
+    font-size: var(--text-3xl);
+    color: var(--color-h2);
+}
+
+h3 {
+    font-size: var(--text-2xl);
+    color: var(--color-h3);
+}
+
+h4 {
+    font-size: var(--text-xl);
+    color: var(--color-h4);
+}
+
+p, li, span {
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    color: var(--color-text-primary);
+    line-height: var(--leading-relaxed);
+}
+
+/* Monospace for code, technical content */
+code, pre, kbd, samp, .mono {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-feature-settings: "liga" 1, "calt" 1;
+}
+
+code {
+    background: var(--color-code-bg);
+    border: 1px solid var(--color-code-border);
+    border-radius: var(--radius-sm);
+    padding: 0.125em 0.375em;
+    color: var(--color-accent-primary);
+}
+
+pre {
+    background: var(--color-code-bg);
+    border: 1px solid var(--color-code-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+    overflow-x: auto;
+}
+
+pre code {
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: var(--color-text-primary);
+}
+
+/* --- LINKS --- */
+a {
+    color: var(--color-text-primary);
+    text-decoration: none;
+    transition: color var(--transition-fast), 
+                background-color var(--transition-fast);
+}
+
+a:hover {
+    color: var(--color-bg-primary);
+    background-color: var(--color-text-primary);
+}
+
+/* Exclude icon-style links from the inverted hover effect */
+a.nav-icon-link:hover,
+a.hero-link:hover {
+    color: var(--color-text-primary);
+    background-color: var(--color-hover-bg);
+}
+
+/* Technical link style - underline with monospace hint */
+.link-technical {
+    color: var(--color-accent-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--color-border);
+    text-underline-offset: 2px;
+}
+
+.link-technical:hover {
+    background-color: transparent;
+    color: var(--color-accent-primary);
+    text-decoration-color: var(--color-accent-primary);
+}
+
+/* --- LISTS --- */
+/* Note: List styles are intentionally minimal here to avoid breaking 
+   markdown content and navigation. Specific components can add their own
+   list styling as needed. */
 ul {
-    list-style-type: circle;
+    list-style-type: disc;
     list-style-position: inside;
-    padding-left: 10px;
+    padding-left: 0.5rem;
 }
 
 ol {
     list-style-type: decimal;
     list-style-position: inside;
+    padding-left: 0.5rem;
 }
 
 li {
-    margin: 5px 0;
+    margin: 0.25rem 0;
 }
 
-span {
-    font-size: 16px;
-
+/* --- SELECTION --- */
+::selection {
+    background-color: var(--color-accent-primary);
+    color: var(--color-bg-primary);
 }
 
-code {
-    font-size: 12px;
-    background: var(--color-code-background);
+/* --- FOCUS STATES (Keyboard navigation) --- */
+:focus-visible {
+    outline: 2px solid var(--color-accent-primary);
+    outline-offset: 2px;
 }
 
-pre {
-    padding: 5px 10px;
-    background: var(--color-background);
+/* --- TABLES --- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--space-6) 0;
+    font-size: var(--text-sm);
 }
 
-a:hover {
-  color: var(--color-background);
-  background-color: var(--color-text)
+th, td {
+    border: 1px solid var(--color-border);
+    padding: var(--space-3) var(--space-4);
+    text-align: left;
 }
 
-a span:hover {
-  color: var(--color-background);
+th {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+    background: var(--color-bg-secondary);
+    border-bottom: 2px solid var(--color-border);
 }
 
-
-
-/* #app {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 2rem;
-
-    font-weight: normal;
+td {
+    font-family: var(--font-sans);
+    color: var(--color-text-secondary);
 }
 
-a,
-.green {
-    text-decoration: none;
-    color: hsla(160, 100%, 37%, 1);
-    transition: 0.4s;
+tr:hover td {
+    background: var(--color-hover-bg);
 }
 
-@media (hover: hover) {
-    a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-    }
+/* --- UTILITY CLASSES --- */
+
+/* Terminal-style prompt prefix */
+.prompt::before {
+    content: "$ ";
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
 }
 
-@media (min-width: 1024px) {
-    body {
-    display: flex;
-    place-items: center;
-    }
+/* Monospace badge/tag */
+.tag {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    padding: var(--space-1) var(--space-2);
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    color: var(--color-text-secondary);
+}
 
-    #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-    }
-} */
+/* Technical timestamp */
+.timestamp {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    letter-spacing: 0.02em;
+}
 
+/* Grid overlay hint (subtle) */
+.grid-bg {
+    background-image: 
+        linear-gradient(var(--color-border-subtle) 1px, transparent 1px),
+        linear-gradient(90deg, var(--color-border-subtle) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+/* --- SCROLLBAR (Dark mode native) --- */
+.dark-mode ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.dark-mode ::-webkit-scrollbar-track {
+    background: var(--color-bg-secondary);
+}
+
+.dark-mode ::-webkit-scrollbar-thumb {
+    background: var(--color-bg-tertiary);
+    border-radius: 4px;
+}
+
+.dark-mode ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text-faint);
+}
+
+/* --- RESPONSIVE --- */
 @media (max-width: 1000px) {
-
     main {
-    width: calc(100% - 30px);
-    margin: 0 auto;
+        width: calc(100% - var(--space-6));
+        margin: 0 auto;
     }
-
-    .web-nav-bar{
-    display: none;
+    
+    .web-nav-bar {
+        display: none;
     }
 }
 
-@media (max-width: 500px) {
-
+@media (max-width: 640px) {
+    :root {
+        --text-4xl: 1.875rem;  /* Smaller h1 on mobile */
+        --text-3xl: 1.5rem;
+        --text-2xl: 1.25rem;
+    }
+    
     main {
-    width: calc(100% - 30px);
-    margin: 0 auto;
+        width: calc(100% - var(--space-4));
     }
-
-    .web-nav-bar{
-    display: none;
+    
+    /* Disable hover effects on touch */
+    a:hover {
+        color: var(--color-text-primary);
+        background-color: transparent;
     }
+}
 
-  a:hover {
-    color: var(--color-text);
-    background-color: var(--color-background)
-  }
-
-  a span:hover {
-    color: var(--color-text);
-  }
-
+/* --- PRINT STYLES --- */
+@media print {
+    body {
+        background: white;
+        color: black;
+    }
+    
+    a {
+        text-decoration: underline;
+    }
+    
+    .no-print {
+        display: none !important;
+    }
 }

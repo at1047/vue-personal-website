@@ -1,23 +1,85 @@
 import { marked } from 'marked';
-import { RouterLink, RouterView } from 'vue-router'
 
 /**
- * Converts markdown text to HTML with custom image processing
+ * Slugify a string for use as an anchor ID
+ * Matches Obsidian's heading ID generation
+ * @param {string} text - The heading text
+ * @returns {string} - URL-safe slug
+ */
+function slugify(text) {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, '')  // Remove special characters
+    .replace(/\s+/g, '-')       // Replace spaces with hyphens
+    .replace(/-+/g, '-')        // Collapse multiple hyphens
+    .replace(/^-|-$/g, '');     // Trim hyphens from ends
+}
+
+/**
+ * Configure marked to add IDs to headings
+ */
+const renderer = new marked.Renderer();
+const originalHeadingRenderer = renderer.heading.bind(renderer);
+
+renderer.heading = function(text, level, raw) {
+  const slug = slugify(raw);
+  return `<h${level} id="${slug}">${text}</h${level}>\n`;
+};
+
+marked.setOptions({
+  renderer: renderer,
+  gfm: true,
+  breaks: false,
+});
+
+/**
+ * Converts markdown text to HTML with custom processing
+ * Supports:
+ * - Obsidian %% comments %%
+ * - Obsidian image embeds: ![[image.png]]
+ * - Obsidian anchor links: [[#Heading Name]] or [[#Heading Name|Custom Text]]
+ * - Obsidian wikilinks: [[Page Name]] (converted to internal routes)
+ * - Auto-generated heading IDs for anchor navigation
+ * 
  * @param {string} markdown - The markdown text to convert
+ * @param {string} type - The content type (e.g., "projects", "blog") for wikilink routing
  * @returns {string} - The converted HTML
  */
 export function markdownToHtml(markdown, type = null) {
   if (!markdown) return '';
   
-  // Remove text wrapped in %%text%% before processing
-  const withoutIgnored = markdown.replace(/%%[\s\S]*?%%/g, '');
+  // Step 1: Remove Obsidian comments wrapped in %%text%%
+  const withoutComments = markdown.replace(/%%[\s\S]*?%%/g, '');
   
-  // Parse markdown to HTML
-  const parsedMarkdown = marked.parse(withoutIgnored);
+  // Step 2: Pre-process Obsidian anchor links BEFORE marked parsing
+  // Convert [[#Heading Name]] to a placeholder that won't be altered by marked
+  // Also handles [[#Heading Name|Custom Text]] syntax
+  const withAnchorPlaceholders = withoutComments.replace(
+    /\[\[#([^\]|]+)(?:\|([^\]]+))?\]\]/g,
+    (match, heading, customText) => {
+      const slug = slugify(heading);
+      const displayText = customText || heading;
+      // Use a placeholder that marked won't touch
+      return `%%ANCHOR_LINK:${slug}:${displayText}%%`;
+    }
+  );
   
-  // Process custom image syntax: ![[filename.ext#classname]] (supports .jpg, .jpeg, .png, .gif, .svg)
-  const replacedMarkdownImg = parsedMarkdown.replace(/<p>!\[\[(.*?)\]\]<\/p>/g, (match, raw) => {
+  // Step 3: Parse markdown to HTML with marked (headings now get IDs)
+  const parsedMarkdown = marked.parse(withAnchorPlaceholders);
+  
+  // Step 4: Restore anchor link placeholders to actual links
+  const withAnchorLinks = parsedMarkdown.replace(
+    /%%ANCHOR_LINK:([^:]+):([^%]+)%%/g,
+    (match, slug, displayText) => {
+      return `<a href="#${slug}" class="anchor-link">${displayText}</a>`;
+    }
+  );
+  
+  // Step 5: Process Obsidian image embeds: ![[filename.ext]] or ![[filename.ext#classname]]
+  const withImages = withAnchorLinks.replace(/<p>!\[\[(.*?)\]\]<\/p>/g, (match, raw) => {
     if (!raw) return match;
+    
     // Extract optional class after '#'
     const hashIndex = raw.indexOf('#');
     const pathPart = hashIndex >= 0 ? raw.slice(0, hashIndex) : raw;
@@ -26,55 +88,59 @@ export function markdownToHtml(markdown, type = null) {
     // Use last '.' to allow filenames with dots
     const lastDot = pathPart.lastIndexOf('.');
     if (lastDot === -1) return match;
+    
     const baseName = pathPart.slice(0, lastDot);
     const extension = pathPart.slice(lastDot + 1).toLowerCase();
 
-    // Permit common image extensions, including gif
-    const allowed = ['jpg', 'jpeg', 'png', 'gif', 'svg'];
+    // Permit common image extensions
+    const allowed = ['jpg', 'jpeg', 'png', 'gif', 'svg', 'webp'];
     if (!allowed.includes(extension)) return match;
 
     // Build img src path, auto-prepend images/ if no folder provided
     const imagePath = baseName.includes('/') ? `${baseName}.${extension}` : `images/${baseName}.${extension}`;
     const idValue = baseName.split('/').pop();
     const classAttr = className ? ` class="${className}"` : '';
+    
     return `<img id="${idValue}"${classAttr} src="/${imagePath}" />`;
   });
 
- 
-  // Process custom image syntax: ![[filename.ext#classname]] (supports .jpg, .jpeg, .png, .gif, .svg)
-  const replacedMarkdown = replacedMarkdownImg.replace(/\[\[(.*?)\]\]/g, (match, raw) => {
+  // Step 6: Process remaining wikilinks for cross-page navigation: [[Page Name]]
+  // Skip if it starts with # (those should have been handled above)
+  const withWikilinks = withImages.replace(/\[\[([^\]#][^\]]*)\]\]/g, (match, raw) => {
     if (!raw) return match;
-    console.log(raw)
     
-
     const segments = raw.split(' ');
     
     if (type == null) {
-      return "<p>Link Broken</p>"
+      return `<span class="broken-link">${raw}</span>`;
     }
 
-    const prefix = segments.shift(0).toLowerCase()
-    const linkName = segments.join(' ')
+    const prefix = segments.shift().toLowerCase();
+    const linkName = segments.join(' ') || prefix;
     const link = `/${type}/${prefix}/${segments.join('_').toLowerCase()}`;
     
-    return `<a href="${link}" style="text-decoration: underline;">${linkName}</a>`;
+    return `<a href="${link}" class="wiki-link">${linkName}</a>`;
   });
 
+  // Step 7: Clean up image tags - remove width attributes
+  const cleanedImages = withWikilinks.replace(/\swidth="[^"]*"/g, '');
 
-  // Remove any width attribute from standard <img> tags (e.g., width="300")
-  // Example input: <img src="/clarent_5.jpg" width="300" />
-  const cleanedImages = replacedMarkdown.replace(/\swidth="[^"]*"/g, '');
-
-  // Add id attribute to standard <img> tags based on filename if missing
+  // Step 8: Add id attribute to standard <img> tags based on filename if missing
   // Also automatically prepend images/ to paths that don't already have a folder
-  // Example: <img src="/clarent_5.jpg" /> => <img id="clarent_5" src="/images/clarent_5.jpg" />
-  const withImgIds = cleanedImages.replace(/<img([^>]*?)src=\"\/?([^/\"]+)\.([a-zA-Z0-9]+)\"([^>]*)>/g, (match, before, name, ext, after) => {
-    // If an id already exists, leave unchanged
-    if (/\sid\s*=/.test(match)) return match;
-    // Check if path already has a folder (contains /)
-    const imagePath = name.includes('/') ? `${name}.${ext}` : `images/${name}.${ext}`;
-    return `<img id="${name.split('/').pop()}"${before}src="/${imagePath}"${after}>`;
-  });
+  const withImgIds = cleanedImages.replace(
+    /<img([^>]*?)src="\/?((?:[^/"]+\/)?[^/"]+)\.([a-zA-Z0-9]+)"([^>]*)>/g,
+    (match, before, name, ext, after) => {
+      // If an id already exists, leave unchanged
+      if (/\sid\s*=/.test(match)) return match;
+      
+      // Check if path already has a folder (contains /)
+      const hasFolder = name.includes('/');
+      const imagePath = hasFolder ? `${name}.${ext}` : `images/${name}.${ext}`;
+      const idValue = name.split('/').pop();
+      
+      return `<img id="${idValue}"${before}src="/${imagePath}"${after}>`;
+    }
+  );
   
   return withImgIds;
 }

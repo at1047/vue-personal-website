@@ -1,163 +1,214 @@
 <template>
-  <div class="projects-container">
-    <div class="section-headers">
-      <h2 class="section-title">Blog</h2>
+  <div class="blog-page">
+    <!-- Page Header -->
+    <header class="page-header">
+      <h1 class="page-title">Blog</h1>
+      <p class="page-description">
+        Thoughts on robotics, volleyball, and engineering problems.
+      </p>
+    </header>
+
+    <!-- Blog Posts List -->
+    <div class="posts-list">
+      <router-link 
+        v-for="post in posts" 
+        :key="post.to"
+        :to="post.to" 
+        class="post-item"
+      >
+        <div class="post-content">
+          <h2 class="post-title">{{ post.title }}</h2>
+          <p v-if="post.excerpt" class="post-excerpt">{{ post.excerpt }}</p>
+        </div>
+        <div class="post-meta">
+          <time class="post-date mono">{{ post.date }}</time>
+          <span class="post-arrow">→</span>
+        </div>
+      </router-link>
     </div>
-
-    <div class="all-projects">
-      <!-- Vue Component Links -->
-      <!--<div class="card">
-        <router-link to="/blog/probability-distribution" class="menu-item">
-          <h3 class="text text-h3">Volleyball: Probability Distribution</h3>
-          <div class="right-content">
-            <p>12-30-2025</p>
-          </div>
-        </router-link>
-</div>-->
-
-       <div class="card">
-        <router-link to="/blog/setters-mindset" class="menu-item">
-          <h3 class="text text-h3">Volleyball: Secret to Happiness</h3>
-          <div class="right-content">
-            <p>10-02-2025</p>
-          </div>
-        </router-link>
-      </div>
-      
-      <div class="card">
-        <router-link to="/blog/defining-volleyball-sets" class="menu-item">
-          <h3 class="text text-h3">Volleyball: Defining Sets</h3>
-          <div class="right-content">
-            <p>06-17-2025</p>
-          </div>
-        </router-link>
-      </div>
-  </div>
   </div>
 </template>
 
 <script>
+import { defineComponent } from 'vue';
+import { markdownToHtml, fetchMarkdown } from '@/utils/markdownUtils.js';
 
-    import { defineComponent } from 'vue';
-    import { markdownToHtml, fetchMarkdown } from '@/utils/markdownUtils.js';
-
-    export default defineComponent({
-        name: 'Blog',
-        data() {
-            return {
-                posts: [],
-                showPopup: false,
-                currentPost: {
-                    id: '',
-                    title: '',
-                    description: '',
-                    date: ''
-                },
-                markdown: '',
-                loading: true,
-            };
+export default defineComponent({
+  name: 'Blog',
+  data() {
+    return {
+      posts: [
+        {
+          to: '/blog/setters-mindset',
+          title: 'Volleyball: Secret to Happiness',
+          excerpt: 'Reflections on mindset and mental game from a setter\'s perspective.',
+          date: '2025-10-02'
         },
-        computed: {
-            markdownHtml() {
-                return markdownToHtml(this.markdown);
-            }
-        },
-        methods: {
-            async openPopup(postId) {
-                const post = this.posts.find(p => p.id === postId);
-                if (!post) return;
-                this.currentPost = post;
-                // Fetch markdown by id from public/blog_md/{id}.md
-                this.markdown = await fetchMarkdown(`blog_md/${post.id}`);
-                this.showPopup = true;
-            },
-            closePopup() {
-                this.showPopup = false;
-                this.markdown = '';
-            }
-        },
-        async created() {
-            try {
-                const response = await fetch('/popupBlogs.json');
-                this.posts = await response.json();
-            } catch (error) {
-                console.error('Error loading blogs:', error);
-                this.posts = [];
-            }
-            this.loading = false;
-        },
-    });
-
+        {
+          to: '/blog/defining-volleyball-sets',
+          title: 'Volleyball: Defining Sets',
+          excerpt: 'A systematic approach to categorizing and understanding set types.',
+          date: '2025-06-17'
+        }
+      ],
+      showPopup: false,
+      currentPost: {
+        id: '',
+        title: '',
+        description: '',
+        date: ''
+      },
+      markdown: '',
+      loading: true,
+    };
+  },
+  computed: {
+    markdownHtml() {
+      return markdownToHtml(this.markdown);
+    }
+  },
+  methods: {
+    async openPopup(postId) {
+      const post = this.posts.find(p => p.id === postId);
+      if (!post) return;
+      this.currentPost = post;
+      this.markdown = await fetchMarkdown(`blog_md/${post.id}`);
+      this.showPopup = true;
+    },
+    closePopup() {
+      this.showPopup = false;
+      this.markdown = '';
+    }
+  },
+  async created() {
+    this.loading = false;
+  },
+});
 </script>
+
 <style scoped>
-.menu-item {
-  background-color: var(--color-menu-item);
-  border-radius: 5px;
-  margin-top: 0;
-  padding: 7px 15px;
-  transition: background-color 100ms ease-out;
-  display: flex;
-  flex-direction: row;
-  align-items: end;
-  justify-content: space-between;
-  min-height: 30px;
+.blog-page {
+  padding-bottom: var(--space-16);
 }
 
-.menu-item:hover {
-  background-color: var(--color-menu-item-hover);
+/* --- PAGE HEADER --- */
+.page-header {
+  padding: var(--space-4) 0 var(--space-3);
+  border-bottom: 1px solid var(--color-border-subtle);
+  margin-bottom: var(--space-6);
 }
 
-.section-headers {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 30px;
-  position: relative;
-  z-index: 3;
+.page-title {
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: var(--color-h1);
+  margin-bottom: var(--space-2);
 }
 
-.all-projects {
+.page-description {
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  max-width: 500px;
+  line-height: var(--leading-relaxed);
+}
+
+/* --- POSTS LIST --- */
+.posts-list {
   display: flex;
   flex-direction: column;
-  position: relative;
-  z-index: 2;
+  gap: var(--space-3);
 }
 
-.section-title {
-  font-size: 32px;
-  margin: 0;
-  text-align: center;
-  color: var(--color-h1);
+.post-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  background: var(--color-card-background);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+}
+
+.post-item:hover {
+  border-color: var(--color-border);
+  background: var(--color-card-background-hover);
+  transform: translateX(4px);
+}
+
+/* --- POST CONTENT --- */
+.post-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.post-title {
+  font-size: var(--text-lg);
   font-weight: 600;
+  color: var(--color-h2);
+  margin: 0 0 var(--space-2) 0;
+  line-height: var(--leading-tight);
 }
 
-.card {
-  position: relative;
-  border-radius: 0px;
-  margin-bottom: 8px;
-}
-
-.text-h3 {
-  font-size: 20px;
-  color: var(--color-text);
+.post-excerpt {
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
   margin: 0;
-  font-weight: 600;
 }
 
-.right-content {
-  padding-bottom: 2px;
-  padding-left: 10px;
+/* --- POST META --- */
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-shrink: 0;
 }
 
-@media (max-width: 768px) {
-  .section-headers {
+.post-date {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.post-arrow {
+  font-family: var(--font-mono);
+  color: var(--color-text-muted);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: all var(--transition-fast);
+}
+
+.post-item:hover .post-arrow {
+  opacity: 1;
+  transform: translateX(0);
+  color: var(--color-accent-primary);
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 600px) {
+  .post-item {
     flex-direction: column;
-    gap: 20px;
-    text-align: center;
+    gap: var(--space-3);
   }
-  .card {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+  
+  .post-meta {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .page-header {
+    padding: var(--space-6) 0 var(--space-8);
+  }
+  
+  .page-title {
+    font-size: var(--text-3xl);
   }
 }
 
+/* Utility */
+.mono {
+  font-family: var(--font-mono);
+}
 </style>

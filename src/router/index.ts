@@ -16,6 +16,7 @@ import ProjectTripodPage from '@/views/projects/tripod.vue'
 import ProjectCarwennanPage from '@/views/projects/carwennan.vue'
 import ProjectHomeAutomationPage from '@/views/projects/home_automation.vue'
 import ProjectJumpingLegPage from '@/views/projects/jumping_leg.vue'
+import Project3DPrintingPage from '@/views/projects/3d_printing.vue'
 
 import BlogProbabilityDistributionPage from '@/views/blog/probability-distribution.vue'
 import BlogSettersMindsetPage from '@/views/blog/setters-mindset.vue'
@@ -104,10 +105,19 @@ const router = createRouter({
                 projects: "/projects",
             }
         },
-        {
-            path: '/projects/jumping_leg',
-            name: 'ProjectJumpingLeg',
-            component: ProjectJumpingLegPage,
+          {
+              path: '/projects/jumping_leg',
+              name: 'ProjectJumpingLeg',
+              component: ProjectJumpingLegPage,
+              meta: {
+                  home: "/",
+                  projects: "/projects",
+              }
+          },
+          {
+            path: '/projects/3d_printing',
+            name: 'Project3DPrinting',
+            component: Project3DPrintingPage,
             meta: {
                 home: "/",
                 projects: "/projects",

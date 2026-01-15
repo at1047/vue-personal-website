@@ -1,4 +1,3 @@
-
 ## Executive Summary
 
 Clarent is a split, tented, columnar keyboard with a bistable compliant mechanism that physically shifts between typing and gaming layouts. <span class="hide-on-mobile">This implementation allows the entire left-hand key matrix to physically shift with a satisfying and tactile click, to switch between a standard ASDF layout for typing and a WASD-optimized layout for gaming. The project integrates ergonomic analysis, compliant mechanism design, and DFM-conscious mechanical engineering to produce a fully 3D-printable, modular input device.</span>
@@ -9,9 +8,9 @@ Clarent is a split, tented, columnar keyboard with a bistable compliant mechanis
 
 ## My journey and problems I found
 
-I type a lot. I also game. I got my first split keyboard in 2021, the Keebio Iris. It was split, columnar, tented, a significant step up for typing. However, as I used it more, I began noticing some problems and making adjustments.
+I type a lot. I also game. I got my first split keyboard in 2021, the Keebio Iris. It was split, columnar, tented [[1]](#appendix), a significant step up for typing. However, as I used it more, I began noticing some problems and making adjustments.
 
-*(explanation of terms in appendix)*
+<!-- *(explanation of terms in [[#Appendix|appendix]].)* -->
 
 Firstly, Columnar keyboards are optimized around assuming the user has a fixed home-row. While gaming, the home position shifts from ASDF to WASD, throwing off finger alignment (e.g., the index finger moves from F to D).
 

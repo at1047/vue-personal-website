@@ -1,43 +1,69 @@
 <template>
-  <header>
-  </header>
-  <body>
-
+  <div class="app-container">
     <transition name="slide">
       <SlideMenu v-show="showSlideMenu" v-on:close-slide="closeSlideMenu()"></SlideMenu>
     </transition>
-    <nav>
-      <div class="nav-bar nav-bar-left">
-        <!-- <span class="nav-icons" v-on:click="openSlideMenu()"><font-awesome-icon icon="fa-bars" /></span> -->
-        <Breadcrumbs :breadcrumbArr="breadcrumbArr" />
-      </div>
-      <div class="nav-bar nav-bar-center">
-        <router-link class="nav-text" to="/">Home</router-link>
-        <router-link class="nav-text" to="/projects">Projects</router-link>
-        <!--<router-link class="nav-text" to="/editor">Editor</router-link>-->
-        <router-link class="nav-text" to="/blog">Blog</router-link>
-        <!--<router-link class="nav-text" to="/recipes">Recipes</router-link>-->
-
-      </div>
-      <div class="nav-bar nav-bar-right">
-        <a class="nav-icons" href="https://github.com/at1047" target="_blank"><font-awesome-icon icon="fa-brands fa-github" /></a>
-        <!--<a class="nav-icons" href="https://www.youtube.com/channel/UCSjOvYqYrVd5-d78yg-Cvlw" target="_blank"><font-awesome-icon icon="fa-brands fa-youtube" /></a>-->
-        <!--<a class="nav-icons" :href="mailtoHref"><font-awesome-icon icon="fa-envelope" /></a>-->
-        <ThemeToggle />
+    
+    <!-- Navigation Bar -->
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+      <div class="nav-inner">
+        <!-- Left: Breadcrumbs with terminal aesthetic -->
+        <div class="nav-section nav-left">
+          <Breadcrumbs :breadcrumbArr="breadcrumbArr" />
+        </div>
+        
+        <!-- Center: Main navigation links -->
+        <div class="nav-section nav-center">
+          <router-link 
+            v-for="link in navLinks" 
+            :key="link.to"
+            :to="link.to" 
+            class="nav-link"
+            :class="{ 'nav-link-active': isActiveRoute(link.to) }"
+          >
+            <span class="nav-link-text">{{ link.label }}</span>
+          </router-link>
+        </div>
+        
+        <!-- Right: External links and theme toggle -->
+        <div class="nav-section nav-right">
+          <a 
+            class="nav-icon-link" 
+            href="https://github.com/at1047" 
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub profile"
+            title="GitHub"
+          >
+            <font-awesome-icon icon="fa-brands fa-github" />
+          </a>
+          <ThemeToggle />
+        </div>
       </div>
     </nav>
-    <div id="nav-underline"></div>
-
+    
+    <!-- Nav underline with subtle gradient accent -->
+    <div class="nav-border"></div>
+    
+    <!-- Main content area -->
     <main class="main-content">
       <div class="main-content-inner">
         <RouterView />
       </div>
     </main>
-  </body>
+    
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-inner">
+        <span class="footer-text">© {{ currentYear }} Andrew Tai</span>
+        <span class="footer-separator">·</span>
+        <span class="footer-text mono">Built with precision</span>
+      </div>
+    </footer>
+  </div>
 </template>
 
 <script>
-
 import { defineComponent } from 'vue';
 import { RouterLink, RouterView } from 'vue-router'
 import SlideMenu from './components/SlideMenu.vue'
@@ -56,84 +82,64 @@ export default defineComponent({
   data() {
     return {
       showSlideMenu: false,
-      contactEmail: import.meta.env.VITE_CONTACT_EMAIL || ''
+      contactEmail: import.meta.env.VITE_CONTACT_EMAIL || '',
+      navLinks: [
+        { to: '/', label: 'Home', key: 'H' },
+        { to: '/projects', label: 'Projects', key: 'P' },
+        { to: '/blog', label: 'Blog', key: 'B' },
+      ]
     }
   },
   computed: {
+    currentYear() {
+      return new Date().getFullYear();
+    },
     mailtoHref() {
       return this.contactEmail ? `mailto:${this.contactEmail}` : 'mailto:';
     },
     breadcrumbArr() {
       const route = this.$route;
-      // 1. Initialize with Home and any meta breadcrumbs
-      // const base = { home: '/', ...(route.meta || {}) };
       const base = { home: '/'};
       let lastKey = '';
 
-      // 2. NEW: Handle Projects and all nested subpages (Dynamic Loop)
-      // This covers "Projects", "ProjectDetails", "ProjectSettings", etc.
       if (
         route.name === 'Projects' || 
-          (typeof route.name === 'string' && route.name.startsWith('Project'))
+        (typeof route.name === 'string' && route.name.startsWith('Project'))
       ) {
-        // Split path into parts: ['', 'projects', 'my-app', 'details']
         const segments = route.path.split('/').filter(Boolean);
 
-        if (segments.length >= 3) 
-        {
-          // A. Create the parent path (Up one level)
-          //    Take all segments except the last one and join them.
+        if (segments.length >= 3) {
           const parentPath = '/' + segments.slice(0, -1).join('/');
-
-          // B. Add the "..." breadcrumb
-          //    This key displays as "..." and links to the parent folder.
           base['...'] = parentPath;
-
-          // C. Add the last file name (Current Page)
           const lastSegment = segments[segments.length - 1];
           base[lastSegment] = route.path;
-
-
         } else {
           Object.assign(base, route.meta || {});
           let currentPath = '';
-          console.log(segments)
           segments.forEach(segment => {
             currentPath += `/${segment}`;
-            console.log(`seg: ${segment}, currpath: ${currentPath}`)
-
-            // Only add if not already in base (prevents overwriting 'home' or meta)
             if (!Object.prototype.hasOwnProperty.call(base, segment)) {
-              // key = display text (e.g. 'my-app'), value = link (e.g. '/projects/my-app')
               base[segment] = currentPath; 
             }
           });
-
         }
-        // Note: We don't set 'lastKey' here because the loop added everything to 'base' directly.
       } 
-
-      // 3. Existing logic for other routes (Blog, Recipes)
       else if (route.name === 'Blog') {
-          Object.assign(base, route.meta || {});
+        Object.assign(base, route.meta || {});
         lastKey = 'blog';
       } else if (typeof route.name === 'string' && route.name.startsWith('Blog')) {
-          Object.assign(base, route.meta || {});
+        Object.assign(base, route.meta || {});
         const segments = route.path.split('/').filter(Boolean);
         lastKey = segments[segments.length - 1] || '';
       } else if (route.name === 'Recipes') {
-          Object.assign(base, route.meta || {});
+        Object.assign(base, route.meta || {});
         lastKey = 'recipes';
       } 
-      // No need to check Home explicitly if base already has it, 
-      // but keeping your logic safe:
       else if (route.name === 'Home') {
-          Object.assign(base, route.meta || {});
-        // 'home' is already in base, so this effectively does nothing, which is fine
+        Object.assign(base, route.meta || {});
         lastKey = 'home';
       }
 
-      // 4. Add the single lastKey (for Blog/Recipes logic)
       if (lastKey && !Object.prototype.hasOwnProperty.call(base, lastKey)) {
         base[lastKey] = route.path;
       }
@@ -141,159 +147,249 @@ export default defineComponent({
       return base;
     }
   },
+  mounted() {
+    // Keyboard navigation for power users
+    document.addEventListener('keydown', this.handleKeyboardNav);
+  },
+  beforeUnmount() {
+    document.removeEventListener('keydown', this.handleKeyboardNav);
+  },
   methods: {
-    openSlideMenu(){
+    handleKeyboardNav(e) {
+      // Only trigger with Alt/Option key to avoid conflicts
+      if (!e.altKey || e.ctrlKey || e.metaKey) return;
+      
+      const key = e.key.toUpperCase();
+      const link = this.navLinks.find(l => l.key === key);
+      
+      if (link && this.$route.path !== link.to) {
+        e.preventDefault();
+        this.$router.push(link.to);
+      }
+    },
+    isActiveRoute(path) {
+      if (path === '/') {
+        return this.$route.path === '/';
+      }
+      return this.$route.path.startsWith(path);
+    },
+    openSlideMenu() {
       this.$emit('open-slide');
       this.showSlideMenu = true;
     },
-    closeSlideMenu(){
+    closeSlideMenu() {
       this.showSlideMenu = false;
     }
   },
 })
-
 </script>
 
 <style scoped>
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
-/*
+/* --- NAVIGATION --- */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--color-nav);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-3) var(--space-6);
+  height: 56px;
+}
+
+.nav-section {
+  display: flex;
+  align-items: center;
+}
+
+.nav-left {
+  flex: 1;
+  min-width: 0;
+}
+
+.nav-center {
+  display: flex;
+  gap: var(--space-1);
+}
+
+.nav-right {
+  flex: 1;
+  justify-content: flex-end;
+  gap: var(--space-6);
+}
+
+/* Navigation links */
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.nav-link:hover {
+  color: var(--color-text-primary);
+  background-color: var(--color-hover-bg);
+}
+
+.nav-link-active {
+  color: var(--color-text-primary);
+}
+
+.nav-link-active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: var(--space-3);
+  right: var(--space-3);
+  height: 2px;
+  background-color: var(--color-accent-primary);
+  border-radius: 1px;
+}
+
+/* Icon links - match ThemeToggle styling */
+.nav-icon-link,
+.nav-icon-link:visited {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  font-size: var(--text-xl);
+  background: transparent;
+  transition: all var(--transition-fast);
+}
+
+.nav-icon-link:hover {
+  color: var(--color-text-primary);
+  background-color: var(--color-hover-bg);
+}
+
+/* Nav border */
+.nav-border {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-border) 20%,
+    var(--color-border) 80%,
+    transparent
+  );
+}
+
+/* --- MAIN CONTENT --- */
 .main-content {
-display: flex;
-justify-content: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .main-content-inner {
-width: 800px;
-}
-*/
-
-nav {
-  display: inline-grid;
-  grid-template-columns: 1fr 1.5fr 1fr;
-  width: 100%;
-  height: 50px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  position:relative;
+  flex: 1;
+  width: min(800px, calc(100% - 2rem));
+  margin: 1rem auto;
+  min-height: 100px; /* Ensure container has minimum height */
 }
 
-
-
-a {
-  display: grid;
-  align-items: center;
-}
-
-button {
-  background: -webkit-linear-gradient(0deg, var(--color-gradient-pink-start), var(--color-gradient-pink-end));
-  padding: 0 5px;
-  border-radius: 5px;
-  border: 0;
-}
-
-#nav-underline {
+/* Ensure child views are visible */
+.main-content-inner > * {
   display: block;
-  width: 100%;
-  height: 1.5px;
-  background: var(--color-background-light);
 }
 
-.nav-icons {
-  font-size: 24px;
+/* --- FOOTER --- */
+.footer {
+  margin-top: auto;
+  padding: var(--space-6) var(--space-4);
+  border-top: 1px solid var(--color-border-subtle);
 }
 
-.nav-icons:hover {
-  cursor: pointer;
-  color: var(--color-background);
-}
-
-.nav-text {
-  font-size: 16px;
-  font-weight: 400;
-}
-
-/*
-.nav-icons,
-.nav-text {
-  transition: color 0.5s ease-in-out;
-  color: var(--color-text);
-}
-*/
-
-nav {
-  background-color: var(--color-nav);
-}
-
-.nav-bar {
-  box-sizing: border-box;
-}
-
-
-.nav.router-link-exact-active {
-  opacity: 0.5;
-  color: var(--color-text-gray);
-  cursor: default;
-}
-
-.nav-bar-left {
-  width: 400px;
+.footer-inner {
   display: flex;
   align-items: center;
-  padding-left: 40px;
-  border-left: none;
-}
-.nav-bar-center {
-  width: 600px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 10px 70px;
-}
-.nav-bar-right {
-  width: 400px;
-  display: flex;
-  justify-content: right;
-  gap: 50px;
-  align-items: center;
-  padding: 10px 60px;
-
+  justify-content: center;
+  gap: var(--space-3);
 }
 
+.footer-text {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.footer-text.mono {
+  font-family: var(--font-mono);
+}
+
+.footer-separator {
+  color: var(--color-text-faint);
+}
+
+/* --- TRANSITIONS --- */
+.slide-enter-active,
+.slide-leave-active {
+  transition: transform 0.3s ease;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+  transform: translateX(-100%);
+}
+
+/* --- RESPONSIVE --- */
 @media (max-width: 800px) {
-
-  .nav-bar-left {
+  .nav-inner {
+    padding: var(--space-3) var(--space-4);
+  }
+  
+  .nav-left {
     display: none;
   }
-  .nav-bar-center {
-    flex-basis: 100%;
-    padding: 10px 40px;
+  
+  .nav-center {
+    flex: 1;
+    justify-content: center;
   }
-  .nav-bar-right {
-    display: none;
+  
+  .nav-right {
+    flex: 0;
   }
 }
 
-/*
-.nav-bar-contacts,
-.nav-bar-socials {
-flex-grow: 1;
+@media (max-width: 500px) {
+  .nav-link {
+    padding: var(--space-2);
+    font-size: var(--text-xs);
+  }
+  
+  .nav-right {
+    gap: var(--space-3);
+  }
+  
+  .nav-icon-link {
+    width: 32px;
+    height: 32px;
+    font-size: var(--text-lg);
+  }
 }
-.nav-bar-socials {
-display: flex;
-align-items: center;
-justify-content: space-around;
-padding-left: 50px;
-padding-right: 50px;
-}
-
-.nav-bar-contacts {
-display: flex;
-align-items: center;
-justify-content: space-around;
-}
-*/
-
-
-
 </style>

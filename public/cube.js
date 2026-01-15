@@ -14,14 +14,14 @@ const delay = 65;
 // const canvasHeight = 36;
 
 
-const canvasWidth = 49;
-const canvasHeight = 26;
+const canvasWidth = 30;
+const canvasHeight = 16;
 
-const cubeWidth = 13;
-const distanceFromCam = 80;
-const K1 = 40;
+const cubeWidth = 8;
+const distanceFromCam = 60;
+const K1 = 26;
 const horizontalOffset = 0;
-const incrementSpeed = 0.5;
+const incrementSpeed = 0.3;
 
 var buffer = new Array(canvasHeight);
 for (var y = 0; y < canvasHeight; y++) {

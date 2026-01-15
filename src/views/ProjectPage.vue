@@ -1,476 +1,387 @@
 <template>
+  <div class="projects-page">
+    <!-- Page Header -->
+    <header class="page-header">
+      <h1 class="page-title">Projects</h1>
+      <p class="page-description">
+        A collection of hardware and software projects — keyboards, robotics, embedded systems, and tools.
+      </p>
+    </header>
 
-  <div class="section-headers">
-    <h2 class="section-title">Projects</h2>
-  </div>
-  <div class="projects-container">
-    <div v-if="loading" class="loading-message">
-      <p>Loading projects...</p>
+    <!-- Loading State -->
+    <div v-if="loading" class="loading-state">
+      <span class="loading-text mono">Loading projects...</span>
     </div>
-    <ul class="projects-list">
-      <li v-for="project in allProjects" :key="project.id" class="project-item">
-        <router-link v-if="project.route" :to="project.route" class="project-link">
-          <img v-if="project.icon" :src="project.icon" :alt="project.title + ' icon'" class="project-icon" :class="{ 'tripod-icon': project.id === 'tripod' }" />
-          <div class="project-content">
-            <h3 class="project-title">{{ project.title }}</h3>
-            <p class="project-description hide-on-mobile">{{ project.description }}</p>
-            <p class="project-tech">Tech used: {{ project.technologies }}</p>
-          </div>
-        </router-link>
-        <!--
-        <div v-else @click="openPopup(project.id)" class="project-link project-clickable">
-          <img v-if="project.icon" :src="project.icon" :alt="project.title + ' icon'" class="project-icon" :class="{ 'tripod-icon': project.id === 'tripod' }" />
-          <div class="project-content">
-            <h3 class="project-title">{{ project.title }}</h3>
-            <p class="project-description">{{ project.description }}</p>
-            <p class="project-tech">Tech used: {{ project.technologies }}</p>
+
+    <!-- Projects List -->
+    <div class="projects-list">
+      <template v-for="project in allProjects" :key="project.id">
+        <router-link 
+          v-if="project.route"
+          :to="project.route" 
+          class="project-item"
+        >
+        <!-- Project Image -->
+        <div class="project-image-wrapper">
+          <img 
+            v-if="project.icon" 
+            :src="project.icon" 
+            :alt="project.title + ' preview'" 
+            class="project-image"
+            loading="lazy"
+          />
+          <div v-else class="project-image-placeholder">
+            <span class="placeholder-icon">◈</span>
           </div>
         </div>
-        -->
-      </li>
-    </ul>
-  </div>
-
-  <!-- Project Popup Modal -->
-
-  <!--
-  <div v-if="showPopup" class="popup-overlay" @click="closePopup">
-    <div class="popup-content" @click.stop>
-      <div class="popup-header">
-        <h2>{{ popupProject.title }}</h2>
-        <button class="popup-close" @click="closePopup">&times;</button>
-      </div>
-      <div class="popup-body">
-        <p><strong>Description:</strong> {{ popupProject.description }}</p>
-        <p><strong>Technologies:</strong> {{ popupProject.technologies }}</p>
-        <div v-if="popupProject.details" class="popup-details">
-          <h3>Additional Details</h3>
-          <div class="popup-details-content" v-html="formatDetails(popupProject.details)"></div>
+        
+        <!-- Project Content -->
+        <div class="project-content">
+          <h2 class="project-title">{{ project.title }}</h2>
+          <p class="project-description">{{ project.description }}</p>
+          
+          <!-- Tech Stack -->
+          <div class="project-meta">
+            <div class="tech-list" v-if="project.technologies">
+              <span 
+                v-for="tech in parseTech(project.technologies)" 
+                :key="tech"
+                class="tech-tag"
+              >
+                {{ tech }}
+              </span>
+            </div>
+          </div>
         </div>
-      </div>
+      </router-link>
+      </template>
+    </div>
+    
+    <!-- Empty State -->
+    <div v-if="!loading && allProjects.length === 0" class="empty-state">
+      <p class="empty-text">No projects found.</p>
     </div>
   </div>
-  -->
 </template>
 
 <script>
-
 import { defineComponent } from 'vue';
-// import axios from 'axios';
-import { RouterLink, RouterView } from 'vue-router'
-
-// console.log(import.meta.env)
+import { RouterLink } from 'vue-router'
 
 export default defineComponent({
-name: 'Projects',
-components: {
-//    RouterView,
-RouterLink,
-},
-data() {
-return {
-showPopup: false,
-popupProject: {
-title: '',
-description: '',
-technologies: '',
-status: '',
-details: ''
-},
-popupProjects: [],
-loading: true,
-// Static projects with routes
-staticProjects: [
-{
-id: 'clarent',
-title: 'Clarent',
-description: 'A Split, Tented, Columnar, Bistable, Ergonomic Keyboard for Typing & Gaming',
-technologies: 'CAD, C++, Kicad',
-route: '/projects/clarent',
-icon: '/images/clarent_icon.jpg'
-},
-{
-id: 'jumping_leg',
-title: 'Jumping Leg',
-description: 'A jumping robotic leg using a Input-Output Linearization Controller',
-technologies: '',
-route: '/projects/jumping_leg',
-icon: '/images/jumping_leg_icon.png'
-},
-{
-id: 'tripod',
-title: 'Tripod',
-description: 'An indestructible tripod for recording volleyball',
-technologies: 'CAD, FEA (ANSYS)',
-route: '/projects/tripod',
-icon: '/images/tripod_icon.jpeg'
-},
-{
-id: 'carwennan',
-title: 'Carwennan',
-description: 'Portable Ergonomic Keyboard (WIP)',
-technologies: 'CAD, C++, Kicad',
-route: '/projects/carwennan',
-icon: '/images/carwennan_icon_1.png'
-},
-{
-id: 'home_automation',
-title: 'Home Automation',
-description: 'IoT solutions for smart home control and weather monitoring',
-technologies: 'Go, Arduino, ESP8266, Docker',
-route: '/projects/home_automation',
-icon: '/images/home_automation_icon.jpg'
-}
-]
-};
-},
-computed: {
-allProjects() {
-return [...this.staticProjects, ...this.popupProjects];
-}
-},
-methods: {
-openPopup(projectId) {
-const project = this.popupProjects.find(p => p.id === projectId);
-if (project) {
-this.popupProject = {
-title: project.title,
-description: project.description,
-technologies: project.technologies,
-status: project.status,
-details: project.details
-};
-this.showPopup = true;
-}
-},
-closePopup() {
-this.showPopup = false;
-},
-formatDetails(details) {
-if (!details) return '';
-
-// Convert line breaks to <br> tags and handle bullet points
-let formatted = details
-.replace(/\n\n/g, '</p><p>') // Double line breaks = new paragraphs
-.replace(/\n/g, '<br>')      // Single line breaks = line breaks
-.replace(/• /g, '&bull; ')   // Convert bullet points to HTML entities
-.replace(/^/, '<p>')         // Start with opening paragraph tag
-.replace(/$/, '</p>');       // End with closing paragraph tag
-
-// Handle image tags - convert [img:filename] or [img:filename:height] to proper img tags
-formatted = formatted.replace(/\[img:([^:\]]+)(?::(\d+))?\]/g, (match, filename, height) => {
-const heightStyle = height ? `style="height: ${height}px;"` : '';
-// Automatically prepend images/ to the path
-const imagePath = filename.startsWith('images/') ? filename : `images/${filename}`;
-return `<div class="popup-image-container"><img src="/${imagePath}" alt="Project image" class="popup-image" ${heightStyle} /></div>`;
-});
-
-return formatted;
-}
-},
-async created() {
-try {
-const response = await fetch('/popupProjects.json');
-this.popupProjects = await response.json();
-} catch (error) {
-console.error('Error loading popup projects:', error);
-// Fallback to empty array if JSON fails to load
-this.popupProjects = [];
-}
-this.loading = false;
-},
+  name: 'Projects',
+  components: {
+    RouterLink,
+  },
+  data() {
+    return {
+      showPopup: false,
+      popupProject: {
+        title: '',
+        description: '',
+        technologies: '',
+        status: '',
+        details: ''
+      },
+      popupProjects: [],
+      loading: true,
+      staticProjects: [
+        {
+          id: 'clarent',
+          title: 'Clarent',
+          description: 'A split, tented, columnar ergonomic keyboard with a bistable mechanism designed for both typing and gaming',
+          technologies: 'CAD, C++, KiCad, PCB Design',
+          route: '/projects/clarent',
+          icon: '/images/clarent_icon.jpg'
+        },
+        {
+          id: 'jumping_leg',
+          title: 'Jumping Leg',
+          description: 'A jumping robotic leg using Input-Output Linearization control for dynamic locomotion',
+          technologies: 'Controls, Dynamics, Simulation, MATLAB',
+          route: '/projects/jumping_leg',
+          icon: '/images/jumping_leg_icon.png'
+        },
+          {
+            id: 'tripod',
+            title: 'Tripod',
+            description: 'An indestructible camera tripod designed for recording volleyball matches with FEA-validated durability',
+            technologies: 'CAD, FEA (ANSYS), DFM',
+            route: '/projects/tripod',
+            icon: '/images/tripod_icon.jpeg'
+          },
+          {
+            id: '3d_printing',
+            title: '3D Printing',
+            description: 'A collection of 3D printing projects',
+            technologies: 'CAD, 3D Printing',
+            route: '/projects/3d_printing',
+            icon: '/images/3d_printing_icon.jpg'
+          },
+        {
+          id: 'carwennan',
+          title: 'Carwennan',
+          description: 'A portable ergonomic keyboard optimized for travel without compromising on split layout',
+          technologies: 'CAD, C++, KiCad',
+          route: '/projects/carwennan',
+          icon: '/images/carwennan_icon_1.png'
+        },
+        {
+          id: 'home_automation',
+          title: 'Home Automation',
+          description: 'IoT infrastructure for smart home control, weather monitoring, and environmental sensing',
+          technologies: 'Go, Arduino, ESP8266, Docker',
+          route: '/projects/home_automation',
+          icon: '/images/home_automation_icon.jpg'
+        }
+      ]
+    };
+  },
+  computed: {
+    allProjects() {
+      return [...this.staticProjects, ...this.popupProjects];
+    }
+  },
+  methods: {
+    parseTech(techString) {
+      if (!techString) return [];
+      return techString.split(',').map(t => t.trim()).filter(t => t);
+    },
+    openPopup(projectId) {
+      const project = this.popupProjects.find(p => p.id === projectId);
+      if (project) {
+        this.popupProject = {
+          title: project.title,
+          description: project.description,
+          technologies: project.technologies,
+          status: project.status,
+          details: project.details
+        };
+        this.showPopup = true;
+      }
+    },
+    closePopup() {
+      this.showPopup = false;
+    },
+    formatDetails(details) {
+      if (!details) return '';
+      let formatted = details
+        .replace(/\n\n/g, '</p><p>')
+        .replace(/\n/g, '<br>')
+        .replace(/• /g, '&bull; ')
+        .replace(/^/, '<p>')
+        .replace(/$/, '</p>');
+      formatted = formatted.replace(/\[img:([^:\]]+)(?::(\d+))?\]/g, (match, filename, height) => {
+        const heightStyle = height ? `style="height: ${height}px;"` : '';
+        const imagePath = filename.startsWith('images/') ? filename : `images/${filename}`;
+        return `<div class="popup-image-container"><img src="/${imagePath}" alt="Project image" class="popup-image" ${heightStyle} /></div>`;
+      });
+      return formatted;
+    }
+  },
+  async created() {
+    try {
+      const response = await fetch('/popupProjects.json');
+      this.popupProjects = await response.json();
+    } catch (error) {
+      console.error('Error loading popup projects:', error);
+      this.popupProjects = [];
+    }
+    this.loading = false;
+  },
 });
 </script>
 
-
 <style scoped>
-
-
-.section-headers {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 30px;
-  position: relative;
-  z-index: 3;
+.projects-page {
+  padding-bottom: var(--space-16);
 }
 
-.section-title {
-  font-size: 32px;
-  margin: 0;
-  text-align: center;
+/* --- PAGE HEADER --- */
+.page-header {
+  padding: var(--space-4) 0 var(--space-3);
+  border-bottom: 1px solid var(--color-border-subtle);
+  margin-bottom: var(--space-6);
+}
+
+.page-title {
+  font-size: var(--text-3xl);
+  font-weight: 700;
   color: var(--color-h1);
-  font-weight: 600;
+  margin-bottom: var(--space-2);
 }
 
-.projects-container {
-  margin-bottom: 60px;
+.page-description {
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  max-width: 800px;
+  line-height: var(--leading-relaxed);
 }
 
+/* --- LOADING STATE --- */
+.loading-state {
+  padding: var(--space-12) 0;
+  text-align: center;
+}
+
+.loading-text {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+/* --- PROJECTS LIST --- */
 .projects-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--space-2);
 }
 
 .project-item {
-  margin: 0;
-  padding: 0;
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  background: var(--color-card-background);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+  align-items: center;
 }
 
-.project-link {
+.project-item:hover {
+  border-color: var(--color-border);
+  background: var(--color-card-background-hover);
+}
+
+/* --- PROJECT IMAGE --- */
+.project-image-wrapper {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-secondary);
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.project-item:hover .project-image {
+  transform: scale(1.03);
+}
+
+.project-image-placeholder {
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
-  gap: 15px;
-  background-color: var(--color-menu-item);
-  border-radius: 8px;
-  padding: 8px 8px;
-  transition: background-color 100ms ease-out;
-  text-decoration: none;
-  color: inherit;
+  justify-content: center;
+  background: var(--color-bg-tertiary);
 }
 
-.project-link:hover {
-  background-color: var(--color-menu-item-hover);
+.placeholder-icon {
+  font-size: var(--text-3xl);
+  color: var(--color-text-faint);
 }
 
-.project-clickable {
-  cursor: pointer;
-}
-
-.project-icon {
-  width: 160px;
-  height: 110px;
-  object-fit: cover;
-  border-radius: 5px;
-  flex-shrink: 0;
-}
-
-.project-icon.tripod-icon {
-  filter: brightness(0.9);
-}
-
+/* --- PROJECT CONTENT --- */
 .project-content {
-  flex: 1;
+  display: flex;
   flex-direction: column;
+  gap: var(--space-1);
   min-width: 0;
-  text-align: left;
 }
 
 .project-title {
-  font-size: 20px;
-  color: var(--color-h2);
-  margin: 0 0 8px 0;
+  font-size: var(--text-lg);
   font-weight: 600;
+  color: var(--color-h2);
+  margin: 0;
+  line-height: var(--leading-tight);
 }
 
 .project-description {
-  font-size: 14px;
-  color: var(--color-text);
-  margin: 0 0 4px 0;
-  line-height: 1.4;
-}
-
-.project-tech {
-  font-size: 14px;
-  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-normal);
   margin: 0;
-  line-height: 1.3;
 }
 
-.loading-message {
-  text-align: center;
-  padding: 20px;
+/* --- PROJECT META --- */
+.project-meta {
+  margin-top: var(--space-1);
+}
+
+.tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.tech-tag {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  padding: var(--space-1) var(--space-2);
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-sm);
   color: var(--color-text-muted);
-  font-style: italic;
+  transition: all var(--transition-fast);
 }
 
-@media (max-width: 500px) {
-  .hide-on-mobile {
-    display: none !important;
-  }
+.project-item:hover .tech-tag {
+  border-color: var(--color-border);
+}
 
-  .projects-list {
-    gap: 10px;
-  }
+/* --- EMPTY STATE --- */
+.empty-state {
+  padding: var(--space-12) 0;
+  text-align: center;
+}
 
-  .project-link {
-    align-items: start; 
-    padding: 8px 8px;
-  }
+.empty-text {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
 
-  .project-icon {
-    width: 100px;
-    height: 80px;
+/* --- RESPONSIVE --- */
+@media (max-width: 600px) {
+  .project-item {
+    grid-template-columns: 100px 1fr;
+    gap: var(--space-2);
   }
-
+  
   .project-title {
-    font-size: 18px;
+    font-size: var(--text-base);
   }
-
-  .project-description,
-  .project-tech {
-    font-size: 13px;
-  }
-}
-
-/* Popup Modal Styles */
-.popup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  backdrop-filter: blur(2px);
-}
-
-.popup-content {
-  background-color: var(--color-card-background);
-  border-radius: 10px;
-  padding: 0;
-  width: 80%;
-  height: 80%;
-  max-width: none;
-  max-height: none;
-  overflow-y: auto;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  border: 1px solid var(--color-background-light);
-}
-
-/* Dark mode shadow - lighter shadow for dark backgrounds */
-.dark-mode .popup-content {
-  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
-}
-
-.popup-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 25px;
-  border-bottom: 1px solid var(--color-background-light);
-  background-color: var(--color-menu-item);
-  border-radius: 10px 10px 0 0;
-}
-
-.popup-header h2 {
-  margin: 0;
-  color: var(--color-text-tertiary);
-  font-size: 24px;
-  font-weight: 600;
-}
-
-.popup-close {
-  background: none;
-  border: none;
-  font-size: 28px;
-  color: var(--color-text-muted);
-  cursor: pointer;
-  padding: 0;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  transition: background-color 0.2s ease;
-}
-
-.popup-close:hover {
-  background-color: var(--color-menu-item-hover);
-}
-
-.popup-body {
-  padding: 25px;
-}
-
-.popup-body p {
-  margin-bottom: 15px;
-  line-height: 1.6;
-  color: var(--color-text);
-}
-
-.popup-body strong {
-  color: var(--color-text-tertiary);
-  font-weight: 600;
-}
-
-.popup-details {
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 1px solid var(--color-background-light);
-}
-
-.popup-details h3 {
-  margin: 0 0 10px 0;
-  color: var(--color-text-tertiary);
-  font-size: 18px;
-  font-weight: 600;
-}
-
-.popup-details-content {
-  line-height: 1.6;
-}
-
-.popup-details-content p {
-  margin: 0 0 15px 0;
-  color: var(--color-text);
-}
-
-.popup-details-content p:last-child {
-  margin-bottom: 0;
-}
-
-.popup-image-container {
-  margin: 15px 0;
-  text-align: center;
-}
-
-.popup-image {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  border: 1px solid var(--color-background-light);
-  object-fit: contain;
-}
-
-/* Fixed height images */
-.popup-image[style*="height:"] {
-  width: auto;
-  max-width: 100%;
-  object-fit: contain;
-}
-
-.dark-mode .popup-image {
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
-}
-
-/* Responsive popup */
-@media (max-width: 768px) {
-  .popup-content {
-    width: 95%;
-    height: 90%;
-    margin: 20px;
-  }
-
-  .popup-header {
-    padding: 15px 20px;
-  }
-
-  .popup-header h2 {
-    font-size: 20px;
-  }
-
-  .popup-body {
-    padding: 20px;
+  
+  .project-description {
+    font-size: var(--text-xs);
   }
 }
 
+@media (max-width: 450px) {
+  .project-item {
+    grid-template-columns: 80px 1fr;
+  }
+  
+  .project-image-wrapper {
+    aspect-ratio: 1/1;
+  }
+  
+  .page-header {
+    padding: var(--space-3) 0 var(--space-2);
+  }
+  
+  .page-title {
+    font-size: var(--text-2xl);
+  }
+}
+
+/* Utility */
+.mono {
+  font-family: var(--font-mono);
+}
 </style>
