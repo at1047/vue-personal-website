@@ -110,14 +110,14 @@ export default defineComponent({
             route: '/projects/tripod',
             icon: '/images/tripod_icon.jpeg'
           },
-          {
-            id: '3d_printing',
-            title: '3D Printing',
-            description: 'A collection of 3D printing projects',
-            technologies: 'CAD, 3D Printing',
-            route: '/projects/3d_printing',
-            icon: '/images/3d_printing_icon.jpg'
-          },
+          // {
+          //   id: '3d_printing',
+          //   title: '3D Printing',
+          //   description: 'A collection of 3D printing projects',
+          //   technologies: 'CAD, 3D Printing',
+          //   route: '/projects/3d_printing',
+          //   icon: '/images/3d_printing_icon.jpg'
+          // },
         {
           id: 'carwennan',
           title: 'Carwennan',

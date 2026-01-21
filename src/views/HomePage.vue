@@ -15,8 +15,7 @@
           <p class="hero-title">Robotics Engineer</p>
           
           <p class="hero-description">
-            I bridge the gap between mechanical engineering and production software. From quadrotor research at UC Berkeley to ergonomic input devices to purpose-built developer tools, my work focuses on engineering discipline and long-term maintainability.
-          </p>
+            My experiences spans the lifecycle of robotics systems, synthesizing between mechanical design, control theory, and software implementation. From quadrotor research at UC Berkeley to ergonomic input devices to industry scale software, I apply engineering disciplines to build elegant, robust, and maintainable solutions.</p>
           
           <!-- Quick links styled like terminal commands -->
           <div class="hero-links">

@@ -81,7 +81,7 @@
   font-weight: 600;
   margin-top: var(--space-8, 2rem);
   margin-bottom: var(--space-3, 0.75rem);
-  color: var(--color-h2, #292524);
+  color: #A7C080;  /* Everforest green */
   text-align: left;
   letter-spacing: -0.01em;
   padding-bottom: var(--space-2, 0.5rem);
@@ -97,7 +97,7 @@
   font-weight: 600;
   margin-top: var(--space-6);
   margin-bottom: var(--space-2);
-  color: var(--color-h3);
+  color: #7FBBB3;  /* Everforest blue */
 }
 
 .markdown h4 {
@@ -175,6 +175,17 @@
 
 .markdown a.anchor-link:hover {
   border-bottom-style: solid;
+}
+
+/* Footnote references - bracketed links like [1] */
+.markdown a.footnote-ref {
+  color: var(--color-accent-primary);
+  text-decoration: none;
+}
+
+.markdown a.footnote-ref:hover {
+  text-decoration: underline;
+  background-color: transparent;
 }
 
 /* Scroll offset for anchor targets (accounts for sticky nav) */
@@ -306,12 +317,9 @@
   border: 1px solid var(--color-border-subtle);
 }
 
-/* Horizontal rules */
+/* Horizontal rules - hidden since headers have border-bottom */
 .markdown hr {
-  margin: var(--space-8) 0;
-  border: none;
-  height: 1px;
-  background: var(--color-border);
+  display: none;
 }
 
 /* Description text (for subtitles) */
@@ -373,10 +381,12 @@
   .markdown h2 {
     font-size: var(--text-xl);
     margin-top: var(--space-6);
+
   }
   
   .markdown h3 {
     font-size: var(--text-base);
+
   }
   
   .markdown pre {

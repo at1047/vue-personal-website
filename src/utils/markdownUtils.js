@@ -52,10 +52,23 @@ export function markdownToHtml(markdown, type = null) {
   // Step 1: Remove Obsidian comments wrapped in %%text%%
   const withoutComments = markdown.replace(/%%[\s\S]*?%%/g, '');
   
-  // Step 2: Pre-process Obsidian anchor links BEFORE marked parsing
+  // Step 2a: Pre-process footnote-style references: \[[[#Heading|N]]] → [N] as link
+  // Format in .md file: \[[[#Appendix|1]]]
+  // Output: <a href="#appendix">[1]</a>
+  const withFootnoteRefs = withoutComments.replace(
+    /\\\[\[\[#([^\]|]+)(?:\|([^\]]+))?\]\]\]/g,
+    (match, heading, displayText) => {
+      const slug = slugify(heading);
+      const text = displayText || '1';
+      // Use a placeholder that marked won't touch
+      return `%%FOOTNOTE_REF:${slug}:${text}%%`;
+    }
+  );
+  
+  // Step 2b: Pre-process Obsidian anchor links BEFORE marked parsing
   // Convert [[#Heading Name]] to a placeholder that won't be altered by marked
   // Also handles [[#Heading Name|Custom Text]] syntax
-  const withAnchorPlaceholders = withoutComments.replace(
+  const withAnchorPlaceholders = withFootnoteRefs.replace(
     /\[\[#([^\]|]+)(?:\|([^\]]+))?\]\]/g,
     (match, heading, customText) => {
       const slug = slugify(heading);
@@ -68,8 +81,16 @@ export function markdownToHtml(markdown, type = null) {
   // Step 3: Parse markdown to HTML with marked (headings now get IDs)
   const parsedMarkdown = marked.parse(withAnchorPlaceholders);
   
-  // Step 4: Restore anchor link placeholders to actual links
-  const withAnchorLinks = parsedMarkdown.replace(
+  // Step 4a: Restore footnote reference placeholders to bracketed links
+  const withFootnoteLinks = parsedMarkdown.replace(
+    /%%FOOTNOTE_REF:([^:]+):([^%]+)%%/g,
+    (match, slug, displayText) => {
+      return `<a href="#${slug}" class="footnote-ref">[${displayText}]</a>`;
+    }
+  );
+  
+  // Step 4b: Restore anchor link placeholders to actual links
+  const withAnchorLinks = withFootnoteLinks.replace(
     /%%ANCHOR_LINK:([^:]+):([^%]+)%%/g,
     (match, slug, displayText) => {
       return `<a href="#${slug}" class="anchor-link">${displayText}</a>`;
